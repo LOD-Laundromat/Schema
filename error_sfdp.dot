@@ -1,0 +1,488 @@
+digraph noname {
+  graph [colorscheme=svg;overlap=false;]
+
+  0 [color=green;label="action
+error:Action
+\"An action performed by a computing device.\"@en";peripheries="1";shape=ellipse;]
+  1 [color=green;label="'archive error'
+error:ArchiveError
+\"An error that occurs as part of an archive (un)packing process.\"@en";peripheries="1";shape=ellipse;]
+  2 [color=green;label="'directory existence error'
+error:DirectoryExistenceError
+\"An error that occurs because a directory which is assumed to exist does not.\"@en
+\"17\"^^xsd:integer
+\"'EXIST'\"^^xsd:string
+\"'File exists'\"^^xsd:string";peripheries="1";shape=ellipse;]
+  3 [color=green;label="'directory not empty'
+error:DirectoryNotEmptyError
+\"An error that occurs because a directory is assumed to be empty, but is not.\"@en
+\"39\"^^xsd:integer
+\"'Directory not empty'\"^^xsd:string
+\"'ENOTEMPTY'\"^^xsd:string";peripheries="1";shape=ellipse;]
+  4 [color=green;label="error
+error:Error
+\"An recognized irregularity in program execution.\"@en";peripheries="1";shape=ellipse;]
+  5 [color=green;label="'existence error'
+error:ExistenceError
+\"An error that occurs because a resource which is assumed to exist does not.\"@en
+\"2\"^^xsd:integer
+\"'ENOENT'\"^^xsd:string
+\"'No such file or directory'\"^^xsd:string";peripheries="1";shape=ellipse;]
+  6 [color=green;label="'file existence error'
+error:FileExistenceError
+\"An error that occurs because a file which is assumed to exist does not.\"@en";peripheries="1";shape=ellipse;]
+  7 [color=green;label="'HTTP error'
+error:HttpError
+\"An error that is emitted as part of an HTTP reply.\"@en";peripheries="1";shape=ellipse;]
+  8 [color=green;label="'HTTP URI'
+error:HttpUri
+\"A URI that uses the HTTP scheme.\"@en";peripheries="1";shape=ellipse;]
+  9 [color=green;label="'IO error'
+error:IoError
+\"An error that was thrown due to an input and/or output issue.\"@en";peripheries="1";shape=ellipse;]
+  10 [color=green;label="error:IsADirectoryError
+'source sink error'
+\"???\"@en
+\"21\"^^xsd:integer
+\"'EISDIR'\"^^xsd:string
+\"'Is a directory'\"^^xsd:string";peripheries="1";shape=ellipse;]
+  11 [color=green;label="error:MalformedUrl
+'malformed URL'
+\"An error that is thrown for a value which is expected to be a URL
+     but does not conform to URL syntax.\"@en";peripheries="1";shape=ellipse;]
+  12 [color=green;label="error:MissingTurtlePrefixDefinition
+'missing Turtle prefix definition'
+\"An error that occurs if a Turtle prefix is used but not defined.\"@en";peripheries="1";shape=ellipse;]
+  13 [color=green;label="error:Object
+object
+\"An object that is related to an error.\"@en";peripheries="1";shape=ellipse;]
+  14 [color=green;label="error:ParserError
+'parser error'
+\"An error that is emitted by a parser, indicating deviation from a defined grammar.\"@en";peripheries="1";shape=ellipse;]
+  15 [color=green;label="error:PermissionError
+'permission error'
+\"An error that occurs because a specific action is not allowed to be performed w.r.t. a specific object that is of a given type.\"@en";peripheries="1";shape=ellipse;]
+  16 [color=green;label="'RDF parser error'
+error:RdfParserError
+\"An error that is emitted by an RDF parser.\"@en";peripheries="1";shape=ellipse;]
+  17 [color=green;label="'RDF/XML parser error'
+error:RdfxmlParserError
+\"An that is emitted by an RDF/XML parser when it encounters data that does not conform to the RDF/XML grammar.\"@en";peripheries="1";shape=ellipse;]
+  18 [color=green;label="error:RedefinedRdfId
+'redefined RDF identifier'
+\"An error that is thrown whenever multiple definitions of the same resource occur in an RDF/XML document. This typically occurs whenever more than one rdf:Id statement occurs for the same resource.\"@en";peripheries="1";shape=ellipse;]
+  19 [color=green;label="'SGML parser error'
+error:SgmlParserError
+\"A warning that is emitted by an SGML parser.\"@en";peripheries="1";shape=ellipse;]
+  20 [color=green;label="error:SocketError
+'socket error'
+\"An error thrown because of a socket-related problem.\"@en";peripheries="1";shape=ellipse;]
+  21 [color=green;label="error:StreamPosition
+'stream position'
+\"A position in a stream.\"@en";peripheries="1";shape=ellipse;]
+  22 [color=green;label="error:SyntaxError
+'syntax position'
+\"A parser error that is due to the occurrence of an expression in the parsed data stream that does not conform to the expected grammar.\"@en";peripheries="1";shape=ellipse;]
+  23 [color=green;label="error:TimeoutError
+'timeout error'
+\"An error that is thrown due to a timeout.\"@en";peripheries="1";shape=ellipse;]
+  24 [color=green;label="'XML parser error'
+error:TurtleParserError
+\"A warning that is emitted by an XML parser.\"@en";peripheries="1";shape=ellipse;]
+  25 [color=green;label="'XML parser error'
+error:XmlParserError
+\"A warning that is emitted by an XML parser.\"@en";peripheries="1";shape=ellipse;]
+  26 [color=green;label="action
+error:action
+\"The action to which the error is related.\"@en";peripheries="1";shape=hexagon;]
+  27 [color=green;label="character
+error:character
+\"The character number of a stream position, indicating the number of characters that have preceded it.\"@en";peripheries="1";shape=hexagon;]
+  28 [color=green;label="'error code'
+error:code
+\"Error code as used by the program in which the error occurs.\"@en";peripheries="1";shape=hexagon;]
+  29 [color=green;label="column
+error:column
+\"The column number of a stream position, indicating the number of characters that have preceded it since the last newline character or since the beginning of the stream.\"@en";peripheries="1";shape=hexagon;]
+  30 [color=green;label="error:connectionRefused";peripheries="1";shape=ellipse;]
+  31 [color=green;label="error:connectionResetByPeer";peripheries="1";shape=ellipse;]
+  32 [color=green;label="error:connectionTimedOut";peripheries="1";shape=ellipse;]
+  33 [color=green;label="'Host not found'
+error:hostNotFound";peripheries="1";shape=ellipse;]
+  34 [color=green;label="error:illegalUtf8Continuation
+'illegal UTF-8 continuation'
+\"Illegal UTF-8 continuation.\"@en";peripheries="1";shape=ellipse;]
+  35 [color=green;label="error:illegalUtf8Start
+'illegal UTF-8 start'
+\"Illegal UTF-8 start.\"@en";peripheries="1";shape=ellipse;]
+  36 [color=green;label="error:isADirectory
+'is a directory'
+\"???\"@en
+\"21\"^^xsd:integer
+\"'EISDIR'\"^^xsd:string
+\"'Is a directory'\"^^xsd:string";peripheries="1";shape=ellipse;]
+  37 [color=green;label="column
+error:line
+\"The line number of a stream position, indicating the number of newline characters that have preceded it.\"@en";peripheries="1";shape=hexagon;]
+  38 [color=green;label="'error message'
+error:message
+\"Error message for the human programmer.\"@en";peripheries="1";shape=hexagon;]
+  39 [color=green;label="error:missingTypeKeywordInMtreeSpec";peripheries="1";shape=ellipse;]
+  40 [color=green;label="'No data'
+error:noData
+\"61\"^^xsd:integer
+\"'ENODATA'\"^^xsd:string
+\"'No data available'\"^^xsd:string";peripheries="1";shape=ellipse;]
+  41 [color=green;label="error:noRouteToHost";peripheries="1";shape=ellipse;]
+  42 [color=green;label="error:notATypewriter
+'not a typewriter'
+\"Inappropriate input/output control for device.\"@en
+\"25\"^^xsd:integer
+\"'ENOTTY'\"^^xsd:string
+\"'Inappropriate ioctl for device'\"^^xsd:string";peripheries="1";shape=ellipse;]
+  43 [color=green;label="error:object
+object
+\"The name of the object to which the error relates.\"@en";peripheries="1";shape=hexagon;]
+  44 [color=green;label="error:readTimeoutError
+'read timeout error'
+\"Timeout occurs while reading\"@en";peripheries="1";shape=ellipse;]
+  45 [color=green;label="error:redirectAction
+'redirect action'
+\"A rediraction action.\"@en";peripheries="1";shape=ellipse;]
+  46 [color=green;label="error:sourceLine
+'source line'
+\"The line number in the original source file for which a parser warning was thrown.\"@en";peripheries="1";shape=hexagon;]
+  47 [color=green;label="'SSL error'
+error:sslError
+\"SSL error\"@en";peripheries="1";shape=ellipse;]
+  48 [color=green;label="error:streamPosition
+'stream position'
+\"The stream position at which an error occurred.\"@en";peripheries="1";shape=hexagon;]
+  49 [color=green;label="'Try again'
+error:tryAgain";peripheries="1";shape=ellipse;]
+  50 [color=green;label="error:variableName
+'variable name'
+\"The C variable name of the error as used in POSIX or in a Linux library or application.\"@en";peripheries="1";shape=hexagon;]
+  51 [color=yellow;label="'Redirection'
+httpo:3xx
+\"An HTTP status that is a redirection.\"@en";peripheries="1";shape=ellipse;]
+  52 [color=yellow;label="'Client Error'
+httpo:4xx
+\"An HTTP status that is unsuccessful due to a client error.\"@en";peripheries="1";shape=ellipse;]
+  53 [color=yellow4;label="rdf:Property";peripheries="1";shape=ellipse;]
+  54 [color=red;label="rdfs:Resource";peripheries="1";shape=ellipse;]
+  55 [color=gainsboro;label="xsd:integer";peripheries="1";shape=ellipse;]
+  56 [color=gainsboro;label="xsd:string";peripheries="1";shape=ellipse;]
+  57 [color=blue;label="\"???\"@en";peripheries="0";shape=plaintext;]
+  58 [color=blue;label="\"A URI that uses the HTTP scheme.\"@en";peripheries="0";shape=plaintext;]
+  59 [color=blue;label="\"A parser error that is due to the occurrence o ...\"@en";peripheries="0";shape=plaintext;]
+  60 [color=blue;label="\"A position in a stream.\"@en";peripheries="0";shape=plaintext;]
+  61 [color=blue;label="\"A rediraction action.\"@en";peripheries="0";shape=plaintext;]
+  62 [color=blue;label="\"A warning that is emitted by an SGML parser.\"@en";peripheries="0";shape=plaintext;]
+  63 [color=blue;label="\"A warning that is emitted by an XML parser.\"@en";peripheries="0";shape=plaintext;]
+  64 [color=blue;label="\"An action performed by a computing device.\"@en";peripheries="0";shape=plaintext;]
+  65 [color=blue;label="\"An error that is emitted as part of an HTTP reply.\"@en";peripheries="0";shape=plaintext;]
+  66 [color=blue;label="\"An error that is emitted by a parser, indicati ...\"@en";peripheries="0";shape=plaintext;]
+  67 [color=blue;label="\"An error that is emitted by an RDF parser.\"@en";peripheries="0";shape=plaintext;]
+  68 [color=blue;label="\"An error that is thrown due to a timeout.\"@en";peripheries="0";shape=plaintext;]
+  69 [color=blue;label="\"An error that is thrown for a value which is e ...\"@en";peripheries="0";shape=plaintext;]
+  70 [color=blue;label="\"An error that is thrown whenever multiple defi ...\"@en";peripheries="0";shape=plaintext;]
+  71 [color=blue;label="\"An error that occurs as part of an archive (un ...\"@en";peripheries="0";shape=plaintext;]
+  72 [color=blue;label="\"An error that occurs because a directory is as ...\"@en";peripheries="0";shape=plaintext;]
+  73 [color=blue;label="\"An error that occurs because a directory which ...\"@en";peripheries="0";shape=plaintext;]
+  74 [color=blue;label="\"An error that occurs because a file which is a ...\"@en";peripheries="0";shape=plaintext;]
+  75 [color=blue;label="\"An error that occurs because a resource which  ...\"@en";peripheries="0";shape=plaintext;]
+  76 [color=blue;label="\"An error that occurs because a specific action ...\"@en";peripheries="0";shape=plaintext;]
+  77 [color=blue;label="\"An error that occurs if a Turtle prefix is use ...\"@en";peripheries="0";shape=plaintext;]
+  78 [color=blue;label="\"An error that was thrown due to an input and/o ...\"@en";peripheries="0";shape=plaintext;]
+  79 [color=blue;label="\"An error thrown because of a socket-related pr ...\"@en";peripheries="0";shape=plaintext;]
+  80 [color=blue;label="\"An object that is related to an error.\"@en";peripheries="0";shape=plaintext;]
+  81 [color=blue;label="\"An recognized irregularity in program execution.\"@en";peripheries="0";shape=plaintext;]
+  82 [color=blue;label="\"An that is emitted by an RDF/XML parser when i ...\"@en";peripheries="0";shape=plaintext;]
+  83 [color=blue;label="\"Error code as used by the program in which the ...\"@en";peripheries="0";shape=plaintext;]
+  84 [color=blue;label="\"Error message for the human programmer.\"@en";peripheries="0";shape=plaintext;]
+  85 [color=blue;label="\"HTTP URI\"@en";peripheries="0";shape=plaintext;]
+  86 [color=blue;label="\"HTTP error\"@en";peripheries="0";shape=plaintext;]
+  87 [color=blue;label="\"IO error\"@en";peripheries="0";shape=plaintext;]
+  88 [color=blue;label="\"Illegal UTF-8 continuation.\"@en";peripheries="0";shape=plaintext;]
+  89 [color=blue;label="\"Illegal UTF-8 start.\"@en";peripheries="0";shape=plaintext;]
+  90 [color=blue;label="\"Inappropriate input/output control for device.\"@en";peripheries="0";shape=plaintext;]
+  91 [color=blue;label="\"No data\"@en";peripheries="0";shape=plaintext;]
+  92 [color=blue;label="\"RDF parser error\"@en";peripheries="0";shape=plaintext;]
+  93 [color=blue;label="\"RDF/XML parser error\"@en";peripheries="0";shape=plaintext;]
+  94 [color=blue;label="\"SGML parser error\"@en";peripheries="0";shape=plaintext;]
+  95 [color=blue;label="\"SSL error\"@en";peripheries="0";shape=plaintext;]
+  96 [color=blue;label="\"The C variable name of the error as used in PO ...\"@en";peripheries="0";shape=plaintext;]
+  97 [color=blue;label="\"The action to which the error is related.\"@en";peripheries="0";shape=plaintext;]
+  98 [color=blue;label="\"The character number of a stream position, ind ...\"@en";peripheries="0";shape=plaintext;]
+  99 [color=blue;label="\"The column number of a stream position, indica ...\"@en";peripheries="0";shape=plaintext;]
+  100 [color=blue;label="\"The line number in the original source file fo ...\"@en";peripheries="0";shape=plaintext;]
+  101 [color=blue;label="\"The line number of a stream position, indicati ...\"@en";peripheries="0";shape=plaintext;]
+  102 [color=blue;label="\"The name of the object to which the error relates.\"@en";peripheries="0";shape=plaintext;]
+  103 [color=blue;label="\"The stream position at which an error occurred.\"@en";peripheries="0";shape=plaintext;]
+  104 [color=blue;label="\"Timeout occurs while reading\"@en";peripheries="0";shape=plaintext;]
+  105 [color=blue;label="\"XML parser error\"@en";peripheries="0";shape=plaintext;]
+  106 [color=blue;label="\"action\"@en";peripheries="0";shape=plaintext;]
+  107 [color=blue;label="\"archive error\"@en";peripheries="0";shape=plaintext;]
+  108 [color=blue;label="\"character\"@en";peripheries="0";shape=plaintext;]
+  109 [color=blue;label="\"column\"@en";peripheries="0";shape=plaintext;]
+  110 [color=blue;label="\"directory existence error\"@en";peripheries="0";shape=plaintext;]
+  111 [color=blue;label="\"directory not empty\"@en";peripheries="0";shape=plaintext;]
+  112 [color=blue;label="\"error\"@en";peripheries="0";shape=plaintext;]
+  113 [color=blue;label="\"error code\"@en";peripheries="0";shape=plaintext;]
+  114 [color=blue;label="\"error message\"@en";peripheries="0";shape=plaintext;]
+  115 [color=blue;label="\"existence error\"@en";peripheries="0";shape=plaintext;]
+  116 [color=blue;label="\"file existence error\"@en";peripheries="0";shape=plaintext;]
+  117 [color=blue;label="\"illegal UTF-8 continuation\"@en";peripheries="0";shape=plaintext;]
+  118 [color=blue;label="\"illegal UTF-8 start\"@en";peripheries="0";shape=plaintext;]
+  119 [color=blue;label="\"is a directory\"@en";peripheries="0";shape=plaintext;]
+  120 [color=blue;label="\"malformed URL\"@en";peripheries="0";shape=plaintext;]
+  121 [color=blue;label="\"missing Turtle prefix definition\"@en";peripheries="0";shape=plaintext;]
+  122 [color=blue;label="\"not a typewriter\"@en";peripheries="0";shape=plaintext;]
+  123 [color=blue;label="\"object\"@en";peripheries="0";shape=plaintext;]
+  124 [color=blue;label="\"parser error\"@en";peripheries="0";shape=plaintext;]
+  125 [color=blue;label="\"permission error\"@en";peripheries="0";shape=plaintext;]
+  126 [color=blue;label="\"read timeout error\"@en";peripheries="0";shape=plaintext;]
+  127 [color=blue;label="\"redefined RDF identifier\"@en";peripheries="0";shape=plaintext;]
+  128 [color=blue;label="\"redirect action\"@en";peripheries="0";shape=plaintext;]
+  129 [color=blue;label="\"socket error\"@en";peripheries="0";shape=plaintext;]
+  130 [color=blue;label="\"source line\"@en";peripheries="0";shape=plaintext;]
+  131 [color=blue;label="\"source sink error\"@en";peripheries="0";shape=plaintext;]
+  132 [color=blue;label="\"stream position\"@en";peripheries="0";shape=plaintext;]
+  133 [color=blue;label="\"syntax position\"@en";peripheries="0";shape=plaintext;]
+  134 [color=blue;label="\"timeout error\"@en";peripheries="0";shape=plaintext;]
+  135 [color=blue;label="\"variable name\"@en";peripheries="0";shape=plaintext;]
+  136 [color=blue;label="\"104\"^^xsd:integer";peripheries="0";shape=plaintext;]
+  137 [color=blue;label="\"110\"^^xsd:integer";peripheries="0";shape=plaintext;]
+  138 [color=blue;label="\"111\"^^xsd:integer";peripheries="0";shape=plaintext;]
+  139 [color=blue;label="\"113\"^^xsd:integer";peripheries="0";shape=plaintext;]
+  140 [color=blue;label="\"17\"^^xsd:integer";peripheries="0";shape=plaintext;]
+  141 [color=blue;label="\"2\"^^xsd:integer";peripheries="0";shape=plaintext;]
+  142 [color=blue;label="\"21\"^^xsd:integer";peripheries="0";shape=plaintext;]
+  143 [color=blue;label="\"25\"^^xsd:integer";peripheries="0";shape=plaintext;]
+  144 [color=blue;label="\"39\"^^xsd:integer";peripheries="0";shape=plaintext;]
+  145 [color=blue;label="\"61\"^^xsd:integer";peripheries="0";shape=plaintext;]
+  146 [color=blue;label="\"'Connection refused'\"^^xsd:string";peripheries="0";shape=plaintext;]
+  147 [color=blue;label="\"'Connection reset by peer'\"^^xsd:string";peripheries="0";shape=plaintext;]
+  148 [color=blue;label="\"'Connection timed out'\"^^xsd:string";peripheries="0";shape=plaintext;]
+  149 [color=blue;label="\"'Directory not empty'\"^^xsd:string";peripheries="0";shape=plaintext;]
+  150 [color=blue;label="\"'ECONNREFUSED'\"^^xsd:string";peripheries="0";shape=plaintext;]
+  151 [color=blue;label="\"'ECONNRESET'\"^^xsd:string";peripheries="0";shape=plaintext;]
+  152 [color=blue;label="\"'EHOSTUNREACH'\"^^xsd:string";peripheries="0";shape=plaintext;]
+  153 [color=blue;label="\"'EISDIR'\"^^xsd:string";peripheries="0";shape=plaintext;]
+  154 [color=blue;label="\"'ENODATA'\"^^xsd:string";peripheries="0";shape=plaintext;]
+  155 [color=blue;label="\"'ENOENT'\"^^xsd:string";peripheries="0";shape=plaintext;]
+  156 [color=blue;label="\"'ENOTEMPTY'\"^^xsd:string";peripheries="0";shape=plaintext;]
+  157 [color=blue;label="\"'ENOTTY'\"^^xsd:string";peripheries="0";shape=plaintext;]
+  158 [color=blue;label="\"'ETIMEDOUT'\"^^xsd:string";peripheries="0";shape=plaintext;]
+  159 [color=blue;label="\"'EXIST'\"^^xsd:string";peripheries="0";shape=plaintext;]
+  160 [color=blue;label="\"'File exists'\"^^xsd:string";peripheries="0";shape=plaintext;]
+  161 [color=blue;label="\"'Host not found'\"^^xsd:string";peripheries="0";shape=plaintext;]
+  162 [color=blue;label="\"'Inappropriate ioctl for device'\"^^xsd:string";peripheries="0";shape=plaintext;]
+  163 [color=blue;label="\"'Is a directory'\"^^xsd:string";peripheries="0";shape=plaintext;]
+  164 [color=blue;label="\"'Missing type keyword in mtree specification.'\"^^xsd:string";peripheries="0";shape=plaintext;]
+  165 [color=blue;label="\"'No data available'\"^^xsd:string";peripheries="0";shape=plaintext;]
+  166 [color=blue;label="\"'No route to host'\"^^xsd:string";peripheries="0";shape=plaintext;]
+  167 [color=blue;label="\"'No such file or directory'\"^^xsd:string";peripheries="0";shape=plaintext;]
+  168 [color=blue;label="\"'Try again'\"^^xsd:string";peripheries="0";shape=plaintext;]
+
+  0 -> 64 [arrowhead=normal;color=red;label="rdfs:comment";style=solid;]
+  0 -> 106 [arrowhead=none;color=red;label=<>;style=dotted;]
+  0 -> 54 [arrowhead=box;color=red;label=<>;style=solid;]
+  1 -> 71 [arrowhead=normal;color=red;label="rdfs:comment";style=solid;]
+  1 -> 107 [arrowhead=none;color=red;label=<>;style=dotted;]
+  1 -> 4 [arrowhead=box;color=red;label=<>;style=solid;]
+  2 -> 140 [arrowhead=normal;color=green;label="error:code";style=solid;]
+  2 -> 160 [arrowhead=normal;color=green;label="error:message";style=solid;]
+  2 -> 159 [arrowhead=normal;color=green;label="error:variableName";style=solid;]
+  2 -> 73 [arrowhead=normal;color=red;label="rdfs:comment";style=solid;]
+  2 -> 110 [arrowhead=none;color=red;label=<>;style=dotted;]
+  2 -> 5 [arrowhead=box;color=red;label=<>;style=solid;]
+  3 -> 144 [arrowhead=normal;color=green;label="error:code";style=solid;]
+  3 -> 149 [arrowhead=normal;color=green;label="error:message";style=solid;]
+  3 -> 156 [arrowhead=normal;color=green;label="error:variableName";style=solid;]
+  3 -> 72 [arrowhead=normal;color=red;label="rdfs:comment";style=solid;]
+  3 -> 111 [arrowhead=none;color=red;label=<>;style=dotted;]
+  3 -> 5 [arrowhead=box;color=red;label=<>;style=solid;]
+  4 -> 81 [arrowhead=normal;color=red;label="rdfs:comment";style=solid;]
+  4 -> 112 [arrowhead=none;color=red;label=<>;style=dotted;]
+  4 -> 54 [arrowhead=box;color=red;label=<>;style=solid;]
+  5 -> 141 [arrowhead=normal;color=green;label="error:code";style=solid;]
+  5 -> 167 [arrowhead=normal;color=green;label="error:message";style=solid;]
+  5 -> 155 [arrowhead=normal;color=green;label="error:variableName";style=solid;]
+  5 -> 75 [arrowhead=normal;color=red;label="rdfs:comment";style=solid;]
+  5 -> 115 [arrowhead=none;color=red;label=<>;style=dotted;]
+  5 -> 4 [arrowhead=box;color=red;label=<>;style=solid;]
+  6 -> 74 [arrowhead=normal;color=red;label="rdfs:comment";style=solid;]
+  6 -> 116 [arrowhead=none;color=red;label=<>;style=dotted;]
+  6 -> 5 [arrowhead=box;color=red;label=<>;style=solid;]
+  7 -> 65 [arrowhead=normal;color=red;label="rdfs:comment";style=solid;]
+  7 -> 86 [arrowhead=none;color=red;label=<>;style=dotted;]
+  7 -> 4 [arrowhead=box;color=red;label=<>;style=solid;]
+  8 -> 58 [arrowhead=normal;color=red;label="rdfs:comment";style=solid;]
+  8 -> 85 [arrowhead=none;color=red;label=<>;style=dotted;]
+  8 -> 13 [arrowhead=box;color=red;label=<>;style=solid;]
+  9 -> 78 [arrowhead=normal;color=red;label="rdfs:comment";style=solid;]
+  9 -> 87 [arrowhead=none;color=red;label=<>;style=dotted;]
+  9 -> 4 [arrowhead=box;color=red;label=<>;style=solid;]
+  10 -> 142 [arrowhead=normal;color=green;label="error:code";style=solid;]
+  10 -> 163 [arrowhead=normal;color=green;label="error:message";style=solid;]
+  10 -> 153 [arrowhead=normal;color=green;label="error:variableName";style=solid;]
+  10 -> 57 [arrowhead=normal;color=red;label="rdfs:comment";style=solid;]
+  10 -> 131 [arrowhead=none;color=red;label=<>;style=dotted;]
+  10 -> 5 [arrowhead=box;color=red;label=<>;style=solid;]
+  11 -> 69 [arrowhead=normal;color=red;label="rdfs:comment";style=solid;]
+  11 -> 120 [arrowhead=none;color=red;label=<>;style=dotted;]
+  11 -> 4 [arrowhead=box;color=red;label=<>;style=solid;]
+  12 -> 77 [arrowhead=normal;color=red;label="rdfs:comment";style=solid;]
+  12 -> 121 [arrowhead=none;color=red;label=<>;style=dotted;]
+  12 -> 24 [arrowhead=box;color=red;label=<>;style=solid;]
+  13 -> 80 [arrowhead=normal;color=red;label="rdfs:comment";style=solid;]
+  13 -> 123 [arrowhead=none;color=red;label=<>;style=dotted;]
+  13 -> 54 [arrowhead=box;color=red;label=<>;style=solid;]
+  14 -> 66 [arrowhead=normal;color=red;label="rdfs:comment";style=solid;]
+  14 -> 124 [arrowhead=none;color=red;label=<>;style=dotted;]
+  14 -> 4 [arrowhead=box;color=red;label=<>;style=solid;]
+  15 -> 76 [arrowhead=normal;color=red;label="rdfs:comment";style=solid;]
+  15 -> 125 [arrowhead=none;color=red;label=<>;style=dotted;]
+  15 -> 4 [arrowhead=box;color=red;label=<>;style=solid;]
+  16 -> 67 [arrowhead=normal;color=red;label="rdfs:comment";style=solid;]
+  16 -> 92 [arrowhead=none;color=red;label=<>;style=dotted;]
+  16 -> 14 [arrowhead=box;color=red;label=<>;style=solid;]
+  17 -> 82 [arrowhead=normal;color=red;label="rdfs:comment";style=solid;]
+  17 -> 93 [arrowhead=none;color=red;label=<>;style=dotted;]
+  17 -> 16 [arrowhead=box;color=red;label=<>;style=solid;]
+  17 -> 25 [arrowhead=box;color=red;label=<>;style=solid;]
+  18 -> 70 [arrowhead=normal;color=red;label="rdfs:comment";style=solid;]
+  18 -> 127 [arrowhead=none;color=red;label=<>;style=dotted;]
+  18 -> 17 [arrowhead=box;color=red;label=<>;style=solid;]
+  19 -> 62 [arrowhead=normal;color=red;label="rdfs:comment";style=solid;]
+  19 -> 94 [arrowhead=none;color=red;label=<>;style=dotted;]
+  19 -> 14 [arrowhead=box;color=red;label=<>;style=solid;]
+  20 -> 79 [arrowhead=normal;color=red;label="rdfs:comment";style=solid;]
+  20 -> 129 [arrowhead=none;color=red;label=<>;style=dotted;]
+  20 -> 4 [arrowhead=box;color=red;label=<>;style=solid;]
+  21 -> 60 [arrowhead=normal;color=red;label="rdfs:comment";style=solid;]
+  21 -> 132 [arrowhead=none;color=red;label=<>;style=dotted;]
+  21 -> 4 [arrowhead=box;color=red;label=<>;style=solid;]
+  22 -> 59 [arrowhead=normal;color=red;label="rdfs:comment";style=solid;]
+  22 -> 133 [arrowhead=none;color=red;label=<>;style=dotted;]
+  22 -> 14 [arrowhead=box;color=red;label=<>;style=solid;]
+  23 -> 68 [arrowhead=normal;color=red;label="rdfs:comment";style=solid;]
+  23 -> 134 [arrowhead=none;color=red;label=<>;style=dotted;]
+  23 -> 4 [arrowhead=box;color=red;label=<>;style=solid;]
+  24 -> 63 [arrowhead=normal;color=red;label="rdfs:comment";style=solid;]
+  24 -> 105 [arrowhead=none;color=red;label=<>;style=dotted;]
+  24 -> 16 [arrowhead=box;color=red;label=<>;style=solid;]
+  25 -> 63 [arrowhead=normal;color=red;label="rdfs:comment";style=solid;]
+  25 -> 105 [arrowhead=none;color=red;label=<>;style=dotted;]
+  25 -> 19 [arrowhead=box;color=red;label=<>;style=solid;]
+  26 -> 53 [arrowhead=empty;color=yellow4;label=<>;style=solid;]
+  26 -> 97 [arrowhead=normal;color=red;label="rdfs:comment";style=solid;]
+  26 -> 4 [arrowhead=normal;color=red;label="rdfs:domain";style=solid;]
+  26 -> 106 [arrowhead=none;color=red;label=<>;style=dotted;]
+  26 -> 0 [arrowhead=normal;color=red;label="rdfs:range";style=solid;]
+  27 -> 53 [arrowhead=empty;color=yellow4;label=<>;style=solid;]
+  27 -> 98 [arrowhead=normal;color=red;label="rdfs:comment";style=solid;]
+  27 -> 21 [arrowhead=normal;color=red;label="rdfs:domain";style=solid;]
+  27 -> 108 [arrowhead=none;color=red;label=<>;style=dotted;]
+  27 -> 55 [arrowhead=normal;color=red;label="rdfs:range";style=solid;]
+  28 -> 53 [arrowhead=empty;color=yellow4;label=<>;style=solid;]
+  28 -> 83 [arrowhead=normal;color=red;label="rdfs:comment";style=solid;]
+  28 -> 4 [arrowhead=normal;color=red;label="rdfs:domain";style=solid;]
+  28 -> 113 [arrowhead=none;color=red;label=<>;style=dotted;]
+  28 -> 55 [arrowhead=normal;color=red;label="rdfs:range";style=solid;]
+  29 -> 53 [arrowhead=empty;color=yellow4;label=<>;style=solid;]
+  29 -> 99 [arrowhead=normal;color=red;label="rdfs:comment";style=solid;]
+  29 -> 21 [arrowhead=normal;color=red;label="rdfs:domain";style=solid;]
+  29 -> 109 [arrowhead=none;color=red;label=<>;style=dotted;]
+  29 -> 55 [arrowhead=normal;color=red;label="rdfs:range";style=solid;]
+  30 -> 138 [arrowhead=normal;color=green;label="error:code";style=solid;]
+  30 -> 146 [arrowhead=normal;color=green;label="error:message";style=solid;]
+  30 -> 150 [arrowhead=normal;color=green;label="error:variableName";style=solid;]
+  30 -> 20 [arrowhead=empty;color=yellow4;label=<>;style=solid;]
+  31 -> 136 [arrowhead=normal;color=green;label="error:code";style=solid;]
+  31 -> 147 [arrowhead=normal;color=green;label="error:message";style=solid;]
+  31 -> 151 [arrowhead=normal;color=green;label="error:variableName";style=solid;]
+  31 -> 5 [arrowhead=empty;color=yellow4;label=<>;style=solid;]
+  31 -> 20 [arrowhead=empty;color=yellow4;label=<>;style=solid;]
+  32 -> 137 [arrowhead=normal;color=green;label="error:code";style=solid;]
+  32 -> 148 [arrowhead=normal;color=green;label="error:message";style=solid;]
+  32 -> 158 [arrowhead=normal;color=green;label="error:variableName";style=solid;]
+  32 -> 20 [arrowhead=empty;color=yellow4;label=<>;style=solid;]
+  33 -> 20 [arrowhead=empty;color=yellow4;label=<>;style=solid;]
+  33 -> 161 [arrowhead=none;color=red;label=<>;style=dotted;]
+  34 -> 9 [arrowhead=empty;color=yellow4;label=<>;style=solid;]
+  34 -> 88 [arrowhead=normal;color=red;label="rdfs:comment";style=solid;]
+  34 -> 117 [arrowhead=none;color=red;label=<>;style=dotted;]
+  35 -> 9 [arrowhead=empty;color=yellow4;label=<>;style=solid;]
+  35 -> 89 [arrowhead=normal;color=red;label="rdfs:comment";style=solid;]
+  35 -> 118 [arrowhead=none;color=red;label=<>;style=dotted;]
+  36 -> 142 [arrowhead=normal;color=green;label="error:code";style=solid;]
+  36 -> 163 [arrowhead=normal;color=green;label="error:message";style=solid;]
+  36 -> 153 [arrowhead=normal;color=green;label="error:variableName";style=solid;]
+  36 -> 9 [arrowhead=empty;color=yellow4;label=<>;style=solid;]
+  36 -> 57 [arrowhead=normal;color=red;label="rdfs:comment";style=solid;]
+  36 -> 119 [arrowhead=none;color=red;label=<>;style=dotted;]
+  37 -> 53 [arrowhead=empty;color=yellow4;label=<>;style=solid;]
+  37 -> 101 [arrowhead=normal;color=red;label="rdfs:comment";style=solid;]
+  37 -> 21 [arrowhead=normal;color=red;label="rdfs:domain";style=solid;]
+  37 -> 109 [arrowhead=none;color=red;label=<>;style=dotted;]
+  37 -> 55 [arrowhead=normal;color=red;label="rdfs:range";style=solid;]
+  38 -> 53 [arrowhead=empty;color=yellow4;label=<>;style=solid;]
+  38 -> 84 [arrowhead=normal;color=red;label="rdfs:comment";style=solid;]
+  38 -> 4 [arrowhead=normal;color=red;label="rdfs:domain";style=solid;]
+  38 -> 114 [arrowhead=none;color=red;label=<>;style=dotted;]
+  38 -> 56 [arrowhead=normal;color=red;label="rdfs:range";style=solid;]
+  39 -> 141 [arrowhead=normal;color=green;label="error:code";style=solid;]
+  39 -> 164 [arrowhead=normal;color=green;label="error:message";style=solid;]
+  39 -> 1 [arrowhead=empty;color=yellow4;label=<>;style=solid;]
+  40 -> 145 [arrowhead=normal;color=green;label="error:code";style=solid;]
+  40 -> 165 [arrowhead=normal;color=green;label="error:message";style=solid;]
+  40 -> 154 [arrowhead=normal;color=green;label="error:variableName";style=solid;]
+  40 -> 20 [arrowhead=empty;color=yellow4;label=<>;style=solid;]
+  40 -> 91 [arrowhead=none;color=red;label=<>;style=dotted;]
+  41 -> 139 [arrowhead=normal;color=green;label="error:code";style=solid;]
+  41 -> 166 [arrowhead=normal;color=green;label="error:message";style=solid;]
+  41 -> 152 [arrowhead=normal;color=green;label="error:variableName";style=solid;]
+  41 -> 20 [arrowhead=empty;color=yellow4;label=<>;style=solid;]
+  42 -> 143 [arrowhead=normal;color=green;label="error:code";style=solid;]
+  42 -> 162 [arrowhead=normal;color=green;label="error:message";style=solid;]
+  42 -> 157 [arrowhead=normal;color=green;label="error:variableName";style=solid;]
+  42 -> 9 [arrowhead=empty;color=yellow4;label=<>;style=solid;]
+  42 -> 90 [arrowhead=normal;color=red;label="rdfs:comment";style=solid;]
+  42 -> 122 [arrowhead=none;color=red;label=<>;style=dotted;]
+  43 -> 53 [arrowhead=empty;color=yellow4;label=<>;style=solid;]
+  43 -> 102 [arrowhead=normal;color=red;label="rdfs:comment";style=solid;]
+  43 -> 4 [arrowhead=normal;color=red;label="rdfs:domain";style=solid;]
+  43 -> 123 [arrowhead=none;color=red;label=<>;style=dotted;]
+  43 -> 13 [arrowhead=normal;color=red;label="rdfs:range";style=solid;]
+  44 -> 23 [arrowhead=empty;color=yellow4;label=<>;style=solid;]
+  44 -> 104 [arrowhead=normal;color=red;label="rdfs:comment";style=solid;]
+  44 -> 126 [arrowhead=none;color=red;label=<>;style=dotted;]
+  45 -> 0 [arrowhead=empty;color=yellow4;label=<>;style=solid;]
+  45 -> 61 [arrowhead=normal;color=red;label="rdfs:comment";style=solid;]
+  45 -> 128 [arrowhead=none;color=red;label=<>;style=dotted;]
+  46 -> 53 [arrowhead=empty;color=yellow4;label=<>;style=solid;]
+  46 -> 100 [arrowhead=normal;color=red;label="rdfs:comment";style=solid;]
+  46 -> 14 [arrowhead=normal;color=red;label="rdfs:domain";style=solid;]
+  46 -> 130 [arrowhead=none;color=red;label=<>;style=dotted;]
+  46 -> 55 [arrowhead=normal;color=red;label="rdfs:range";style=solid;]
+  47 -> 4 [arrowhead=empty;color=yellow4;label=<>;style=solid;]
+  47 -> 95 [arrowhead=normal;color=red;label="rdfs:comment";style=solid;]
+  47 -> 95 [arrowhead=none;color=red;label=<>;style=dotted;]
+  48 -> 53 [arrowhead=empty;color=yellow4;label=<>;style=solid;]
+  48 -> 103 [arrowhead=normal;color=red;label="rdfs:comment";style=solid;]
+  48 -> 4 [arrowhead=normal;color=red;label="rdfs:domain";style=solid;]
+  48 -> 132 [arrowhead=none;color=red;label=<>;style=dotted;]
+  48 -> 21 [arrowhead=normal;color=red;label="rdfs:range";style=solid;]
+  49 -> 20 [arrowhead=empty;color=yellow4;label=<>;style=solid;]
+  49 -> 168 [arrowhead=none;color=red;label=<>;style=dotted;]
+  50 -> 53 [arrowhead=empty;color=yellow4;label=<>;style=solid;]
+  50 -> 96 [arrowhead=normal;color=red;label="rdfs:comment";style=solid;]
+  50 -> 4 [arrowhead=normal;color=red;label="rdfs:domain";style=solid;]
+  50 -> 135 [arrowhead=none;color=red;label=<>;style=dotted;]
+  50 -> 56 [arrowhead=normal;color=red;label="rdfs:range";style=solid;]
+  51 -> 7 [arrowhead=box;color=red;label=<>;style=solid;]
+  52 -> 7 [arrowhead=box;color=red;label=<>;style=solid;]
+}
