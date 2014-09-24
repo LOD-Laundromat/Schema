@@ -1,0 +1,222 @@
+@prefix   xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix  rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix   rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix   llo: <http://lodlaundromat.org/ontology/> .
+@prefix httpo: <http://lodlaundromat.org/http/ontology/> .
+@prefix error: <http://lodlaundromat.org/error/ontology/> .
+
+# Named toplevel resources (32)
+
+llo:Archive
+        rdfs:comment "The class of resources that denote a data document that can be unpacked in order to reveal one or more data document entries. These entries are of type ArchiveEntry.\nSince archives can contain archives, there may be resources that are both Archive and ArchiveEntry."@en ;
+        rdfs:label "file archive"@en ;
+        rdfs:subClassOf llo:DataDocument .
+
+llo:ArchiveEntry
+        rdfs:comment "The class of resource that denote data documents that are not directly downloaded over the Internet, but that are extracted from another data document. The data document from which the archive entry is extracted is always of type Archive, and can either be of type URL or of type ArchiveEntry."@en ;
+        rdfs:label "file archive entry"@en ;
+        rdfs:subClassOf llo:DataDocument .
+
+llo:DataDocument
+        rdfs:comment "A data document that is handled by the LOD Laundromat.\n Instances of this class are named by using MD5 hashed of the source(s) of the data document. The source of a data document is either its URL, or the pair of (1) the source of the archive from which it was derived, and (2) its entry path within that archive."@en ;
+        rdfs:label "data document"@en ;
+        rdfs:subClassOf rdfs:Class .
+
+llo:URL
+        rdfs:comment "The class of resources denoting data documents that are directly downloaded over the Internet.\nSuch URLs are always added as seed points to the LOD Basket, via an HTTP SEND request to the LOD Basket endpoint.\nThese requests can be performed either by (1) a bash script we use to initialize the LOD Laundromat, (2) the procedure the LOD Washing Machine cleaning process uses to extract VoID datadump locations, and (3) human input, delivered through the HTML form at the LOD Laundromat dissemination Website."@en ;
+        rdfs:label "URL"@en ;
+        rdfs:subClassOf llo:DataDocument .
+
+llo:added
+        a rdf:Property ;
+        rdfs:comment "The date and time at which the dirty data document was added to the LOD Basket."@en ;
+        rdfs:domain llo:DataDocument ;
+        rdfs:label "added"@en ;
+        rdfs:range xsd:dateTime .
+
+llo:archiveFileType
+        a rdf:Property ;
+        rdfs:comment "The high-level file type of an archive file.\nPossible values: `file` and `dir`.\nAn archive of type `dir` can be unpacked into archive entries."@en ;
+        rdfs:domain llo:Archive ;
+        rdfs:label "archive file type"@en ;
+        rdfs:range xsd:string .
+
+llo:archiveFilters
+        a rdf:Property ;
+        rdfs:comment "A list of filters that were applied in unpacking the archive."@en ;
+        rdfs:domain llo:Archive ;
+        rdfs:label "archive filters"@en ;
+        rdfs:range rdf:List .
+
+llo:archiveFormat
+        a rdf:Property ;
+        rdfs:comment "TODO"@en ;
+        rdfs:domain llo:Archive ;
+        rdfs:label "archive format"@en ;
+        rdfs:range xsd:string .
+
+llo:archiveLastModified
+        a rdf:Property ;
+        rdfs:comment "TODO"@en ;
+        rdfs:domain llo:Archive ;
+        rdfs:label "archive last modified"@en ;
+        rdfs:range xsd:dateTime .
+
+llo:archiveSize
+        a rdf:Property ;
+        rdfs:comment "TODO"@en ;
+        rdfs:domain llo:Archive ;
+        rdfs:label "archive size"@en ;
+        rdfs:range xsd:integer .
+
+llo:byteCount
+        a rdf:Property ;
+        rdfs:comment "The number of bytes that were processed in the stream of the dirty data document."@en ;
+        rdfs:domain llo:DataDocument ;
+        rdfs:label "byte count"@en ;
+        rdfs:range xsd:integer .
+
+llo:characterCount
+        a rdf:Property ;
+        rdfs:comment "The number of characters that were processed in the stream of the dirty data document."@en ;
+        rdfs:domain llo:DataDocument ;
+        rdfs:label "character count"@en ;
+        rdfs:range xsd:integer .
+
+llo:containsEntry
+        a rdf:Property ;
+        rdfs:comment "A link between a parent archive and one of its direct archive entries."@en ;
+        rdfs:domain llo:Archive ;
+        rdfs:label "contains entry"@en ;
+        rdfs:range llo:ArchiveEntry .
+
+llo:contentLength
+        a rdf:Property ;
+        rdfs:comment "The number of bytes denoted in the Content-Length header of the HTTP reply message, received upon downloading a single dirty data document of type URL. Availability of this information depends on whether the disseminating host can be accessed and the HTTP reply contains the factum."@en ;
+        rdfs:domain llo:URL ;
+        rdfs:label "content length"@en ;
+        rdfs:range xsd:integer .
+
+llo:contentType
+        a rdf:Property ;
+        rdfs:comment "The value of the Content-Type header of the HTTP reply message, received upon downloading a single data document of type URL. Availability of this information depends on whether the disseminating host can be accessed and the HTTP reply contains the factum."@en ;
+        rdfs:domain llo:URL ;
+        rdfs:label "content type"@en ;
+        rdfs:range xsd:string .
+
+llo:duplicates
+        a rdf:Property ;
+        rdfs:comment "The number of triples that are duplicates of other triples in the same dirty data document."@en ;
+        rdfs:domain llo:DataDocument ;
+        rdfs:label "number of duplicate triples"@en ;
+        rdfs:range xsd:integer .
+
+llo:endClean
+        a rdf:Property ;
+        rdfs:comment "The date and time at which the process of cleaning the data document ended."@en ;
+        rdfs:domain llo:DataDocument ;
+        rdfs:label "end cleaning a data document"@en ;
+        rdfs:range xsd:dateTime .
+
+llo:endUnpack
+        a rdf:Property ;
+        rdfs:comment "The date and time at which the process of downloading and unpacking the data document ended."@en ;
+        rdfs:domain llo:DataDocument ;
+        rdfs:label "end unpacking a data document"@en ;
+        rdfs:range xsd:dateTime .
+
+llo:exception
+        a rdf:Property ;
+        rdfs:comment "A blockig exception that occured somewhere during the unpacking and/or cleaning process. Possible values: (1) fail, failed to unpack/clean due to an unanticipated reason. (2) true, successfully unpacked and cleaned data document. (3) exception, failed to unpack/clean due to an anticipated reason."@en ;
+        rdfs:domain llo:DataDocument ;
+        rdfs:label "status"@en ;
+        rdfs:range error:Error .
+
+llo:fileExtension
+        a rdf:Property ;
+        rdfs:comment "The file extension of a the dirty data document.\nThis is only set for data documents that can be downloading and extracted, and that have a file extension."@en ;
+        rdfs:domain llo:DataDocument ;
+        rdfs:label "file extension"@en ;
+        rdfs:range xsd:string .
+
+llo:httpStatus
+        a rdf:Property ;
+        rdfs:comment "The HTTP status of the reply that was received when requesting the resource located at the URL."@en ;
+        rdfs:domain llo:URL ;
+        rdfs:label "HTTP status"@en ;
+        rdfs:range httpo:Status .
+
+llo:lastModified
+        a rdf:Property ;
+        rdfs:comment "The date and time denoted by the Last-Modified header of the HTTP reply message, received upon downloading a single data document of type URL. Availability of this information depends on whether the disseminating host can be accessed and the HTTP reply contains the factum."@en ;
+        rdfs:domain llo:URL ;
+        rdfs:label "last modified"@en ;
+        rdfs:range xsd:dateTime .
+
+llo:lineCount
+        a rdf:Property ;
+        rdfs:comment "The number of lines that were processed in the stream of the data document."@en ;
+        rdfs:domain llo:DataDocument ;
+        rdfs:label "line count"@en ;
+        rdfs:range xsd:integer .
+
+llo:path
+        a rdf:Property ;
+        rdfs:comment "For data documents that are entries in a file archive, the path of the data document in that file archive."@en ;
+        rdfs:domain llo:ArchiveEntry ;
+        rdfs:label "file archive path"@en ;
+        rdfs:range xsd:string .
+
+llo:serializationFormat
+        a rdf:Property ;
+        rdfs:comment "The RDF serialization format that the dirty data document was parsed in.\nThis format is determined based on a parse of an initial portion of the file contents, the file extension (if any) and the value of the HTTP Content-Type header (if any).\nThe possible values are: JSON-LD, N-Quads, N-Triples, RDF/XML, RDFa, Turtle, TriG."@en ;
+        rdfs:domain llo:DataDocument ;
+        rdfs:label "serialization format"@en ;
+        rdfs:range rdfs:Resource .
+
+llo:size
+        a rdf:Property ;
+        rdfs:comment "The size of the downloaded dirty data document, represented in bytes on disk.\nAvailability: Any data document that can be downloaded/unpacked."@en ;
+        rdfs:domain llo:DataDocument ;
+        rdfs:label "byte size"@en ;
+        rdfs:range xsd:integer .
+
+llo:startClean
+        a rdf:Property ;
+        rdfs:comment "The date and time at which the process of cleaning the data document started."@en ;
+        rdfs:domain llo:DataDocument ;
+        rdfs:label "start cleaning a data document"@en ;
+        rdfs:range xsd:dateTime .
+
+llo:startUnpack
+        a rdf:Property ;
+        rdfs:comment "The date and time at which the process of downloading and unpacking the data document started."@en ;
+        rdfs:domain llo:DataDocument ;
+        rdfs:label "start unpacking a data document"@en ;
+        rdfs:range xsd:dateTime .
+
+llo:triples
+        a rdf:Property ;
+        rdfs:comment "The number of triples that could be read from the dirty data document. This is also the number of triples that is stored in the cleaned data document.\n     This is after triple deduplication."@en ;
+        rdfs:domain llo:DataDocument ;
+        rdfs:label "triples"@en ;
+        rdfs:range xsd:integer .
+
+llo:unrecognizedFormat
+        a rdfs:Resource ;
+        rdfs:comment "A syntactic format that is not recognized as any of the RDF serialization formats."@en ;
+        rdfs:label "unrecognized format"@en .
+
+llo:url
+        a rdf:Property ;
+        rdfs:comment "The URL from which the original version of the data document was downloaded."@en ;
+        rdfs:domain llo:URL ;
+        rdfs:label "URL"@en ;
+        rdfs:range rdfs:Resource .
+
+llo:warning
+        a rdf:Property ;
+        rdfs:comment "A non-blocking warning message that is either emitted while downloading, unpacking, or cleaning a dirty data document.\nPossible values: (1) TODO (1) Syntax error while parsing RDF file. (2) No RDF in file."@en ;
+        rdfs:domain llo:DataDocument ;
+        rdfs:label "message"@en ;
+        rdfs:range error:Error .
