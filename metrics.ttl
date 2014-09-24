@@ -11,6 +11,7 @@
 @prefix formats: <http://www.w3.org/ns/formats/> .
 @prefix void-ext: <http://ldf.fi/void-ext#> .
 @prefix llm: <http://lodlaundromat.org/metrics/ontology/> .
+@prefix llo: <http://lodlaundromat.org/ontology/> .
 
 
 
@@ -249,38 +250,45 @@ llm:literalLength
 
 llm:mean
 	a owl:DatatypeProperty ; 
-	rdfs:label "Mean"
-	rdfs:comment "Mean"
+	rdfs:label "Mean";
+	rdfs:comment "Mean";
 	rdfs:domain llm:descriptiveStatistics;
 	rdfs:range xsd:double .
 	
 llm:std
 	a owl:DatatypeProperty ; 
-	rdfs:label "Standard Deviation"
-	rdfs:comment "Standard Deviation"
+	rdfs:label "Standard Deviation";
+	rdfs:comment "Standard Deviation";
 	rdfs:domain llm:descriptiveStatistics;
 	rdfs:range xsd:double .
 
 llm:median
 	a owl:DatatypeProperty ; 
-	rdfs:label "Median"
-	rdfs:comment "Median"
+	rdfs:label "Median";
+	rdfs:comment "Median";
 	rdfs:domain llm:descriptiveStatistics;
 	rdfs:range xsd:long .
 	
 llm:max
 	a owl:DatatypeProperty ; 
-	rdfs:label "Maximum"
-	rdfs:comment "Maximum"
+	rdfs:label "Maximum";
+	rdfs:comment "Maximum";
 	rdfs:domain llm:descriptiveStatistics;
 	rdfs:range xsd:long .
 
 llm:min
 	a owl:DatatypeProperty ; 
-	rdfs:label "Minimum"
-	rdfs:comment "Minimum"
+	rdfs:label "Minimum";
+	rdfs:comment "Minimum";
 	rdfs:domain llm:descriptiveStatistics;
 	rdfs:range xsd:long .
+
+llm:metrics
+	a owl:ObjectProperty;
+	rdfs:label "The dataset metrics";
+	rdfs:comment "The dataset metrics for this document cleaned by the LOD Laundromat";
+	rdfs:domain llo:DataDocument;
+	rdfs:range void:Dataset.
 
 llm:descriptiveStatistics
 	a owl:Class;
