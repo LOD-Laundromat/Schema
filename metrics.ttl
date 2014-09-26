@@ -12,30 +12,31 @@
 @prefix void-ext: <http://ldf.fi/void-ext#> .
 @prefix llm: <http://lodlaundromat.org/metrics/ontology/> .
 @prefix llo: <http://lodlaundromat.org/ontology/> .
+@prefix voaf: <http://purl.org/vocommons/voaf#> .
+@prefix cc: <http://creativecommons.org/ns#> .
 
 
 
-
-
-
-<http://lodlaundromat.org/metrics/ontology> a owl:Ontology ;
+<http://lodlaundromat.org/metrics/ontology/> 
+	a owl:Ontology ;
+	a voaf:Vocabulary;
 	owl:versionInfo "1.0.0" ;
 	owl:imports <http://rdfs.org/ns/void> ;
 	owl:imports <http://ldf.fi/void-ext> ;
 	owl:imports <http://bio2rdf.org/bio2rdf.dataset_vocabulary> ;
 	dcterms:title "Collection (and extension) of several dataset metrics" ;
-	dcterms:description "Collection (and extension) of several dataset metrics, including VoiD, VoiD-ext, Bio2RDF metrics, and LODStats" ;
+	dcterms:description "Collection (and extension) of several dataset metrics, including VoiD, VoiD-ext and Bio2RDF metrics" ;
 	dcterms:modified "2014-09-24"^^xsd:date ;
 	dcterms:created "2014-09-24"^^xsd:date ;
 	foaf:homepage <http://lodlaundromat.org> ;
 	vann:preferredNamespaceUri "http://lodlaundromat.org/metrics/ontology/";
     	vann:preferredNamespacePrefix "llm";
 	dcterms:publisher "VU University Amsterdam" ;
-	dc:creator <http://lodlaundromat.org/metrics/ontology/laurensrietveld> .
+	dc:creator 
+		[a foaf:Person; foaf:name "Laurens Rietveld"; foaf:homepage <http://laurensrietveld.nl>] ,
+		[a foaf:Person; foaf:name "Wouter Beek"; foaf:homepage <http://www.wouterbeek.com>] ;
+	cc:license <http://creativecommons.org/licenses/by/3.0/> .
 
-<http://lodlaundromat.org/metrics/ontology/laurensrietveld> a foaf:Person;
-    foaf:name "Laurens Rietveld";
-    foaf:homepage <http://laurensrietveld.nl>.
 
 llm:triples 
 	a owl:DatatypeProperty;
