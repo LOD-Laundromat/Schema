@@ -248,6 +248,25 @@ llm:literalLength
 	rdfs:domain void:Dataset ;
 	rdfs:range llm:descriptiveStatistics .
 
+llm:degree
+	a owl:ObjectProperty;
+	rdfs:label "Degree statistics";
+	rdfs:comment "Statistics on the degrees of resources in this dataset.";
+	rdfs:domain void:Dataset ;
+	rdfs:range llm:descriptiveStatistics .
+llm:outDegree
+	a owl:ObjectProperty;
+	rdfs:label "Out-degree statistics";
+	rdfs:comment "Statistics on the out-degree of resources in this dataset, i.e. statistics on the out-links of resources, i.e. how often a resource occurs in a subject position";
+	rdfs:domain void:Dataset ;
+	rdfs:range llm:descriptiveStatistics .
+	
+llm:inDegree
+	a owl:ObjectProperty;
+	rdfs:label "In-degree statistics";
+	rdfs:comment "Statistics on the in-degree of resources in this dataset, i.e. statistics on the incoming links of resources, i.e. how often a resource occurs in an object position";
+	rdfs:domain void:Dataset ;
+	rdfs:range llm:descriptiveStatistics .
 
 llm:mean
 	a owl:DatatypeProperty ; 
