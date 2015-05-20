@@ -234,7 +234,6 @@ llm:min
 	rdfs:range xsd:long .
 
 llm:metrics
-  a prov:Entity;
 	a owl:ObjectProperty;
 	rdfs:label "The dataset metrics";
 	rdfs:comment "The dataset metrics for this document cleaned by the LOD Laundromat";
