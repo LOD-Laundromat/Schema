@@ -14,7 +14,7 @@
 @prefix llo: <http://lodlaundromat.org/ontology/> .
 @prefix voaf: <http://purl.org/vocommons/voaf#> .
 @prefix cc: <http://creativecommons.org/ns#> .
-
+@prefix prov: <http://www.w3.org/ns/prov#>
 
 
 <http://lodlaundromat.org/metrics/ontology/> 
@@ -242,6 +242,7 @@ llm:metrics
 
 llm:descriptiveStatistics
 	a owl:Class;
+  a prov:Entity;
 	rdfs:label "Descriptive Statistics";
 	rdfs:comment "A set of descriptive statistics, including the mean, standard deviation, median and min/max values".
 	
