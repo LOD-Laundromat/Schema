@@ -20,13 +20,13 @@
 <http://lodlaundromat.org/metrics/ontology/> 
 	a owl:Ontology ;
 	a voaf:Vocabulary;
-	owl:versionInfo "1.0.0" ;
+	owl:versionInfo "1.0.1" ;
 	owl:imports <http://rdfs.org/ns/void> ;
 	owl:imports <http://ldf.fi/void-ext> ;
 	owl:imports <http://bio2rdf.org/bio2rdf.dataset_vocabulary> ;
 	dcterms:title "Collection (and extension) of several dataset metrics" ;
 	dcterms:description "Collection (and extension) of several dataset metrics, including VoiD, VoiD-ext and Bio2RDF metrics" ;
-	dcterms:modified "2014-09-24"^^xsd:date ;
+	dcterms:modified "2015-05-20"^^xsd:date ;
 	dcterms:created "2014-09-24"^^xsd:date ;
 	foaf:homepage <http://lodlaundromat.org> ;
 	vann:preferredNamespaceUri "http://lodlaundromat.org/metrics/ontology/";
@@ -38,87 +38,53 @@
 	cc:license <http://creativecommons.org/licenses/by/3.0/> .
 
 
-llm:triples 
-	a owl:DatatypeProperty;
-	owl:equivalentProperty void:triples;
-	owl:equivalentProperty bio:Dataset-Triples;
+void:triples 
     rdfs:label "Number of triples";
-    rdfs:comment "The total number of triples contained in a void:Dataset.";
-    rdfs:domain void:Dataset;
-    rdfs:range xsd:long .
+    rdfs:comment "The total number of triples contained in the Dataset.".
 
-llm:distinctClasses 
-	a owl:DatatypeProperty;
-	owl:equivalentProperty void:classes;
-	owl:equivalentProperty bio:Dataset-Distinct-Types;
-    rdfs:label "Number of distinct classes";
-    rdfs:comment "The total number of distinct classes in a void:Dataset. In other words, the number of distinct resources occuring as objects of rdf:type triples in the dataset.";
-    rdfs:domain void:Dataset;
-    rdfs:range xsd:long .
+void:classes
+  rdfs:label "Number of distinct classes";
+  rdfs:comment "The total number of distinct classes in a void:Dataset. In other words, the number of distinct resources occuring as objects of rdf:type triples in the dataset.".
 
-llm:distinctDefinedClasses 
-	a owl:DatatypeProperty;
-	owl:equivalentProperty void:classes;
-	owl:equivalentProperty bio:Dataset-Distinct-Types;
-    rdfs:label "Number of distinct defined classes";
-    rdfs:comment "The total number of distinct defined classes in a void:Dataset. In other words, the number of distinct resources which have rdfs:Object or owl:Object as type.";
-    rdfs:domain void:Dataset;
-    rdfs:range xsd:long .
-
-llm:distinctProperties 
-	a owl:DatatypeProperty;
-	owl:equivalentProperty void:properties;
-	owl:equivalentProperty bio:Dataset-Distinct-Properties;
+void:properties 
     rdfs:label "Number of (distinct) properties";
-    rdfs:comment "The total number of distinct properties in a void:Dataset. In other words, the number of distinct resources that occur in the predicate position of triples in the dataset.";
-    rdfs:domain void:Dataset;
-    rdfs:range xsd:long .
+    rdfs:comment "The total number of distinct properties in a void:Dataset. In other words, the number of distinct resources that occur in the predicate position of triples in the dataset.".
 
-llm:distinctDefinedProperties
-	a owl:DatatypeProperty;
-	owl:equivalentProperty void:classes;
-	owl:equivalentProperty bio:Dataset-Distinct-Types;
-    rdfs:label "Number of distinct defined properties";
-    rdfs:comment "The total number of distinct defined properties in a void:Dataset. In other words, the number of distinct resources which have rdfs:Property, owl:ObjectProperty, or owl:DatatypeProperty as type.";
-    rdfs:domain void:Dataset;
-    rdfs:range xsd:long .
 
-llm:distinctEntities
-	a owl:DatatypeProperty;
-	owl:equivalentProperty void:entities;
-	owl:equivalentProperty bio:Dataset-Distinct-Entities;
-    rdfs:label "Number of distinct entities";
-    rdfs:comment "The total number of distinct entities that are described in a void:Dataset.";
-    rdfs:domain void:Dataset;
-    rdfs:range xsd:long .
 
-llm:distinctObjects
+llm:definedClasses 
 	a owl:DatatypeProperty;
-	owl:equivalentProperty void:distinctObjects;
-	owl:equivalentProperty bio:Dataset-Distinct-Objects;
+  rdfs:label "Number of distinct defined classes";
+  rdfs:comment "The total number of distinct defined classes in a void:Dataset. In other words, the number of distinct resources which have rdfs:Object or owl:Object as type.";
+  rdfs:domain void:Dataset;
+  rdfs:range xsd:long .
+
+
+
+llm:definedProperties
+	a owl:DatatypeProperty;
+  rdfs:label "Number of distinct defined properties";
+  rdfs:comment "The total number of distinct defined properties in a void:Dataset. In other words, the number of distinct resources which have rdfs:Property, owl:ObjectProperty, or owl:DatatypeProperty as type.";
+  rdfs:domain void:Dataset;
+  rdfs:range xsd:long .
+
+void:entities
+  rdfs:label "Number of distinct entities";
+  rdfs:comment "The total number of distinct entities (IRIs) that are described in a void:Dataset.".
+
+void:distinctObjects
     rdfs:label "Number of distinct objects";
-    rdfs:comment "The total number of distinct objects in a void:Dataset. In other words, the number of distinct resources that occur in the object position of triples in the dataset. Literals are included in this count.";
-    rdfs:domain void:Dataset;
-    rdfs:range xsd:long .
+    rdfs:comment "The total number of distinct objects in a void:Dataset. In other words, the number of distinct resources that occur in the object position of triples in the dataset. Literals are included in this count.".
 
-llm:distinctSubjects
-	a owl:DatatypeProperty;
-	owl:equivalentProperty void:distinctSubjects;
-	owl:equivalentProperty bio:Dataset-Distinct-Subjects;
+void:distinctSubjects
     rdfs:label "Number of distinct subjects";
-    rdfs:comment "The total number of distinct subjects in a void:Dataset. In other words, the number of distinct resources that occur in the subject position of triples in the dataset.";
-    rdfs:domain void:Dataset;
-    rdfs:range xsd:long .
+    rdfs:comment "The total number of distinct subjects in a void:Dataset. In other words, the number of distinct resources that occur in the subject position of triples in the dataset.".
 
 
 
-llm:distinctRDFNodes
-	a owl:DatatypeProperty ;
-	owl:equivalentProperty void-ext:distinctRDFNodes;
+void-ext:distinctRDFNodes
 	rdfs:label "Distinct RDF nodes" ;
-	rdfs:comment "The total number of distinct RDF nodes in a void:Dataset. In other words, the number of distinct literals, IRI references and blank nodes that occur in the subject, predicate or object position of triples in the dataset." ;
-	rdfs:domain void:Dataset ;
-	rdfs:range xsd:long .
+	rdfs:comment "The total number of distinct RDF nodes in a void:Dataset. In other words, the number of distinct literals, IRI references and blank nodes that occur in the subject, predicate or object position of triples in the dataset." .
 
 llm:IRIs
 	a owl:DatatypeProperty ;
@@ -127,13 +93,9 @@ llm:IRIs
 	rdfs:domain void:Dataset ;
 	rdfs:range xsd:long .
 
-llm:distinctIRIs
-	a owl:DatatypeProperty ;
-	owl:equivalentProperty void-ext:distinctIRIReferences;
+void-ext:distinctIRIReferences
 	rdfs:label "Distinct IRI references" ;
-	rdfs:comment "The total number of distinct IRI references in a void:Dataset. In other words, the number of distinct IRI references that occur in the subject, predicate or object position of triples in the dataset." ;
-	rdfs:domain void:Dataset ;
-	rdfs:range xsd:long .
+	rdfs:comment "The total number of distinct IRI references in a void:Dataset. In other words, the number of distinct IRI references that occur in the subject, predicate or object position of triples in the dataset." .
 
 llm:blankNodes
 	a owl:DatatypeProperty ;
@@ -142,13 +104,9 @@ llm:blankNodes
 	rdfs:domain void:Dataset ;
 	rdfs:range xsd:long .
 
-llm:distinctBlankNodes
-	a owl:DatatypeProperty ;
-	owl:equivalentProperty void-ext:distinctBlankNodes;
+void-ext:distinctBlankNodes
 	rdfs:label "Distinct blank nodes" ;
-	rdfs:comment "The total number of distinct blank nodes in a void:Dataset. In other words, the number of distinct blank nodes that occur in the subject or object position of triples in the dataset." ;
-	rdfs:domain void:Dataset ;
-	rdfs:range xsd:long .
+	rdfs:comment "The total number of distinct blank nodes in a void:Dataset. In other words, the number of distinct blank nodes that occur in the subject or object position of triples in the dataset." .
 
 llm:literals
 	a owl:DatatypeProperty ;
@@ -157,61 +115,33 @@ llm:literals
 	rdfs:domain void:Dataset ;
 	rdfs:range xsd:long .
 
-llm:distinctLiterals
-	a owl:DatatypeProperty ;
-	owl:equivalentProperty void-ext:distinctLiterals;
+void-ext:distinctLiterals
 	rdfs:label "Distinct literals" ;
-	rdfs:comment "The total number of distinct literals in a void:Dataset. In other words, the number of distinct literals that occur in the object position of triples in the dataset." ;
-	rdfs:domain void:Dataset ;
-	rdfs:range xsd:long .
+	rdfs:comment "The total number of distinct literals in a void:Dataset. In other words, the number of distinct literals that occur in the object position of triples in the dataset." .
 
-llm:distinctSubjectIRIs
-	a owl:DatatypeProperty ;
-	owl:equivalentProperty void-ext:distinctIRIReferenceSubjects;
+void-ext:distinctIRIReferenceSubjects
 	rdfs:label "Distinct IRIs in subject location" ;
-	rdfs:comment "The total number of distinct IRIs as subjects in a void:Dataset. In other words, the number of distinct IRI references that occur in the subject position of triples in the dataset." ;
-	rdfs:domain void:Dataset ;
-	rdfs:range xsd:long .
+	rdfs:comment "The total number of distinct IRIs as subjects in a void:Dataset. In other words, the number of distinct IRI references that occur in the subject position of triples in the dataset." .
 
-llm:distinctSubjectBlankNodes
-	a owl:DatatypeProperty ;
-	owl:equivalentProperty void-ext:distinctBlankNodeSubjects;
+void-ext:distinctBlankNodeSubjects
 	rdfs:label "Distinct blank nodes in subject location" ;
-	rdfs:comment "The total number of distinct blank nodes as subjects in a void:Dataset. In other words, the number of distinct blank nodes that occur in the subject position of triples in the dataset." ;
-	rdfs:domain void:Dataset ;
-	rdfs:range xsd:long .
+	rdfs:comment "The total number of distinct blank nodes as subjects in a void:Dataset. In other words, the number of distinct blank nodes that occur in the subject position of triples in the dataset." .
 
-llm:distinctObjectIRIs
-	a owl:DatatypeProperty ;
-	owl:equivalentProperty void-ext:distinctIRIReferenceObjects;
+void-ext:distinctIRIReferenceObjects
 	rdfs:label "Distinct IRIs in object location" ;
-	rdfs:comment "The total number of distinct IRIs as objects in a void:Dataset. In other words, the number of distinct IRI references that occur in the object position of triples in the dataset." ;
-	rdfs:domain void:Dataset ;
-	rdfs:range xsd:long .
+	rdfs:comment "The total number of distinct IRIs as objects in a void:Dataset. In other words, the number of distinct IRI references that occur in the object position of triples in the dataset." .
 
 llm:distinctObjectBlankNodes
-	a owl:DatatypeProperty ;
-	owl:equivalentProperty void-ext:distinctBlankNodeObjects;
 	rdfs:label "Distinct blank nodes in object location" ;
-	rdfs:comment "The total number of distinct blank nodes as objects in a void:Dataset. In other words, the number of distinct blank nodes that occur in the object position of triples in the dataset." ;
-	rdfs:domain void:Dataset ;
-	rdfs:range xsd:long .
+	rdfs:comment "The total number of distinct blank nodes as objects in a void:Dataset. In other words, the number of distinct blank nodes that occur in the object position of triples in the dataset." .
 
-llm:distinctDataTypes
-	a owl:DatatypeProperty ;
-	owl:equivalentProperty void-ext:datatypes;
+void-ext:datatypes
 	rdfs:label "Distinct literal datatypes" ;
-	rdfs:comment "The total number of literal datatypes in a void:Dataset. In other words, the number of distinct datatypes that appear in any datatyped literal objects in the dataset." ;
-	rdfs:domain void:Dataset ;
-	rdfs:range xsd:long .
+	rdfs:comment "The total number of literal datatypes in a void:Dataset. In other words, the number of distinct datatypes that appear in any datatyped literal objects in the dataset." .
 
-llm:distinctLanguages
-	a owl:DatatypeProperty ;
-	owl:equivalentProperty void-ext:languages;
+void-ext:languages
 	rdfs:label "Distinct languages" ;
-	rdfs:comment "The total number of literal languages in a void:Dataset. In other words, the number of distinct languages that appear in any language literal objects in the dataset." ;
-	rdfs:domain void:Dataset ;
-	rdfs:range xsd:long .
+	rdfs:comment "The total number of literal languages in a void:Dataset. In other words, the number of distinct languages that appear in any language literal objects in the dataset." .
 
 llm:IRILength
 	a owl:ObjectProperty;
