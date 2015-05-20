@@ -131,7 +131,7 @@ void-ext:distinctIRIReferenceObjects
 	rdfs:label "Distinct IRIs in object location" ;
 	rdfs:comment "The total number of distinct IRIs as objects in a void:Dataset. In other words, the number of distinct IRI references that occur in the object position of triples in the dataset." .
 
-llm:distinctObjectBlankNodes
+void-ext:distinctBlankNodeObjects
 	rdfs:label "Distinct blank nodes in object location" ;
 	rdfs:comment "The total number of distinct blank nodes as objects in a void:Dataset. In other words, the number of distinct blank nodes that occur in the object position of triples in the dataset." .
 
