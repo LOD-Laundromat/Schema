@@ -6,7 +6,22 @@
 @prefix    httpo: <http://lodlaundromat.org/http/ontology/> .
 @prefix    error: <http://lodlaundromat.org/error/ontology/> .
 
-# Named toplevel resources (86)
+<http://lodlaundromat.org/http/ontology/>
+	a owl:Ontology ;
+	a voaf:Vocabulary;
+	owl:versionInfo "1.0.1" ;
+	dcterms:title "Vocabulary for describing http error codes" ;
+	dcterms:description "Vocabulary for describing http error codes" ;
+	dcterms:modified "2015-11-18"^^xsd:date ;
+	dcterms:created "2014-09-24"^^xsd:date ;
+	foaf:homepage <http://lodlaundromat.org> ;
+	vann:preferredNamespaceUri "http://lodlaundromat.org/http/ontology/";
+    	vann:preferredNamespacePrefix "httpo";
+	dcterms:publisher "VU University Amsterdam" ;
+	dc:creator
+		[a foaf:Person; foaf:name "Laurens Rietveld"; foaf:homepage <http://laurensrietveld.nl>] ,
+		[a foaf:Person; foaf:name "Wouter Beek"; foaf:homepage <http://www.wouterbeek.com>] ;
+	cc:license <http://creativecommons.org/licenses/by/3.0/> .
 
 <http://lodlaundromat.org/http/ontology/100>
         a <http://lodlaundromat.org/http/ontology/1xx> ;

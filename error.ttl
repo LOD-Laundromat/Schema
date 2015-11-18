@@ -3,7 +3,22 @@
 @prefix   rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix error: <http://lodlaundromat.org/error/ontology/> .
 
-# Named toplevel resources (60)
+<http://lodlaundromat.org/error/ontology/>
+	a owl:Ontology ;
+	a voaf:Vocabulary;
+	owl:versionInfo "1.0.1" ;
+	dcterms:title "Vocabulary for describing crawling errors" ;
+	dcterms:description "Vocabulary for describing crawling errors, such as archive and http errors" ;
+	dcterms:modified "2015-11-18"^^xsd:date ;
+	dcterms:created "2014-09-24"^^xsd:date ;
+	foaf:homepage <http://lodlaundromat.org> ;
+	vann:preferredNamespaceUri "http://lodlaundromat.org/error/ontology/";
+    	vann:preferredNamespacePrefix "error";
+	dcterms:publisher "VU University Amsterdam" ;
+	dc:creator
+		[a foaf:Person; foaf:name "Laurens Rietveld"; foaf:homepage <http://laurensrietveld.nl>] ,
+		[a foaf:Person; foaf:name "Wouter Beek"; foaf:homepage <http://www.wouterbeek.com>] ;
+	cc:license <http://creativecommons.org/licenses/by/3.0/> .
 
 <http://lodlaundromat.org/error/ontology/4xxHttpError>
         rdfs:comment "An HTTP error in the 400-range."@en-us ;
