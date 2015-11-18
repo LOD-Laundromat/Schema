@@ -14,7 +14,7 @@
 @prefix llo: <http://lodlaundromat.org/ontology/> .
 @prefix voaf: <http://purl.org/vocommons/voaf#> .
 @prefix cc: <http://creativecommons.org/ns#> .
-@prefix prov: <http://www.w3.org/ns/prov#>
+@prefix prov: <http://www.w3.org/ns/prov#> .
 
 
 <http://lodlaundromat.org/metrics/ontology/>
