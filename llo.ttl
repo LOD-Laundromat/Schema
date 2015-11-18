@@ -5,7 +5,26 @@
 @prefix httpo: <http://lodlaundromat.org/http/ontology/> .
 @prefix error: <http://lodlaundromat.org/error/ontology/> .
 
-# Named toplevel resources (36)
+
+<http://lodlaundromat.org/ontology/>
+	a owl:Ontology ;
+	a voaf:Vocabulary;
+	owl:versionInfo "1.0.2" ;
+	owl:imports <http://lodlaundromat.org/http/ontology> ;
+	owl:imports <http://lodlaundromat.org/error/ontology> ;
+	dcterms:title "LOD Laundromat Vocabulary" ;
+	dcterms:description "Vocabulary for describing the crawling meta-data of the LOD Laundromat" ;
+	dcterms:modified "2015-11-18"^^xsd:date ;
+	dcterms:created "2014-09-24"^^xsd:date ;
+	foaf:homepage <http://lodlaundromat.org> ;
+	vann:preferredNamespaceUri "http://lodlaundromat.org/ontology/";
+    	vann:preferredNamespacePrefix "llo";
+	dcterms:publisher "VU University Amsterdam" ;
+	dc:creator
+		[a foaf:Person; foaf:name "Laurens Rietveld"; foaf:homepage <http://laurensrietveld.nl>] ,
+		[a foaf:Person; foaf:name "Wouter Beek"; foaf:homepage <http://www.wouterbeek.com>] ;
+	cc:license <http://creativecommons.org/licenses/by/3.0/> .
+
 
 error:unrecognizedFormat
         a rdfs:Resource ;
