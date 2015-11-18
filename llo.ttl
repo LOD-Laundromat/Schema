@@ -81,7 +81,7 @@ llo:byteCount
         rdfs:label "byte count"@en-us ;
         rdfs:range xsd:nonNegativeInteger .
 
-llo:characterCount
+llo:charCount
         a rdf:Property ;
         rdfs:comment "The number of characters that were processed in the stream of the dirty data document."@en-us ;
         rdfs:domain llo:DataDocument ;

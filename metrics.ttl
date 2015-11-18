@@ -17,7 +17,7 @@
 @prefix prov: <http://www.w3.org/ns/prov#>
 
 
-<http://lodlaundromat.org/metrics/ontology/> 
+<http://lodlaundromat.org/metrics/ontology/>
 	a owl:Ontology ;
 	a voaf:Vocabulary;
 	owl:versionInfo "1.0.1" ;
@@ -32,13 +32,13 @@
 	vann:preferredNamespaceUri "http://lodlaundromat.org/metrics/ontology/";
     	vann:preferredNamespacePrefix "llm";
 	dcterms:publisher "VU University Amsterdam" ;
-	dc:creator 
+	dc:creator
 		[a foaf:Person; foaf:name "Laurens Rietveld"; foaf:homepage <http://laurensrietveld.nl>] ,
 		[a foaf:Person; foaf:name "Wouter Beek"; foaf:homepage <http://www.wouterbeek.com>] ;
 	cc:license <http://creativecommons.org/licenses/by/3.0/> .
 
 
-void:triples 
+void:triples
     rdfs:label "Number of triples";
     rdfs:comment "The total number of triples contained in the Dataset.".
 
@@ -46,13 +46,13 @@ void:classes
   rdfs:label "Number of distinct classes";
   rdfs:comment "The total number of distinct classes in a void:Dataset. In other words, the number of distinct resources occuring as objects of rdf:type triples in the dataset.".
 
-void:properties 
+void:properties
     rdfs:label "Number of (distinct) properties";
     rdfs:comment "The total number of distinct properties in a void:Dataset. In other words, the number of distinct resources that occur in the predicate position of triples in the dataset.".
 
 
 
-llm:definedClasses 
+llm:definedClasses
 	a owl:DatatypeProperty;
   rdfs:label "Number of distinct defined classes";
   rdfs:comment "The total number of distinct defined classes in a void:Dataset. In other words, the number of distinct resources which have rdfs:Object or owl:Object as type.";
@@ -150,21 +150,21 @@ llm:IRILength
 	rdfs:domain void:Dataset ;
 	rdfs:range llm:descriptiveStatistics .
 
-llm:subjectIRILength
+llm:subIRILength
 	a owl:ObjectProperty;
 	rdfs:label "Statistics on the lengths of subject IRIs";
 	rdfs:comment "Statistics on the lengths of IRIs, calculated on the non-distinct set of IRIs occurring in the subject position";
 	rdfs:domain void:Dataset ;
 	rdfs:range llm:descriptiveStatistics .
 
-llm:propertyIRILength
+llm:predIRILength
 	a owl:ObjectProperty;
-	rdfs:label "Statistics on the lengths of property IRIs";
+	rdfs:label "Statistics on the lengths of predicate IRIs";
 	rdfs:comment "Statistics on the lengths of IRIs, calculated on the non-distinct set of IRIs occurring in the predicate position";
 	rdfs:domain void:Dataset ;
 	rdfs:range llm:descriptiveStatistics .
 
-llm:objectIRILength
+llm:objIRILength
 	a owl:ObjectProperty;
 	rdfs:label "Statistics on the lengths of object IRIs";
 	rdfs:comment "Statistics on the lengths of IRIs, calculated on the non-distinct set of IRIs occurring in the object position";
@@ -190,7 +190,7 @@ llm:outDegree
 	rdfs:comment "Statistics on the out-degree of resources in this dataset, i.e. statistics on the out-links of resources, i.e. how often a resource occurs in a subject position";
 	rdfs:domain void:Dataset ;
 	rdfs:range llm:descriptiveStatistics .
-	
+
 llm:inDegree
 	a owl:ObjectProperty;
 	rdfs:label "In-degree statistics";
@@ -199,35 +199,35 @@ llm:inDegree
 	rdfs:range llm:descriptiveStatistics .
 
 llm:mean
-	a owl:DatatypeProperty ; 
+	a owl:DatatypeProperty ;
 	rdfs:label "Mean";
 	rdfs:comment "Mean";
 	rdfs:domain llm:descriptiveStatistics;
 	rdfs:range xsd:double .
-	
+
 llm:std
-	a owl:DatatypeProperty ; 
+	a owl:DatatypeProperty ;
 	rdfs:label "Standard Deviation";
 	rdfs:comment "Standard Deviation";
 	rdfs:domain llm:descriptiveStatistics;
 	rdfs:range xsd:double .
 
 llm:median
-	a owl:DatatypeProperty ; 
+	a owl:DatatypeProperty ;
 	rdfs:label "Median";
 	rdfs:comment "Median";
 	rdfs:domain llm:descriptiveStatistics;
 	rdfs:range xsd:long .
-	
+
 llm:max
-	a owl:DatatypeProperty ; 
+	a owl:DatatypeProperty ;
 	rdfs:label "Maximum";
 	rdfs:comment "Maximum";
 	rdfs:domain llm:descriptiveStatistics;
 	rdfs:range xsd:long .
 
 llm:min
-	a owl:DatatypeProperty ; 
+	a owl:DatatypeProperty ;
 	rdfs:label "Minimum";
 	rdfs:comment "Minimum";
 	rdfs:domain llm:descriptiveStatistics;
@@ -244,4 +244,16 @@ llm:descriptiveStatistics
 	a owl:Class;
 	rdfs:label "Descriptive Statistics";
 	rdfs:comment "A set of descriptive statistics, including the mean, standard deviation, median and min/max values".
-	
+
+llm:gitCommitId
+	a owl:DatatypeProperty ;
+	rdfs:label "Git Commit ID" ;
+	rdfs:comment "Commit ID belonging to a particular prov entity. Useful to refer to a GIT repository in any point in time" ;
+	rdfs:domain prov:Entity ;
+	rdfs:range xsd:string .
+
+llm:gitRepository
+	a owl:ObjectProperty;
+	rdfs:label "Git Repository URL" ;
+	rdfs:comment "Repository URL belonging to a particular prov entity" ;
+	rdfs:domain prov:Entity .
