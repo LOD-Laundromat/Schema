@@ -1,259 +1,227 @@
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix bio: <http://bio2rdf.org/bio2rdf.dataset_vocabulary:> .
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix vann: <http://purl.org/vocab/vann/> .
-@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+# baseURI: http://lodlaundromat.org/metrics/ontology/
+# imports: http://ldf.fi/void-ext
+# imports: http://lodlaundromat.org/ontology/
+# imports: http://rdfs.org/ns/void
+
+@prefix : <http://www.semanticweb.org/owl/owlapi/turtle#> .
+@prefix cc: <http://creativecommons.org/ns#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
-@prefix void: <http://rdfs.org/ns/void#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix formats: <http://www.w3.org/ns/formats/> .
-@prefix void-ext: <http://ldf.fi/void-ext#> .
+@prefix httpo: <http://lodlaundromat.org/http/ontology/> .
 @prefix llm: <http://lodlaundromat.org/metrics/ontology/> .
 @prefix llo: <http://lodlaundromat.org/ontology/> .
-@prefix voaf: <http://purl.org/vocommons/voaf#> .
-@prefix cc: <http://creativecommons.org/ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix voaf: <http://purl.org/vocommons/voaf#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix void-ext: <http://ldf.fi/void-ext#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-
-<http://lodlaundromat.org/metrics/ontology/>
-	a owl:Ontology ;
-	a voaf:Vocabulary;
-	owl:versionInfo "1.0.1" ;
-	owl:imports <http://rdfs.org/ns/void> ;
-	owl:imports <http://ldf.fi/void-ext> ;
-	owl:imports <http://bio2rdf.org/bio2rdf.dataset_vocabulary> ;
-	dcterms:title "Collection (and extension) of several dataset metrics" ;
-	dcterms:description "Collection (and extension) of several dataset metrics, including VoiD, VoiD-ext and Bio2RDF metrics" ;
-	dcterms:modified "2015-05-20"^^xsd:date ;
-	dcterms:created "2014-09-24"^^xsd:date ;
-	foaf:homepage <http://lodlaundromat.org> ;
-	vann:preferredNamespaceUri "http://lodlaundromat.org/metrics/ontology/";
-    	vann:preferredNamespacePrefix "llm";
-	dcterms:publisher "VU University Amsterdam" ;
-	dc:creator
-		[a foaf:Person; foaf:name "Laurens Rietveld"; foaf:homepage <http://laurensrietveld.nl>] ,
-		[a foaf:Person; foaf:name "Wouter Beek"; foaf:homepage <http://www.wouterbeek.com>] ;
-	cc:license <http://creativecommons.org/licenses/by/3.0/> .
-
-
-void:triples
-    rdfs:label "Number of triples";
-    rdfs:comment "The total number of triples contained in the Dataset.".
-
-void:classes
-  rdfs:label "Number of distinct classes";
-  rdfs:comment "The total number of distinct classes in a void:Dataset. In other words, the number of distinct resources occuring as objects of rdf:type triples in the dataset.".
-
-void:properties
-    rdfs:label "Number of (distinct) properties";
-    rdfs:comment "The total number of distinct properties in a void:Dataset. In other words, the number of distinct resources that occur in the predicate position of triples in the dataset.".
-
-
-
-llm:definedClasses
-	a owl:DatatypeProperty;
-  rdfs:label "Number of distinct defined classes";
-  rdfs:comment "The total number of distinct defined classes in a void:Dataset. In other words, the number of distinct resources which have rdfs:Object or owl:Object as type.";
-  rdfs:domain void:Dataset;
-  rdfs:range xsd:long .
-
-
-
-llm:definedProperties
-	a owl:DatatypeProperty;
-  rdfs:label "Number of distinct defined properties";
-  rdfs:comment "The total number of distinct defined properties in a void:Dataset. In other words, the number of distinct resources which have rdfs:Property, owl:ObjectProperty, or owl:DatatypeProperty as type.";
-  rdfs:domain void:Dataset;
-  rdfs:range xsd:long .
-
-void:entities
-  rdfs:label "Number of distinct entities";
-  rdfs:comment "The total number of distinct entities (IRIs) that are described in a void:Dataset.".
-
-void:distinctObjects
-    rdfs:label "Number of distinct objects";
-    rdfs:comment "The total number of distinct objects in a void:Dataset. In other words, the number of distinct resources that occur in the object position of triples in the dataset. Literals are included in this count.".
-
-void:distinctSubjects
-    rdfs:label "Number of distinct subjects";
-    rdfs:comment "The total number of distinct subjects in a void:Dataset. In other words, the number of distinct resources that occur in the subject position of triples in the dataset.".
-
-
-
-void-ext:distinctRDFNodes
-	rdfs:label "Distinct RDF nodes" ;
-	rdfs:comment "The total number of distinct RDF nodes in a void:Dataset. In other words, the number of distinct literals, IRI references and blank nodes that occur in the subject, predicate or object position of triples in the dataset." .
-
-llm:IRIs
-	a owl:DatatypeProperty ;
-	rdfs:label "Total number of IRI references" ;
-	rdfs:comment "Total number of (non-distinct) IRI references in a void:Dataset. In other words, the number of distinct IRI references that occur in the subject, predicate or object position of triples in the dataset." ;
-	rdfs:domain void:Dataset ;
-	rdfs:range xsd:long .
-
-void-ext:distinctIRIReferences
-	rdfs:label "Distinct IRI references" ;
-	rdfs:comment "The total number of distinct IRI references in a void:Dataset. In other words, the number of distinct IRI references that occur in the subject, predicate or object position of triples in the dataset." .
-
-llm:blankNodes
-	a owl:DatatypeProperty ;
-	rdfs:label "Total number of blank nodes" ;
-	rdfs:comment "The total number of (non-distinct) blank nodes in a void:Dataset. In other words, the number of distinct blank nodes that occur in the subject or object position of triples in the dataset." ;
-	rdfs:domain void:Dataset ;
-	rdfs:range xsd:long .
-
-void-ext:distinctBlankNodes
-	rdfs:label "Distinct blank nodes" ;
-	rdfs:comment "The total number of distinct blank nodes in a void:Dataset. In other words, the number of distinct blank nodes that occur in the subject or object position of triples in the dataset." .
-
-llm:literals
-	a owl:DatatypeProperty ;
-	rdfs:label "Total number of literals" ;
-	rdfs:comment "The total number of (non-distinct) literals in a void:Dataset. In other words, the number of distinct literals that occur in the object position of triples in the dataset." ;
-	rdfs:domain void:Dataset ;
-	rdfs:range xsd:long .
-
-void-ext:distinctLiterals
-	rdfs:label "Distinct literals" ;
-	rdfs:comment "The total number of distinct literals in a void:Dataset. In other words, the number of distinct literals that occur in the object position of triples in the dataset." .
-
-void-ext:distinctIRIReferenceSubjects
-	rdfs:label "Distinct IRIs in subject location" ;
-	rdfs:comment "The total number of distinct IRIs as subjects in a void:Dataset. In other words, the number of distinct IRI references that occur in the subject position of triples in the dataset." .
-
-void-ext:distinctBlankNodeSubjects
-	rdfs:label "Distinct blank nodes in subject location" ;
-	rdfs:comment "The total number of distinct blank nodes as subjects in a void:Dataset. In other words, the number of distinct blank nodes that occur in the subject position of triples in the dataset." .
-
-void-ext:distinctIRIReferenceObjects
-	rdfs:label "Distinct IRIs in object location" ;
-	rdfs:comment "The total number of distinct IRIs as objects in a void:Dataset. In other words, the number of distinct IRI references that occur in the object position of triples in the dataset." .
-
-void-ext:distinctBlankNodeObjects
-	rdfs:label "Distinct blank nodes in object location" ;
-	rdfs:comment "The total number of distinct blank nodes as objects in a void:Dataset. In other words, the number of distinct blank nodes that occur in the object position of triples in the dataset." .
-
-void-ext:datatypes
-	rdfs:label "Distinct literal datatypes" ;
-	rdfs:comment "The total number of literal datatypes in a void:Dataset. In other words, the number of distinct datatypes that appear in any datatyped literal objects in the dataset." .
-
-void-ext:languages
-	rdfs:label "Distinct languages" ;
-	rdfs:comment "The total number of literal languages in a void:Dataset. In other words, the number of distinct languages that appear in any language literal objects in the dataset." .
-
+llm:
+  rdf:type voaf:Vocabulary ;
+  rdf:type owl:Ontology ;
+  cc:license <http://creativecommons.org/licenses/by/3.0/> ;
+  dc:creator [
+      rdf:type foaf:Person ;
+      rdfs:isDefinedBy llm: ;
+      foaf:homepage <http://laurensrietveld.nl> ;
+      foaf:name "Laurens Rietveld" ;
+    ] ;
+  dc:creator [
+      rdf:type foaf:Person ;
+      rdfs:isDefinedBy llm: ;
+      foaf:homepage <http://www.wouterbeek.com> ;
+      foaf:name "Wouter Beek" ;
+    ] ;
+  dcterms:created "2014-09-24"^^xsd:date ;
+  dcterms:description "Collection (and extension) of several dataset metrics, including VoiD, VoiD-ext and Bio2RDF metrics" ;
+  dcterms:modified "2015-05-20"^^xsd:date ;
+  dcterms:publisher "VU University Amsterdam" ;
+  dcterms:title "Collection (and extension) of several dataset metrics" ;
+  vann:preferredNamespacePrefix "llm" ;
+  vann:preferredNamespaceUri "http://lodlaundromat.org/metrics/ontology/" ;
+  owl:imports <http://ldf.fi/void-ext> ;
+  owl:imports llo: ;
+  owl:imports <http://rdfs.org/ns/void> ;
+  owl:versionInfo "1.0.2" ;
+  foaf:homepage <http://lodlaundromat.org> ;
+.
 llm:IRILength
-	a owl:ObjectProperty;
-	rdfs:label "Statistics on the lengths of IRIs";
-	rdfs:comment "Statistics on the lengths of IRIs, calculated on the non-distinct set of IRIs";
-	rdfs:domain void:Dataset ;
-	rdfs:range llm:descriptiveStatistics .
-
-llm:subIRILength
-	a owl:ObjectProperty;
-	rdfs:label "Statistics on the lengths of subject IRIs";
-	rdfs:comment "Statistics on the lengths of IRIs, calculated on the non-distinct set of IRIs occurring in the subject position";
-	rdfs:domain void:Dataset ;
-	rdfs:range llm:descriptiveStatistics .
-
-llm:predIRILength
-	a owl:ObjectProperty;
-	rdfs:label "Statistics on the lengths of predicate IRIs";
-	rdfs:comment "Statistics on the lengths of IRIs, calculated on the non-distinct set of IRIs occurring in the predicate position";
-	rdfs:domain void:Dataset ;
-	rdfs:range llm:descriptiveStatistics .
-
-llm:objIRILength
-	a owl:ObjectProperty;
-	rdfs:label "Statistics on the lengths of object IRIs";
-	rdfs:comment "Statistics on the lengths of IRIs, calculated on the non-distinct set of IRIs occurring in the object position";
-	rdfs:domain void:Dataset ;
-	rdfs:range llm:descriptiveStatistics .
-
-llm:literalLength
-	a owl:ObjectProperty;
-	rdfs:label "Statistics on the lengths of literals";
-	rdfs:comment "Statistics on the lengths of a non-distinct set of literals. The length of the literal does not include language tags or datatypes";
-	rdfs:domain void:Dataset ;
-	rdfs:range llm:descriptiveStatistics .
-
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "Statistics on the lengths of IRIs, calculated on the non-distinct set of IRIs" ;
+  rdfs:domain void:Dataset ;
+  rdfs:isDefinedBy llm: ;
+  rdfs:label "Statistics on the lengths of IRIs" ;
+  rdfs:range llm:descriptiveStatistics ;
+.
+llm:IRIs
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "Total number of (non-distinct) IRI references in a void:Dataset. In other words, the number of distinct IRI references that occur in the subject, predicate or object position of triples in the dataset." ;
+  rdfs:domain void:Dataset ;
+  rdfs:isDefinedBy llm: ;
+  rdfs:label "Total number of IRI references" ;
+  rdfs:range xsd:long ;
+.
+llm:blankNodes
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "The total number of (non-distinct) blank nodes in a void:Dataset. In other words, the number of distinct blank nodes that occur in the subject or object position of triples in the dataset." ;
+  rdfs:domain void:Dataset ;
+  rdfs:isDefinedBy llm: ;
+  rdfs:label "Total number of blank nodes" ;
+  rdfs:range xsd:long ;
+.
+llm:definedClasses
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "The total number of distinct defined classes in a void:Dataset. In other words, the number of distinct resources which have rdfs:Object or owl:Object as type." ;
+  rdfs:domain void:Dataset ;
+  rdfs:isDefinedBy llm: ;
+  rdfs:label "Number of distinct defined classes" ;
+  rdfs:range xsd:long ;
+.
+llm:definedProperties
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "The total number of distinct defined properties in a void:Dataset. In other words, the number of distinct resources which have rdfs:Property, owl:ObjectProperty, or owl:DatatypeProperty as type." ;
+  rdfs:domain void:Dataset ;
+  rdfs:isDefinedBy llm: ;
+  rdfs:label "Number of distinct defined properties" ;
+  rdfs:range xsd:long ;
+.
 llm:degree
-	a owl:ObjectProperty;
-	rdfs:label "Degree statistics";
-	rdfs:comment "Statistics on the degrees of resources in this dataset.";
-	rdfs:domain void:Dataset ;
-	rdfs:range llm:descriptiveStatistics .
-llm:outDegree
-	a owl:ObjectProperty;
-	rdfs:label "Out-degree statistics";
-	rdfs:comment "Statistics on the out-degree of resources in this dataset, i.e. statistics on the out-links of resources, i.e. how often a resource occurs in a subject position";
-	rdfs:domain void:Dataset ;
-	rdfs:range llm:descriptiveStatistics .
-
-llm:inDegree
-	a owl:ObjectProperty;
-	rdfs:label "In-degree statistics";
-	rdfs:comment "Statistics on the in-degree of resources in this dataset, i.e. statistics on the incoming links of resources, i.e. how often a resource occurs in an object position";
-	rdfs:domain void:Dataset ;
-	rdfs:range llm:descriptiveStatistics .
-
-llm:mean
-	a owl:DatatypeProperty ;
-	rdfs:label "Mean";
-	rdfs:comment "Mean";
-	rdfs:domain llm:descriptiveStatistics;
-	rdfs:range xsd:double .
-
-llm:std
-	a owl:DatatypeProperty ;
-	rdfs:label "Standard Deviation";
-	rdfs:comment "Standard Deviation";
-	rdfs:domain llm:descriptiveStatistics;
-	rdfs:range xsd:double .
-
-llm:median
-	a owl:DatatypeProperty ;
-	rdfs:label "Median";
-	rdfs:comment "Median";
-	rdfs:domain llm:descriptiveStatistics;
-	rdfs:range xsd:long .
-
-llm:max
-	a owl:DatatypeProperty ;
-	rdfs:label "Maximum";
-	rdfs:comment "Maximum";
-	rdfs:domain llm:descriptiveStatistics;
-	rdfs:range xsd:long .
-
-llm:min
-	a owl:DatatypeProperty ;
-	rdfs:label "Minimum";
-	rdfs:comment "Minimum";
-	rdfs:domain llm:descriptiveStatistics;
-	rdfs:range xsd:long .
-
-llm:metrics
-	a owl:ObjectProperty;
-	rdfs:label "The dataset metrics";
-	rdfs:comment "The dataset metrics for this document cleaned by the LOD Laundromat";
-	rdfs:domain llo:DataDocument;
-	rdfs:range void:Dataset.
-
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "Statistics on the degrees of resources in this dataset." ;
+  rdfs:domain void:Dataset ;
+  rdfs:isDefinedBy llm: ;
+  rdfs:label "Degree statistics" ;
+  rdfs:range llm:descriptiveStatistics ;
+.
 llm:descriptiveStatistics
-	a owl:Class;
-	rdfs:label "Descriptive Statistics";
-	rdfs:comment "A set of descriptive statistics, including the mean, standard deviation, median and min/max values".
-
+  rdf:type owl:Class ;
+  rdfs:comment "A set of descriptive statistics, including the mean, standard deviation, median and min/max values" ;
+  rdfs:isDefinedBy llm: ;
+  rdfs:label "Descriptive Statistics" ;
+.
 llm:gitCommitId
-	a owl:DatatypeProperty ;
-	rdfs:label "Git Commit ID" ;
-	rdfs:comment "Commit ID belonging to a particular prov entity. Useful to refer to a GIT repository in any point in time" ;
-	rdfs:domain prov:Entity ;
-	rdfs:range xsd:string .
-
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "Commit ID belonging to a particular prov entity. Useful to refer to a GIT repository in any point in time" ;
+  rdfs:domain prov:Entity ;
+  rdfs:isDefinedBy llm: ;
+  rdfs:label "Git Commit ID" ;
+  rdfs:range xsd:string ;
+.
 llm:gitRepository
-	a owl:ObjectProperty;
-	rdfs:label "Git Repository URL" ;
-	rdfs:comment "Repository URL belonging to a particular prov entity" ;
-	rdfs:domain prov:Entity .
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "Repository URL belonging to a particular prov entity" ;
+  rdfs:domain prov:Entity ;
+  rdfs:isDefinedBy llm: ;
+  rdfs:label "Git Repository URL" ;
+.
+llm:inDegree
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "Statistics on the in-degree of resources in this dataset, i.e. statistics on the incoming links of resources, i.e. how often a resource occurs in an object position" ;
+  rdfs:domain void:Dataset ;
+  rdfs:isDefinedBy llm: ;
+  rdfs:label "In-degree statistics" ;
+  rdfs:range llm:descriptiveStatistics ;
+.
+llm:literalLength
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "Statistics on the lengths of a non-distinct set of literals. The length of the literal does not include language tags or datatypes" ;
+  rdfs:domain void:Dataset ;
+  rdfs:isDefinedBy llm: ;
+  rdfs:label "Statistics on the lengths of literals" ;
+  rdfs:range llm:descriptiveStatistics ;
+.
+llm:literals
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "The total number of (non-distinct) literals in a void:Dataset. In other words, the number of distinct literals that occur in the object position of triples in the dataset." ;
+  rdfs:domain void:Dataset ;
+  rdfs:isDefinedBy llm: ;
+  rdfs:label "Total number of literals" ;
+  rdfs:range xsd:long ;
+.
+llm:max
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "Maximum" ;
+  rdfs:domain llm:descriptiveStatistics ;
+  rdfs:isDefinedBy llm: ;
+  rdfs:label "Maximum" ;
+  rdfs:range xsd:long ;
+.
+llm:mean
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "Mean" ;
+  rdfs:domain llm:descriptiveStatistics ;
+  rdfs:isDefinedBy llm: ;
+  rdfs:label "Mean" ;
+  rdfs:range xsd:double ;
+.
+llm:median
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "Median" ;
+  rdfs:domain llm:descriptiveStatistics ;
+  rdfs:isDefinedBy llm: ;
+  rdfs:label "Median" ;
+  rdfs:range xsd:long ;
+.
+llm:metrics
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "The dataset metrics for this document cleaned by the LOD Laundromat" ;
+  rdfs:domain llo:DataDocument ;
+  rdfs:isDefinedBy llm: ;
+  rdfs:label "The dataset metrics" ;
+  rdfs:range void:Dataset ;
+.
+llm:min
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "Minimum" ;
+  rdfs:domain llm:descriptiveStatistics ;
+  rdfs:isDefinedBy llm: ;
+  rdfs:label "Minimum" ;
+  rdfs:range xsd:long ;
+.
+llm:objIRILength
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "Statistics on the lengths of IRIs, calculated on the non-distinct set of IRIs occurring in the object position" ;
+  rdfs:domain void:Dataset ;
+  rdfs:isDefinedBy llm: ;
+  rdfs:label "Statistics on the lengths of object IRIs" ;
+  rdfs:range llm:descriptiveStatistics ;
+.
+llm:outDegree
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "Statistics on the out-degree of resources in this dataset, i.e. statistics on the out-links of resources, i.e. how often a resource occurs in a subject position" ;
+  rdfs:domain void:Dataset ;
+  rdfs:isDefinedBy llm: ;
+  rdfs:label "Out-degree statistics" ;
+  rdfs:range llm:descriptiveStatistics ;
+.
+llm:predIRILength
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "Statistics on the lengths of IRIs, calculated on the non-distinct set of IRIs occurring in the predicate position" ;
+  rdfs:domain void:Dataset ;
+  rdfs:isDefinedBy llm: ;
+  rdfs:label "Statistics on the lengths of predicate IRIs" ;
+  rdfs:range llm:descriptiveStatistics ;
+.
+llm:std
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "Standard Deviation" ;
+  rdfs:domain llm:descriptiveStatistics ;
+  rdfs:isDefinedBy llm: ;
+  rdfs:label "Standard Deviation" ;
+  rdfs:range xsd:double ;
+.
+llm:subIRILength
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "Statistics on the lengths of IRIs, calculated on the non-distinct set of IRIs occurring in the subject position" ;
+  rdfs:domain void:Dataset ;
+  rdfs:isDefinedBy llm: ;
+  rdfs:label "Statistics on the lengths of subject IRIs" ;
+  rdfs:range llm:descriptiveStatistics ;
+.
