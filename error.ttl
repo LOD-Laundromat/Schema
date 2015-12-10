@@ -1,366 +1,387 @@
-@prefix   xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix  rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix   rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix cc: <http://creativecommons.org/ns#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix error: <http://lodlaundromat.org/error/ontology/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix formats: <http://www.w3.org/ns/formats/> .
+@prefix httpo: <http://lodlaundromat.org/http/ontology/> .
+@prefix llm: <http://lodlaundromat.org/metrics/ontology/> .
+@prefix llo: <http://lodlaundromat.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix voaf: <http://purl.org/vocommons/voaf#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix void-ext: <http://ldf.fi/void-ext#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<http://lodlaundromat.org/error/ontology/>
-	a owl:Ontology ;
-	a voaf:Vocabulary;
-	owl:versionInfo "1.0.1" ;
-	dcterms:title "Vocabulary for describing crawling errors" ;
-	dcterms:description "Vocabulary for describing crawling errors, such as archive and http errors" ;
-	dcterms:modified "2015-11-18"^^xsd:date ;
-	dcterms:created "2014-09-24"^^xsd:date ;
-	foaf:homepage <http://lodlaundromat.org> ;
-	vann:preferredNamespaceUri "http://lodlaundromat.org/error/ontology/";
-    	vann:preferredNamespacePrefix "error";
-	dcterms:publisher "VU University Amsterdam" ;
-	dc:creator
-		[a foaf:Person; foaf:name "Laurens Rietveld"; foaf:homepage <http://laurensrietveld.nl>] ,
-		[a foaf:Person; foaf:name "Wouter Beek"; foaf:homepage <http://www.wouterbeek.com>] ;
-	cc:license <http://creativecommons.org/licenses/by/3.0/> .
+<http://lodlaundromat.org/error/ontology/4xxHttpError> a owl:Class ;
+    rdfs:label "4xx HTTP Error"@en-us ;
+    rdfs:comment "An HTTP error in the 400-range."@en-us ;
+    rdfs:subClassOf error:HttpError .
 
-<http://lodlaundromat.org/error/ontology/4xxHttpError>
-        rdfs:comment "An HTTP error in the 400-range."@en-us ;
-        rdfs:label "4xx HTTP Error"@en-us ;
-        rdfs:subClassOf error:HttpError .
+<http://lodlaundromat.org/error/ontology/5xxHttpError> a owl:Class ;
+    rdfs:label "5xx HTTP Error"@en-us ;
+    rdfs:comment "An HTTP error in the 500-range."@en-us ;
+    rdfs:subClassOf error:HttpError .
 
-<http://lodlaundromat.org/error/ontology/5xxHttpError>
-        rdfs:comment "An HTTP error in the 500-range."@en-us ;
-        rdfs:label "5xx HTTP Error"@en-us ;
-        rdfs:subClassOf error:HttpError .
+error:CharacterEncodingError a owl:Class ;
+    rdfs:label "character encoding error"@en-us ;
+    rdfs:comment "An error due to the use of an illegitimate character code. The character code is stored under the error:object property."@en-us ;
+    rdfs:subClassOf error:EncodingError .
 
-error:Action
-        rdfs:comment "An action performed by a computing device."@en-us ;
-        rdfs:label "action"@en-us ;
-        rdfs:subClassOf rdfs:Resource .
+error:DirectoryExistenceError a owl:Class ;
+    rdfs:label "directory existence error"@en-us ;
+    error:code "17"^^xsd:nonNegativeInteger ;
+    error:message "File exists"^^xsd:string ;
+    error:variableName "EXIST"^^xsd:string ;
+    rdfs:comment "An error that occurs because a directory which is assumed to exist does not."@en-us ;
+    rdfs:subClassOf error:ExistenceError .
 
-error:ArchiveError
-        rdfs:comment "An error that occurs as part of an archive (un)packing process."@en-us ;
-        rdfs:label "archive error"@en-us ;
-        rdfs:subClassOf error:Error .
+error:DirectoryNotEmptyError a owl:Class ;
+    rdfs:label "directory not empty"@en-us ;
+    error:code "39"^^xsd:nonNegativeInteger ;
+    error:message "Directory not empty"^^xsd:string ;
+    error:variableName "ENOTEMPTY"^^xsd:string ;
+    rdfs:comment "An error that occurs because a directory is assumed to be empty, but is not."@en-us ;
+    rdfs:subClassOf error:ExistenceError .
 
-error:CharacterEncodingError
-        rdfs:comment "An error due to the use of an illegitimate character code. The character code is stored under the error:object property."@en-us ;
-        rdfs:label "character encoding error"@en-us ;
-        rdfs:subClassOf error:EncodingError .
+error:FileExistenceError a owl:Class ;
+    rdfs:label "file existence error"@en-us ;
+    rdfs:comment "An error that occurs because a file which is assumed to exist does not."@en-us ;
+    rdfs:subClassOf error:ExistenceError .
 
-error:DirectoryExistenceError
-        error:code "17"^^xsd:nonNegativeInteger ;
-        error:message "File exists"^^xsd:string ;
-        error:variableName "EXIST"^^xsd:string ;
-        rdfs:comment "An error that occurs because a directory which is assumed to exist does not."@en-us ;
-        rdfs:label "directory existence error"@en-us ;
-        rdfs:subClassOf error:ExistenceError .
+error:HttpUri a owl:Class ;
+    rdfs:label "HTTP URI"@en-us ;
+    rdfs:comment "A URI that uses the HTTP scheme."@en-us ;
+    rdfs:subClassOf error:Object .
 
-error:DirectoryNotEmptyError
-        error:code "39"^^xsd:nonNegativeInteger ;
-        error:message "Directory not empty"^^xsd:string ;
-        error:variableName "ENOTEMPTY"^^xsd:string ;
-        rdfs:comment "An error that occurs because a directory is assumed to be empty, but is not."@en-us ;
-        rdfs:label "directory not empty"@en-us ;
-        rdfs:subClassOf error:ExistenceError .
+error:IsADirectoryError a owl:Class ;
+    rdfs:label "source sink error"@en-us ;
+    error:code "21"^^xsd:nonNegativeInteger ;
+    error:message "Is a directory"^^xsd:string ;
+    error:variableName "EISDIR"^^xsd:string ;
+    rdfs:comment "???"@en-us ;
+    rdfs:subClassOf error:ExistenceError .
 
-error:EncodingError
-        rdfs:comment "An error due to the use of an illigitimate or unrecognized encoding."@en-us ;
-        rdfs:label "encoding error"@en-us ;
-        rdfs:subClassOf error:Error .
+error:MalformedUrl a owl:Class ;
+    rdfs:label "malformed URL"@en-us ;
+    rdfs:comment "An error that is thrown for a value which is expected to be a URL but does not conform to URL syntax."@en-us ;
+    rdfs:subClassOf error:Error .
 
-error:Error
-        rdfs:comment "An recognized irregularity in program execution."@en-us ;
-        rdfs:label "error"@en-us ;
-        rdfs:subClassOf rdfs:Resource .
+error:MissingTurtlePrefixDefinition a owl:Class ;
+    rdfs:label "missing Turtle prefix definition"@en-us ;
+    rdfs:comment "An error that occurs if a Turtle prefix is used but not defined."@en-us ;
+    rdfs:subClassOf error:TurtleParserError .
 
-error:ExistenceError
-        error:code "2"^^xsd:nonNegativeInteger ;
-        error:message "No such file or directory"^^xsd:string ;
-        error:variableName "ENOENT"^^xsd:string ;
-        rdfs:comment "An error that occurs because a resource which is assumed to exist does not."@en-us ;
-        rdfs:label "existence error"@en-us ;
-        rdfs:subClassOf error:Error .
+error:PermissionError a owl:Class ;
+    rdfs:label "permission error"@en-us ;
+    rdfs:comment "An error that occurs because a specific action is not allowed to be performed w.r.t. a specific object that is of a given type."@en-us ;
+    rdfs:subClassOf error:Error .
 
-error:FileExistenceError
-        rdfs:comment "An error that occurs because a file which is assumed to exist does not."@en-us ;
-        rdfs:label "file existence error"@en-us ;
-        rdfs:subClassOf error:ExistenceError .
+error:RedefinedRdfId a owl:Class ;
+    rdfs:label "redefined RDF identifier"@en-us ;
+    rdfs:comment "An error that is thrown whenever multiple definitions of the same resource occur in an RDF/XML document. This typically occurs whenever more than one rdf:Id statement occurs for the same resource."@en-us ;
+    rdfs:subClassOf error:RdfxmlParserError .
 
-error:HttpError
-        rdfs:comment "An error that is emitted as part of an HTTP reply."@en-us ;
-        rdfs:label "HTTP error"@en-us ;
-        rdfs:subClassOf error:Error .
+error:SyntaxError a owl:Class ;
+    rdfs:label "syntax position"@en-us ;
+    rdfs:comment "A parser error that is due to the occurrence of an expression in the parsed data stream that does not conform to the expected grammar."@en-us ;
+    rdfs:subClassOf error:ParserError .
 
-error:HttpUri
-        rdfs:comment "A URI that uses the HTTP scheme."@en-us ;
-        rdfs:label "HTTP URI"@en-us ;
-        rdfs:subClassOf error:Object .
+error:XmlNameError a owl:Class ;
+    rdfs:label "XML name error"@en-us ;
+    rdfs:comment "The argument to rdf:ID is not an XML name."@en-us ;
+    rdfs:subClassOf error:XmlParserError .
 
-error:IoError
-        rdfs:comment "An error that was thrown due to an input and/or output issue."@en-us ;
-        rdfs:label "IO error"@en-us ;
-        rdfs:subClassOf error:Error .
+error:action a rdf:Property ;
+    rdfs:label "action"@en-us ;
+    rdfs:comment "The action to which the error is related."@en-us ;
+    rdfs:domain error:Error ;
+    rdfs:isDefinedBy error: ;
+    rdfs:range error:Action .
 
-error:IsADirectoryError
-        error:code "21"^^xsd:nonNegativeInteger ;
-        error:message "Is a directory"^^xsd:string ;
-        error:variableName "EISDIR"^^xsd:string ;
-        rdfs:comment "???"@en-us ;
-        rdfs:label "source sink error"@en-us ;
-        rdfs:subClassOf error:ExistenceError .
+error:character a rdf:Property ;
+    rdfs:label "character"@en-us ;
+    rdfs:comment "The character number of a stream position, indicating the number of characters that have preceded it."@en-us ;
+    rdfs:domain error:StreamPosition ;
+    rdfs:isDefinedBy error: ;
+    rdfs:range xsd:integer .
 
-error:MalformedUrl
-        rdfs:comment "An error that is thrown for a value which is expected to be a URL but does not conform to URL syntax."@en-us ;
-        rdfs:label "malformed URL"@en-us ;
-        rdfs:subClassOf error:Error .
+error:code a rdf:Property ;
+    rdfs:label "error code"@en-us ;
+    rdfs:comment "Error code as used by the program in which the error occurs."@en-us ;
+    rdfs:domain error:Error ;
+    rdfs:isDefinedBy error: ;
+    rdfs:range xsd:nonNegativeInteger .
 
-error:MissingTurtlePrefixDefinition
-        rdfs:comment "An error that occurs if a Turtle prefix is used but not defined."@en-us ;
-        rdfs:label "missing Turtle prefix definition"@en-us ;
-        rdfs:subClassOf error:TurtleParserError .
+error:column a rdf:Property ;
+    rdfs:label "column"@en-us ;
+    rdfs:comment "The column number of a stream position, indicating the number of characters that have preceded it since the last newline character or since the beginning of the stream."@en-us ;
+    rdfs:domain error:StreamPosition ;
+    rdfs:isDefinedBy error: ;
+    rdfs:range xsd:integer .
 
-error:Object
-        rdfs:comment "An object that is related to an error."@en-us ;
-        rdfs:label "object"@en-us ;
-        rdfs:subClassOf rdfs:Resource .
+error:connectionRefused a error:SocketError ;
+    error:code "111"^^xsd:nonNegativeInteger ;
+    error:message "Connection refused"^^xsd:string ;
+    error:variableName "ECONNREFUSED"^^xsd:string ;
+    rdfs:isDefinedBy error: .
 
-error:ParserError
-        rdfs:comment "An error that is emitted by a parser, indicating deviation from a defined grammar."@en-us ;
-        rdfs:label "parser error"@en-us ;
-        rdfs:subClassOf error:Error .
+error:connectionResetByPeer a error:ExistenceError,
+        error:ReadError,
+        error:SocketError ;
+    error:code "104"^^xsd:nonNegativeInteger ;
+    error:message "Connection reset by peer"^^xsd:string ;
+    error:variableName "ECONNRESET"^^xsd:string ;
+    rdfs:isDefinedBy error: .
 
-error:PermissionError
-        rdfs:comment "An error that occurs because a specific action is not allowed to be performed w.r.t. a specific object that is of a given type."@en-us ;
-        rdfs:label "permission error"@en-us ;
-        rdfs:subClassOf error:Error .
+error:connectionTimedOut a error:SocketError ;
+    error:code "110"^^xsd:nonNegativeInteger ;
+    error:message "Connection timed out"^^xsd:string ;
+    error:variableName "ETIMEDOUT"^^xsd:string ;
+    rdfs:isDefinedBy error: .
 
-error:RdfParserError
-        rdfs:comment "An error that is emitted by an RDF parser."@en-us ;
-        rdfs:label "RDF parser error"@en-us ;
-        rdfs:subClassOf error:ParserError .
+error:encodingError a error:WriteError ;
+    rdfs:label "encoding error"@en-us ;
+    rdfs:comment "Encoding cannot represent character."@en-us ;
+    rdfs:isDefinedBy error: .
 
-error:RdfxmlParserError
-        rdfs:comment "An that is emitted by an RDF/XML parser when it encounters data that does not conform to the RDF/XML grammar."@en-us ;
-        rdfs:label "RDF/XML parser error"@en-us ;
-        rdfs:subClassOf error:RdfParserError ,
-                        error:XmlParserError .
+error:hostNotFound a error:SocketError ;
+    rdfs:label "Host not found"@en-us ;
+    rdfs:isDefinedBy error: .
 
-error:ReadError
-        rdfs:comment "An error that occurs while reading data."@en-us ;
-        rdfs:label "read error"@en-us ;
-        rdfs:subClassOf error:IoError .
+error:illegalUtf8Continuation a error:ReadError ;
+    rdfs:label "illegal UTF-8 continuation"@en-us ;
+    rdfs:comment "Illegal UTF-8 continuation."@en-us ;
+    rdfs:isDefinedBy error: .
 
-error:RedefinedRdfId
-        rdfs:comment "An error that is thrown whenever multiple definitions of the same resource occur in an RDF/XML document. This typically occurs whenever more than one rdf:Id statement occurs for the same resource."@en-us ;
-        rdfs:label "redefined RDF identifier"@en-us ;
-        rdfs:subClassOf error:RdfxmlParserError .
+error:illegalUtf8Start a error:ReadError ;
+    rdfs:label "illegal UTF-8 start"@en-us ;
+    rdfs:comment "Illegal UTF-8 start."@en-us ;
+    rdfs:isDefinedBy error: .
 
-error:SgmlParserError
-        rdfs:comment "A warning that is emitted by an SGML parser."@en-us ;
-        rdfs:label "SGML parser error"@en-us ;
-        rdfs:subClassOf error:ParserError .
+error:invalidCentralDirectorySignature a error:ArchiveError ;
+    error:code "25"^^xsd:nonNegativeInteger ;
+    error:message "Invalid central directory signature."^^xsd:string ;
+    rdfs:isDefinedBy error: .
 
-error:SocketError
-        rdfs:comment "An error thrown because of a socket-related problem."@en-us ;
-        rdfs:label "socket error"@en-us ;
-        rdfs:subClassOf error:Error .
+error:isADirectory a error:ReadError ;
+    rdfs:label "is a directory"@en-us ;
+    error:code "21"^^xsd:nonNegativeInteger ;
+    error:message "Is a directory"^^xsd:string ;
+    error:variableName "EISDIR"^^xsd:string ;
+    rdfs:comment "???"@en-us ;
+    rdfs:isDefinedBy error: .
 
-error:StreamPosition
-        rdfs:comment "A position in a stream."@en-us ;
-        rdfs:label "stream position"@en-us ;
-        rdfs:subClassOf error:Error .
+error:line a rdf:Property ;
+    rdfs:label "column"@en-us ;
+    rdfs:comment "The line number of a stream position, indicating the number of newline characters that have preceded it."@en-us ;
+    rdfs:domain error:StreamPosition ;
+    rdfs:isDefinedBy error: ;
+    rdfs:range xsd:integer .
 
-error:SyntaxError
-        rdfs:comment "A parser error that is due to the occurrence of an expression in the parsed data stream that does not conform to the expected grammar."@en-us ;
-        rdfs:label "syntax position"@en-us ;
-        rdfs:subClassOf error:ParserError .
+error:message a rdf:Property ;
+    rdfs:label "error message"@en-us ;
+    rdfs:comment "Error message for the human programmer."@en-us ;
+    rdfs:domain error:Error ;
+    rdfs:isDefinedBy error: ;
+    rdfs:range xsd:string .
 
-error:TimeoutError
-        rdfs:comment "An error that is thrown due to a timeout."@en-us ;
-        rdfs:label "timeout error"@en-us ;
-        rdfs:subClassOf error:Error .
+error:missingTypeKeywordInMtreeSpec a error:ArchiveError ;
+    error:code "2"^^xsd:nonNegativeInteger ;
+    error:message "Missing type keyword in mtree specification."^^xsd:string ;
+    rdfs:isDefinedBy error: .
 
-error:TurtleParserError
-        rdfs:comment "A warning that is emitted by an XML parser."@en-us ;
-        rdfs:label "XML parser error"@en-us ;
-        rdfs:subClassOf error:RdfParserError .
+error:noData a error:SocketError ;
+    rdfs:label "No data"@en-us ;
+    error:code "61"^^xsd:nonNegativeInteger ;
+    error:message "No data available"^^xsd:string ;
+    error:variableName "ENODATA"^^xsd:string ;
+    rdfs:isDefinedBy error: .
 
-error:WriteError
-        rdfs:comment "An error that occurs while writing data."@en-us ;
-        rdfs:label "write error"@en-us ;
-        rdfs:subClassOf error:IoError .
+error:noRouteToHost a error:SocketError ;
+    error:code "113"^^xsd:nonNegativeInteger ;
+    error:message "No route to host"^^xsd:string ;
+    error:variableName "EHOSTUNREACH"^^xsd:string ;
+    rdfs:isDefinedBy error: .
 
-error:XmlNameError
-        rdfs:comment "The argument to rdf:ID is not an XML name."@en-us ;
-        rdfs:label "XML name error"@en-us ;
-        rdfs:subClassOf error:XmlParserError .
+error:notATypewriter a error:ReadError ;
+    rdfs:label "not a typewriter"@en-us ;
+    error:code "25"^^xsd:nonNegativeInteger ;
+    error:message "Inappropriate ioctl for device"^^xsd:string ;
+    error:variableName "ENOTTY"^^xsd:string ;
+    rdfs:comment "Inappropriate input/output control for device."@en-us ;
+    rdfs:isDefinedBy error: .
 
-error:XmlParserError
-        rdfs:comment "A warning that is emitted by an XML parser."@en-us ;
-        rdfs:label "XML parser error"@en-us ;
-        rdfs:subClassOf error:SgmlParserError .
+error:object a rdf:Property ;
+    rdfs:label "object"@en-us ;
+    rdfs:comment "The name of the object to which the error relates."@en-us ;
+    rdfs:domain error:Error ;
+    rdfs:isDefinedBy error: ;
+    rdfs:range error:Object .
 
-error:action
-        a rdf:Property ;
-        rdfs:comment "The action to which the error is related."@en-us ;
-        rdfs:domain error:Error ;
-        rdfs:label "action"@en-us ;
-        rdfs:range error:Action .
+error:readTimeoutError a error:TimeoutError ;
+    rdfs:label "read timeout error"@en-us ;
+    rdfs:comment "Timeout occurs while reading"@en-us ;
+    rdfs:isDefinedBy error: .
 
-error:character
-        a rdf:Property ;
-        rdfs:comment "The character number of a stream position, indicating the number of characters that have preceded it."@en-us ;
-        rdfs:domain error:StreamPosition ;
-        rdfs:label "character"@en-us ;
-        rdfs:range xsd:integer .
+error:redirectAction a error:Action ;
+    rdfs:label "redirect action"@en-us ;
+    rdfs:comment "A rediraction action."@en-us ;
+    rdfs:isDefinedBy error: .
 
-error:code
-        a rdf:Property ;
-        rdfs:comment "Error code as used by the program in which the error occurs."@en-us ;
-        rdfs:domain error:Error ;
-        rdfs:label "error code"@en-us ;
-        rdfs:range xsd:nonNegativeInteger .
+error:sourceLine a rdf:Property ;
+    rdfs:label "source line"@en-us ;
+    rdfs:comment "The line number in the original source file for which a parser warning was thrown."@en-us ;
+    rdfs:domain error:ParserError ;
+    rdfs:isDefinedBy error: ;
+    rdfs:range xsd:integer .
 
-error:column
-        a rdf:Property ;
-        rdfs:comment "The column number of a stream position, indicating the number of characters that have preceded it since the last newline character or since the beginning of the stream."@en-us ;
-        rdfs:domain error:StreamPosition ;
-        rdfs:label "column"@en-us ;
-        rdfs:range xsd:integer .
+error:sslError a error:Error ;
+    rdfs:label "SSL error"@en-us ;
+    rdfs:comment "SSL error"@en-us ;
+    rdfs:isDefinedBy error: .
 
-error:connectionRefused
-        a error:SocketError ;
-        error:code "111"^^xsd:nonNegativeInteger ;
-        error:message "Connection refused"^^xsd:string ;
-        error:variableName "ECONNREFUSED"^^xsd:string .
+error:streamPosition a rdf:Property ;
+    rdfs:label "stream position"@en-us ;
+    rdfs:comment "The stream position at which an error occurred."@en-us ;
+    rdfs:domain error:Error ;
+    rdfs:isDefinedBy error: ;
+    rdfs:range error:StreamPosition .
 
-error:connectionResetByPeer
-        a error:ExistenceError ,
-          error:ReadError ,
-          error:SocketError ;
-        error:code "104"^^xsd:nonNegativeInteger ;
-        error:message "Connection reset by peer"^^xsd:string ;
-        error:variableName "ECONNRESET"^^xsd:string .
+error:tryAgain a error:SocketError ;
+    rdfs:label "Try again"@en-us ;
+    rdfs:isDefinedBy error: .
 
-error:connectionTimedOut
-        a error:SocketError ;
-        error:code "110"^^xsd:nonNegativeInteger ;
-        error:message "Connection timed out"^^xsd:string ;
-        error:variableName "ETIMEDOUT"^^xsd:string .
+error:variableName a rdf:Property ;
+    rdfs:label "variable name"@en-us ;
+    rdfs:comment "The C variable name of the error as used in POSIX or in a Linux library or application."@en-us ;
+    rdfs:domain error:Error ;
+    rdfs:isDefinedBy error: ;
+    rdfs:range xsd:string .
 
-error:encodingError
-        a error:WriteError ;
-        rdfs:comment "Encoding cannot represent character."@en-us ;
-        rdfs:label "encoding error"@en-us .
+error:EncodingError a owl:Class ;
+    rdfs:label "encoding error"@en-us ;
+    rdfs:comment "An error due to the use of an illigitimate or unrecognized encoding."@en-us ;
+    rdfs:subClassOf error:Error .
 
-error:hostNotFound
-        a error:SocketError ;
-        rdfs:label "Host not found"@en-us .
+error:RdfxmlParserError a owl:Class ;
+    rdfs:label "RDF/XML parser error"@en-us ;
+    rdfs:comment "An that is emitted by an RDF/XML parser when it encounters data that does not conform to the RDF/XML grammar."@en-us ;
+    rdfs:subClassOf error:RdfParserError,
+        error:XmlParserError .
 
-error:illegalUtf8Continuation
-        a error:ReadError ;
-        rdfs:comment "Illegal UTF-8 continuation."@en-us ;
-        rdfs:label "illegal UTF-8 continuation"@en-us .
+error:SgmlParserError a owl:Class ;
+    rdfs:label "SGML parser error"@en-us ;
+    rdfs:comment "A warning that is emitted by an SGML parser."@en-us ;
+    rdfs:subClassOf error:ParserError .
 
-error:illegalUtf8Start
-        a error:ReadError ;
-        rdfs:comment "Illegal UTF-8 start."@en-us ;
-        rdfs:label "illegal UTF-8 start"@en-us .
+error:TimeoutError a owl:Class ;
+    rdfs:label "timeout error"@en-us ;
+    rdfs:comment "An error that is thrown due to a timeout."@en-us ;
+    rdfs:subClassOf error:Error .
 
-error:invalidCentralDirectorySignature
-        a error:ArchiveError ;
-        error:code "25"^^xsd:nonNegativeInteger ;
-        error:message "Invalid central directory signature."^^xsd:string .
+error:TurtleParserError a owl:Class ;
+    rdfs:label "XML parser error"@en-us ;
+    rdfs:comment "A warning that is emitted by an XML parser."@en-us ;
+    rdfs:subClassOf error:RdfParserError .
 
-error:isADirectory
-        a error:ReadError ;
-        error:code "21"^^xsd:nonNegativeInteger ;
-        error:message "Is a directory"^^xsd:string ;
-        error:variableName "EISDIR"^^xsd:string ;
-        rdfs:comment "???"@en-us ;
-        rdfs:label "is a directory"@en-us .
+error:WriteError a owl:Class ;
+    rdfs:label "write error"@en-us ;
+    rdfs:comment "An error that occurs while writing data."@en-us ;
+    rdfs:subClassOf error:IoError .
 
-error:line
-        a rdf:Property ;
-        rdfs:comment "The line number of a stream position, indicating the number of newline characters that have preceded it."@en-us ;
-        rdfs:domain error:StreamPosition ;
-        rdfs:label "column"@en-us ;
-        rdfs:range xsd:integer .
+error:Action a owl:Class ;
+    rdfs:label "action"@en-us ;
+    rdfs:comment "An action performed by a computing device."@en-us ;
+    rdfs:isDefinedBy error: .
 
-error:message
-        a rdf:Property ;
-        rdfs:comment "Error message for the human programmer."@en-us ;
-        rdfs:domain error:Error ;
-        rdfs:label "error message"@en-us ;
-        rdfs:range xsd:string .
+error:ArchiveError a owl:Class ;
+    rdfs:label "archive error"@en-us ;
+    rdfs:comment "An error that occurs as part of an archive (un)packing process."@en-us ;
+    rdfs:subClassOf error:Error .
 
-error:missingTypeKeywordInMtreeSpec
-        a error:ArchiveError ;
-        error:code "2"^^xsd:nonNegativeInteger ;
-        error:message "Missing type keyword in mtree specification."^^xsd:string .
+error:HttpError a owl:Class ;
+    rdfs:label "HTTP error"@en-us ;
+    rdfs:comment "An error that is emitted as part of an HTTP reply."@en-us ;
+    rdfs:subClassOf error:Error .
 
-error:noData
-        a error:SocketError ;
-        error:code "61"^^xsd:nonNegativeInteger ;
-        error:message "No data available"^^xsd:string ;
-        error:variableName "ENODATA"^^xsd:string ;
-        rdfs:label "No data"@en-us .
+error:IoError a owl:Class ;
+    rdfs:label "IO error"@en-us ;
+    rdfs:comment "An error that was thrown due to an input and/or output issue."@en-us ;
+    rdfs:subClassOf error:Error .
 
-error:noRouteToHost
-        a error:SocketError ;
-        error:code "113"^^xsd:nonNegativeInteger ;
-        error:message "No route to host"^^xsd:string ;
-        error:variableName "EHOSTUNREACH"^^xsd:string .
+error:Object a owl:Class ;
+    rdfs:label "object"@en-us ;
+    rdfs:comment "An object that is related to an error."@en-us ;
+    rdfs:isDefinedBy error: .
 
-error:notATypewriter
-        a error:ReadError ;
-        error:code "25"^^xsd:nonNegativeInteger ;
-        error:message "Inappropriate ioctl for device"^^xsd:string ;
-        error:variableName "ENOTTY"^^xsd:string ;
-        rdfs:comment "Inappropriate input/output control for device."@en-us ;
-        rdfs:label "not a typewriter"@en-us .
+error:RdfParserError a owl:Class ;
+    rdfs:label "RDF parser error"@en-us ;
+    rdfs:comment "An error that is emitted by an RDF parser."@en-us ;
+    rdfs:subClassOf error:ParserError .
 
-error:object
-        a rdf:Property ;
-        rdfs:comment "The name of the object to which the error relates."@en-us ;
-        rdfs:domain error:Error ;
-        rdfs:label "object"@en-us ;
-        rdfs:range error:Object .
+error:XmlParserError a owl:Class ;
+    rdfs:label "XML parser error"@en-us ;
+    rdfs:comment "A warning that is emitted by an XML parser."@en-us ;
+    rdfs:subClassOf error:SgmlParserError .
 
-error:readTimeoutError
-        a error:TimeoutError ;
-        rdfs:comment "Timeout occurs while reading"@en-us ;
-        rdfs:label "read timeout error"@en-us .
+error:ParserError a owl:Class ;
+    rdfs:label "parser error"@en-us ;
+    rdfs:comment "An error that is emitted by a parser, indicating deviation from a defined grammar."@en-us ;
+    rdfs:subClassOf error:Error .
 
-error:redirectAction
-        a error:Action ;
-        rdfs:comment "A rediraction action."@en-us ;
-        rdfs:label "redirect action"@en-us .
+error:StreamPosition a owl:Class ;
+    rdfs:label "stream position"@en-us ;
+    rdfs:comment "A position in a stream."@en-us ;
+    rdfs:subClassOf error:Error .
 
-error:sourceLine
-        a rdf:Property ;
-        rdfs:comment "The line number in the original source file for which a parser warning was thrown."@en-us ;
-        rdfs:domain error:ParserError ;
-        rdfs:label "source line"@en-us ;
-        rdfs:range xsd:integer .
+error:ExistenceError a owl:Class ;
+    rdfs:label "existence error"@en-us ;
+    error:code "2"^^xsd:nonNegativeInteger ;
+    error:message "No such file or directory"^^xsd:string ;
+    error:variableName "ENOENT"^^xsd:string ;
+    rdfs:comment "An error that occurs because a resource which is assumed to exist does not."@en-us ;
+    rdfs:subClassOf error:Error .
 
-error:sslError
-        a error:Error ;
-        rdfs:comment "SSL error"@en-us ;
-        rdfs:label "SSL error"@en-us .
+error:ReadError a owl:Class ;
+    rdfs:label "read error"@en-us ;
+    rdfs:comment "An error that occurs while reading data."@en-us ;
+    rdfs:subClassOf error:IoError .
 
-error:streamPosition
-        a rdf:Property ;
-        rdfs:comment "The stream position at which an error occurred."@en-us ;
-        rdfs:domain error:Error ;
-        rdfs:label "stream position"@en-us ;
-        rdfs:range error:StreamPosition .
+error:SocketError a owl:Class ;
+    rdfs:label "socket error"@en-us ;
+    rdfs:comment "An error thrown because of a socket-related problem."@en-us ;
+    rdfs:subClassOf error:Error .
 
-error:tryAgain
-        a error:SocketError ;
-        rdfs:label "Try again"@en-us .
+error:Error a owl:Class ;
+    rdfs:label "error"@en-us ;
+    rdfs:comment "An recognized irregularity in program execution."@en-us ;
+    rdfs:isDefinedBy error: .
 
-error:variableName
-        a rdf:Property ;
-        rdfs:comment "The C variable name of the error as used in POSIX or in a Linux library or application."@en-us ;
-        rdfs:domain error:Error ;
-        rdfs:label "variable name"@en-us ;
-        rdfs:range xsd:string .
+error: a voaf:Vocabulary,
+        owl:Ontology ;
+    cc:license <http://creativecommons.org/licenses/by/3.0/> ;
+    dc:creator [ a foaf:Person ;
+            rdfs:isDefinedBy error: ;
+            foaf:homepage <http://laurensrietveld.nl> ;
+            foaf:name "Laurens Rietveld" ],
+        [ a foaf:Person ;
+            rdfs:isDefinedBy error: ;
+            foaf:homepage <http://www.wouterbeek.com> ;
+            foaf:name "Wouter Beek" ] ;
+    dcterms:created "2014-09-24"^^xsd:date ;
+    dcterms:description "Vocabulary for describing crawling errors, such as archive and http errors" ;
+    dcterms:modified "2015-11-18"^^xsd:date ;
+    dcterms:publisher "VU University Amsterdam" ;
+    dcterms:title "Vocabulary for describing crawling errors" ;
+    vann:preferredNamespacePrefix "error" ;
+    vann:preferredNamespaceUri "http://lodlaundromat.org/error/ontology/" ;
+    rdfs:isDefinedBy error: ;
+    owl:versionInfo "1.0.1" ;
+    foaf:homepage <http://lodlaundromat.org> .
+
