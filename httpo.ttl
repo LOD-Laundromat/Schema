@@ -1,4 +1,5 @@
 # baseURI: http://lodlaundromat.org/http/ontology/
+# imports: http://lodlaundromat.org/resource/person
 
 @prefix cc: <http://creativecommons.org/ns#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
@@ -11,6 +12,7 @@
 @prefix llm: <http://lodlaundromat.org/metrics/ontology/> .
 @prefix llo: <http://lodlaundromat.org/ontology/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix person: <http://lodlaundromat.org/resource/person/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -25,18 +27,9 @@ httpo:
   rdf:type voaf:Vocabulary ;
   rdf:type owl:Ontology ;
   cc:license <http://creativecommons.org/licenses/by/3.0/> ;
-  dc:creator [
-      rdf:type foaf:Person ;
-      rdfs:isDefinedBy httpo: ;
-      foaf:homepage <http://laurensrietveld.nl> ;
-      foaf:name "Laurens Rietveld" ;
-    ] ;
-  dc:creator [
-      rdf:type foaf:Person ;
-      rdfs:isDefinedBy httpo: ;
-      foaf:homepage <http://www.wouterbeek.com> ;
-      foaf:name "Wouter Beek" ;
-    ] ;
+  dc:creator person:laurens_rietveld ;
+  dc:creator person:wouter_beek ;
+  dc:creator person:rinke_hoekstra ;
   dcterms:created "2014-09-24"^^xsd:date ;
   dcterms:description "Vocabulary for describing http error codes" ;
   dcterms:modified "2015-11-18"^^xsd:date ;
@@ -45,6 +38,7 @@ httpo:
   vann:preferredNamespacePrefix "httpo" ;
   vann:preferredNamespaceUri "http://lodlaundromat.org/http/ontology/" ;
   rdfs:isDefinedBy httpo: ;
+  owl:imports <http://lodlaundromat.org/resource/person> ;
   owl:versionInfo "1.0.1" ;
   foaf:homepage <http://lodlaundromat.org> ;
 .
