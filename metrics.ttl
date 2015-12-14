@@ -1,9 +1,12 @@
 # baseURI: http://lodlaundromat.org/metrics/ontology/
 # imports: http://ldf.fi/void-ext
+# imports: http://lodlaundromat.org/error/ontology/
 # imports: http://lodlaundromat.org/ontology/
+# imports: http://lodlaundromat.org/resource/person
 # imports: http://rdfs.org/ns/void
+# imports: http://www.w3.org/ns/prov#
 
-@prefix : <http://www.semanticweb.org/owl/owlapi/turtle#> .
+@prefix : <http://lodlaundromat.org/metrics/ontology/> .
 @prefix cc: <http://creativecommons.org/ns#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
@@ -13,6 +16,7 @@
 @prefix llm: <http://lodlaundromat.org/metrics/ontology/> .
 @prefix llo: <http://lodlaundromat.org/ontology/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix person: <http://lodlaundromat.org/resource/person/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -23,22 +27,49 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+void-ext:averageIRILength
+  owl:propertyChainAxiom (
+      llm:IRILength
+      llm:mean
+    ) ;
+.
+void-ext:averageLiteralLength
+  owl:propertyChainAxiom (
+      llm:literalLength
+      llm:mean
+    ) ;
+.
+void-ext:averageObjectIRILength
+  owl:propertyChainAxiom (
+      llm:objIRILength
+      llm:mean
+    ) ;
+.
+void-ext:averagePropertyIRILength
+  owl:propertyChainAxiom (
+      llm:predIRILength
+      llm:mean
+    ) ;
+.
+void-ext:averageSubjectIRILength
+  owl:propertyChainAxiom (
+      llm:subIRILength
+      llm:mean
+    ) ;
+.
+void-ext:distinctBlankNodes
+  rdfs:subPropertyOf llm:blankNodes ;
+.
+void-ext:distinctLiterals
+  rdfs:subPropertyOf llm:literals ;
+.
 llm:
   rdf:type voaf:Vocabulary ;
   rdf:type owl:Ontology ;
   cc:license <http://creativecommons.org/licenses/by/3.0/> ;
-  dc:creator [
-      rdf:type foaf:Person ;
-      rdfs:isDefinedBy llm: ;
-      foaf:homepage <http://laurensrietveld.nl> ;
-      foaf:name "Laurens Rietveld" ;
-    ] ;
-  dc:creator [
-      rdf:type foaf:Person ;
-      rdfs:isDefinedBy llm: ;
-      foaf:homepage <http://www.wouterbeek.com> ;
-      foaf:name "Wouter Beek" ;
-    ] ;
+  dc:creator person:laurens_rietveld ;
+  dc:creator person:rinke_hoekstra ;
+  dc:creator person:wouter_beek ;
   dcterms:created "2014-09-24"^^xsd:date ;
   dcterms:description "Collection (and extension) of several dataset metrics, including VoiD, VoiD-ext and Bio2RDF metrics" ;
   dcterms:modified "2015-05-20"^^xsd:date ;
@@ -47,10 +78,27 @@ llm:
   vann:preferredNamespacePrefix "llm" ;
   vann:preferredNamespaceUri "http://lodlaundromat.org/metrics/ontology/" ;
   owl:imports <http://ldf.fi/void-ext> ;
+  owl:imports <http://lodlaundromat.org/error/ontology/> ;
   owl:imports llo: ;
+  owl:imports <http://lodlaundromat.org/resource/person> ;
   owl:imports <http://rdfs.org/ns/void> ;
+  owl:imports prov: ;
   owl:versionInfo "1.0.2" ;
   foaf:homepage <http://lodlaundromat.org> ;
+.
+llm:Dataset
+  rdf:type owl:Class ;
+  rdfs:comment "A dataset description"^^xsd:string ;
+  rdfs:isDefinedBy llm: ;
+  rdfs:label "Dataset"^^xsd:string ;
+  rdfs:subClassOf void:Dataset ;
+  rdfs:subClassOf prov:Entity ;
+.
+llm:DescriptiveStatistics
+  rdf:type owl:Class ;
+  rdfs:comment "A set of descriptive statistics, including the mean, standard deviation, median and min/max values" ;
+  rdfs:isDefinedBy llm: ;
+  rdfs:label "Descriptive Statistics" ;
 .
 llm:IRILength
   rdf:type owl:ObjectProperty ;
@@ -58,7 +106,8 @@ llm:IRILength
   rdfs:domain void:Dataset ;
   rdfs:isDefinedBy llm: ;
   rdfs:label "Statistics on the lengths of IRIs" ;
-  rdfs:range llm:descriptiveStatistics ;
+  rdfs:range llm:DescriptiveStatistics ;
+  rdfs:subPropertyOf llm:statistics ;
 .
 llm:IRIs
   rdf:type owl:DatatypeProperty ;
@@ -67,6 +116,7 @@ llm:IRIs
   rdfs:isDefinedBy llm: ;
   rdfs:label "Total number of IRI references" ;
   rdfs:range xsd:long ;
+  rdfs:subPropertyOf void:entities ;
 .
 llm:blankNodes
   rdf:type owl:DatatypeProperty ;
@@ -83,6 +133,7 @@ llm:definedClasses
   rdfs:isDefinedBy llm: ;
   rdfs:label "Number of distinct defined classes" ;
   rdfs:range xsd:long ;
+  rdfs:subPropertyOf void:classes ;
 .
 llm:definedProperties
   rdf:type owl:DatatypeProperty ;
@@ -91,6 +142,7 @@ llm:definedProperties
   rdfs:isDefinedBy llm: ;
   rdfs:label "Number of distinct defined properties" ;
   rdfs:range xsd:long ;
+  rdfs:subPropertyOf void:properties ;
 .
 llm:degree
   rdf:type owl:ObjectProperty ;
@@ -98,13 +150,8 @@ llm:degree
   rdfs:domain void:Dataset ;
   rdfs:isDefinedBy llm: ;
   rdfs:label "Degree statistics" ;
-  rdfs:range llm:descriptiveStatistics ;
-.
-llm:descriptiveStatistics
-  rdf:type owl:Class ;
-  rdfs:comment "A set of descriptive statistics, including the mean, standard deviation, median and min/max values" ;
-  rdfs:isDefinedBy llm: ;
-  rdfs:label "Descriptive Statistics" ;
+  rdfs:range llm:DescriptiveStatistics ;
+  rdfs:subPropertyOf llm:statistics ;
 .
 llm:gitCommitId
   rdf:type owl:DatatypeProperty ;
@@ -127,7 +174,8 @@ llm:inDegree
   rdfs:domain void:Dataset ;
   rdfs:isDefinedBy llm: ;
   rdfs:label "In-degree statistics" ;
-  rdfs:range llm:descriptiveStatistics ;
+  rdfs:range llm:DescriptiveStatistics ;
+  rdfs:subPropertyOf llm:statistics ;
 .
 llm:literalLength
   rdf:type owl:ObjectProperty ;
@@ -135,7 +183,8 @@ llm:literalLength
   rdfs:domain void:Dataset ;
   rdfs:isDefinedBy llm: ;
   rdfs:label "Statistics on the lengths of literals" ;
-  rdfs:range llm:descriptiveStatistics ;
+  rdfs:range llm:DescriptiveStatistics ;
+  rdfs:subPropertyOf llm:statistics ;
 .
 llm:literals
   rdf:type owl:DatatypeProperty ;
@@ -148,26 +197,29 @@ llm:literals
 llm:max
   rdf:type owl:DatatypeProperty ;
   rdfs:comment "Maximum" ;
-  rdfs:domain llm:descriptiveStatistics ;
+  rdfs:domain llm:DescriptiveStatistics ;
   rdfs:isDefinedBy llm: ;
   rdfs:label "Maximum" ;
   rdfs:range xsd:long ;
+  rdfs:subPropertyOf llm:value ;
 .
 llm:mean
   rdf:type owl:DatatypeProperty ;
   rdfs:comment "Mean" ;
-  rdfs:domain llm:descriptiveStatistics ;
+  rdfs:domain llm:DescriptiveStatistics ;
   rdfs:isDefinedBy llm: ;
   rdfs:label "Mean" ;
   rdfs:range xsd:double ;
+  rdfs:subPropertyOf llm:value ;
 .
 llm:median
   rdf:type owl:DatatypeProperty ;
   rdfs:comment "Median" ;
-  rdfs:domain llm:descriptiveStatistics ;
+  rdfs:domain llm:DescriptiveStatistics ;
   rdfs:isDefinedBy llm: ;
   rdfs:label "Median" ;
   rdfs:range xsd:long ;
+  rdfs:subPropertyOf llm:value ;
 .
 llm:metrics
   rdf:type owl:ObjectProperty ;
@@ -177,13 +229,20 @@ llm:metrics
   rdfs:label "The dataset metrics" ;
   rdfs:range void:Dataset ;
 .
+llm:metrics_of
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain llm:Dataset ;
+  rdfs:isDefinedBy llm: ;
+  owl:inverseOf llm:metrics ;
+.
 llm:min
   rdf:type owl:DatatypeProperty ;
   rdfs:comment "Minimum" ;
-  rdfs:domain llm:descriptiveStatistics ;
+  rdfs:domain llm:DescriptiveStatistics ;
   rdfs:isDefinedBy llm: ;
   rdfs:label "Minimum" ;
   rdfs:range xsd:long ;
+  rdfs:subPropertyOf llm:value ;
 .
 llm:objIRILength
   rdf:type owl:ObjectProperty ;
@@ -191,7 +250,8 @@ llm:objIRILength
   rdfs:domain void:Dataset ;
   rdfs:isDefinedBy llm: ;
   rdfs:label "Statistics on the lengths of object IRIs" ;
-  rdfs:range llm:descriptiveStatistics ;
+  rdfs:range llm:DescriptiveStatistics ;
+  rdfs:subPropertyOf llm:statistics ;
 .
 llm:outDegree
   rdf:type owl:ObjectProperty ;
@@ -199,7 +259,8 @@ llm:outDegree
   rdfs:domain void:Dataset ;
   rdfs:isDefinedBy llm: ;
   rdfs:label "Out-degree statistics" ;
-  rdfs:range llm:descriptiveStatistics ;
+  rdfs:range llm:DescriptiveStatistics ;
+  rdfs:subPropertyOf llm:statistics ;
 .
 llm:predIRILength
   rdf:type owl:ObjectProperty ;
@@ -207,15 +268,23 @@ llm:predIRILength
   rdfs:domain void:Dataset ;
   rdfs:isDefinedBy llm: ;
   rdfs:label "Statistics on the lengths of predicate IRIs" ;
-  rdfs:range llm:descriptiveStatistics ;
+  rdfs:range llm:DescriptiveStatistics ;
+  rdfs:subPropertyOf llm:statistics ;
+.
+llm:statistics
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain llm:Dataset ;
+  rdfs:isDefinedBy llm: ;
+  rdfs:range llm:DescriptiveStatistics ;
 .
 llm:std
   rdf:type owl:DatatypeProperty ;
   rdfs:comment "Standard Deviation" ;
-  rdfs:domain llm:descriptiveStatistics ;
+  rdfs:domain llm:DescriptiveStatistics ;
   rdfs:isDefinedBy llm: ;
   rdfs:label "Standard Deviation" ;
   rdfs:range xsd:double ;
+  rdfs:subPropertyOf llm:value ;
 .
 llm:subIRILength
   rdf:type owl:ObjectProperty ;
@@ -223,5 +292,16 @@ llm:subIRILength
   rdfs:domain void:Dataset ;
   rdfs:isDefinedBy llm: ;
   rdfs:label "Statistics on the lengths of subject IRIs" ;
-  rdfs:range llm:descriptiveStatistics ;
+  rdfs:range llm:DescriptiveStatistics ;
+  rdfs:subPropertyOf llm:statistics ;
+.
+llm:value
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain llm:DescriptiveStatistics ;
+.
+void:triples
+  owl:propertyChainAxiom (
+      llm:metrics_of
+      llo:triples
+    ) ;
 .
