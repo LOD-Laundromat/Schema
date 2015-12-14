@@ -1,0 +1,30 @@
+# baseURI: http://lodlaundromat.org/resource/person
+
+@prefix : <http://lodlaundromat.org/resource/person/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+
+<http://lodlaundromat.org/resource/person>
+  rdf:type owl:Ontology ;
+  owl:imports <http://xmlns.com/foaf/0.1> ;
+  owl:versionInfo "Created with TopBraid Composer"^^xsd:string ;
+.
+
+
+:wouter_beek a foaf:Person;
+  rdfs:isDefinedBy : ;
+  foaf:name "Wouter Beek" ;
+  foaf:homepage <http://www.wouterbeek.com> .
+
+:laurens_rietveld a foaf:Person;
+  rdfs:isDefinedBy : ;
+  foaf:name "Laurens Rietveld" ;
+  foaf:homepage <http://laurensrietveld.nl> .
+
+:rinke_hoekstra a foaf:Person;
+  rdfs:isDefinedBy : ;
+  foaf:name "Rinke Hoekstra" ;
+  foaf:homepage <http://www.rinkehoekstra.nl> .
