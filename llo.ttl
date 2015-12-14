@@ -1,2367 +1,343 @@
-@prefix : <http://www.semanticweb.org/owl/owlapi/turtle#> .
-@prefix cc: <http://creativecommons.org/ns#> .
+# baseURI: http://lodlaundromat.org/ontology/
+# imports: http://lodlaundromat.org/error/ontology/
+# imports: http://lodlaundromat.org/http/ontology/
+# imports: http://lodlaundromat.org/resource/person
+# imports: http://purl.org/dc/elements/1.1
+# imports: http://purl.org/dc/terms
+# imports: http://purl.org/vocab/vann
+# imports: http://purl.org/vocommons/voaf
+# imports: http://www.w3.org/ns/prov
+# imports: http://xmlns.com/foaf/0.1
+
+@prefix : <http://lodlaundromat.org/ontology/> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
-@prefix llm: <http://lodlaundromat.org/metrics/ontology/> .
-@prefix llo: <http://lodlaundromat.org/ontology/> .
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix xml: <http://www.w3.org/XML/1998/namespace> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
-@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix person: <http://lodlaundromat.org/resource/person/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix vann: <http://purl.org/vocab/vann/> .
 @prefix voaf: <http://purl.org/vocommons/voaf#> .
-@prefix void: <http://rdfs.org/ns/void#> .
-@prefix error: <http://lodlaundromat.org/error/ontology/> .
-@prefix httpo: <http://lodlaundromat.org/http/ontology/> .
-@prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix formats: <http://www.w3.org/ns/formats/> .
-@prefix void-ext: <http://ldf.fi/void-ext#> .
-@base <http://lodlaundromat.org/ontology/> .
-
-<http://lodlaundromat.org/ontology/> rdf:type owl:Ontology ;
-                                     
-                                     dcterms:created "2014-09-24"^^xsd:date ;
-                                     
-                                     dcterms:modified "2015-11-18"^^xsd:date ;
-                                     
-                                     dcterms:publisher "VU University Amsterdam" ;
-                                     
-                                     vann:preferredNamespacePrefix "llo" ;
-                                     
-                                     vann:preferredNamespaceUri "http://lodlaundromat.org/ontology/" ;
-                                     
-                                     dcterms:title "LOD Laundromat Vocabulary" ;
-                                     
-                                     dcterms:description "Vocabulary for describing the crawling meta-data of the LOD Laundromat" ;
-                                     
-                                     owl:versionInfo "1.0.2" ;
-                                     
-                                     foaf:homepage <http://lodlaundromat.org> ;
-                                     
-                                     cc:license <http://creativecommons.org/licenses/by/3.0/> ;
-                                     
-                                     owl:imports error: ,
-                                                 httpo: ;
-                                     
-                                     dc:creator [ ] ,
-[ ] .
-
-
-#################################################################
-#
-#    Datatypes
-#
-#################################################################
-
-
-###  http://lodlaundromat.org/http/ontology/statusCode
-
-httpo:statusCode owl:equivalentClass <http://www.w3.org/2011/http#statusCodeNumber> .
-
-
-
-
-
-#################################################################
-#
-#    Object Properties
-#
-#################################################################
-
-
-###  http://lodlaundromat.org/error/ontology/action
-
-error:action rdfs:label "action"@en-us ;
-             
-             rdfs:comment "The action to which the error is related."@en-us ;
-             
-             rdfs:range error:Action ;
-             
-             rdfs:domain error:Error .
-
-
-
-###  http://lodlaundromat.org/error/ontology/object
-
-error:object rdfs:label "object"@en-us ;
-             
-             rdfs:comment "The name of the object to which the error relates."@en-us ;
-             
-             rdfs:domain error:Error ;
-             
-             rdfs:range error:Object .
-
-
-
-###  http://lodlaundromat.org/error/ontology/streamPosition
-
-error:streamPosition rdfs:label "stream position"@en-us ;
-                     
-                     rdfs:comment "The stream position at which an error occurred."@en-us ;
-                     
-                     rdfs:domain error:Error ;
-                     
-                     rdfs:range error:StreamPosition .
-
-
-
-###  http://lodlaundromat.org/ontology/archiveFilters
-
-llo:archiveFilters rdf:type owl:ObjectProperty ;
-                   
-                   rdfs:label "archive filters"@en-us ;
-                   
-                   rdfs:comment "A list of filters that were applied in unpacking the archive."@en-us ;
-                   
-                   rdfs:domain llo:Archive ;
-                   
-                   rdfs:range rdf:List .
-
-
-
-###  http://lodlaundromat.org/ontology/containsEntry
-
-llo:containsEntry rdf:type owl:ObjectProperty ;
-                  
-                  rdfs:label "contains entry"@en-us ;
-                  
-                  rdfs:comment "A link between a parent archive and one of its direct archive entries."@en-us ;
-                  
-                  rdfs:domain llo:Archive ;
-                  
-                  rdfs:range llo:ArchiveEntry .
-
-
-
-###  http://lodlaundromat.org/ontology/exception
-
-llo:exception rdf:type owl:ObjectProperty ;
-              
-              rdfs:label "status"@en-us ;
-              
-              rdfs:comment "A blockig exception that occured somewhere during the unpacking and/or cleaning process. Possible values: (1) fail, failed to unpack/clean due to an unanticipated reason. (2) true, successfully unpacked and cleaned data document. (3) exception, failed to unpack/clean due to an anticipated reason."@en-us ;
-              
-              rdfs:range error:Error ;
-              
-              rdfs:domain llo:DataDocument .
-
-
-
-###  http://lodlaundromat.org/ontology/httpStatus
-
-llo:httpStatus rdf:type owl:ObjectProperty ;
-               
-               rdfs:label "HTTP status"@en-us ;
-               
-               rdfs:comment "The HTTP status of the reply that was received when requesting the resource located at the URL."@en-us ;
-               
-               rdfs:range httpo:Status ;
-               
-               rdfs:domain llo:URL .
-
-
-
-###  http://lodlaundromat.org/ontology/serializationFormat
-
-llo:serializationFormat rdf:type owl:ObjectProperty ;
-                        
-                        rdfs:label "serialization format"@en-us ;
-                        
-                        rdfs:comment "The RDF serialization format that the dirty data document was parsed in.This format is determined based on a parse of an initial portion of the file contents, the file extension (if any) and the value of the HTTP Content-Type header (if any).The possible values are: JSON-LD, N-Quads, N-Triples, RDF/XML, RDFa, Turtle, TriG."@en-us ;
-                        
-                        rdfs:domain llo:DataDocument ;
-                        
-                        rdfs:range rdfs:Resource .
-
-
-
-###  http://lodlaundromat.org/ontology/url
-
-llo:url rdf:type owl:ObjectProperty ;
-        
-        rdfs:label "URL"@en-us ;
-        
-        rdfs:comment "The URL from which the original version of the data document was downloaded."@en-us ;
-        
-        rdfs:domain llo:URL ;
-        
-        rdfs:range rdfs:Resource .
-
-
-
-###  http://lodlaundromat.org/ontology/warning
-
-llo:warning rdf:type owl:ObjectProperty ;
-            
-            rdfs:label "message"@en-us ;
-            
-            rdfs:comment "A non-blocking warning message that is either emitted while downloading, unpacking, or cleaning a dirty data document.Possible values: (1) TODO (1) Syntax error while parsing RDF file. (2) No RDF in file."@en-us ;
-            
-            rdfs:range error:Error ;
-            
-            rdfs:domain llo:DataDocument .
-
-
-
-
-
-#################################################################
-#
-#    Data properties
-#
-#################################################################
-
-
-###  http://lodlaundromat.org/error/ontology/character
-
-error:character rdfs:label "character"@en-us ;
-                
-                rdfs:comment "The character number of a stream position, indicating the number of characters that have preceded it."@en-us ;
-                
-                rdfs:domain error:StreamPosition ;
-                
-                rdfs:range xsd:integer .
-
-
-
-###  http://lodlaundromat.org/error/ontology/code
-
-error:code rdfs:label "error code"@en-us ;
-           
-           rdfs:comment "Error code as used by the program in which the error occurs."@en-us ;
-           
-           rdfs:domain error:Error ;
-           
-           rdfs:range xsd:nonNegativeInteger .
-
-
-
-###  http://lodlaundromat.org/error/ontology/column
-
-error:column rdfs:label "column"@en-us ;
-             
-             rdfs:comment "The column number of a stream position, indicating the number of characters that have preceded it since the last newline character or since the beginning of the stream."@en-us ;
-             
-             rdfs:domain error:StreamPosition ;
-             
-             rdfs:range xsd:integer .
-
-
-
-###  http://lodlaundromat.org/error/ontology/line
-
-error:line rdfs:label "column"@en-us ;
-           
-           rdfs:comment "The line number of a stream position, indicating the number of newline characters that have preceded it."@en-us ;
-           
-           rdfs:domain error:StreamPosition ;
-           
-           rdfs:range xsd:integer .
-
-
-
-###  http://lodlaundromat.org/error/ontology/message
-
-error:message rdfs:label "error message"@en-us ;
-              
-              rdfs:comment "Error message for the human programmer."@en-us ;
-              
-              rdfs:domain error:Error ;
-              
-              rdfs:range xsd:string .
-
-
-
-###  http://lodlaundromat.org/error/ontology/sourceLine
-
-error:sourceLine rdfs:label "source line"@en-us ;
-                 
-                 rdfs:comment "The line number in the original source file for which a parser warning was thrown."@en-us ;
-                 
-                 rdfs:domain error:ParserError ;
-                 
-                 rdfs:range xsd:integer .
-
-
-
-###  http://lodlaundromat.org/error/ontology/variableName
-
-error:variableName rdfs:label "variable name"@en-us ;
-                   
-                   rdfs:comment "The C variable name of the error as used in POSIX or in a Linux library or application."@en-us ;
-                   
-                   rdfs:domain error:Error ;
-                   
-                   rdfs:range xsd:string .
-
-
-
-###  http://lodlaundromat.org/http/ontology/reasonPhrase
-
-httpo:reasonPhrase rdfs:label "HTTP reason phrase"@en-us ;
-                   
-                   rdfs:comment "A natural language message describing an HTTP status."@en-us ;
-                   
-                   rdfs:domain httpo:Status ;
-                   
-                   rdfs:range xsd:string .
-
-
-
-###  http://lodlaundromat.org/http/ontology/statusCode
-
-httpo:statusCode rdfs:domain httpo:Status ;
-                 
-                 rdfs:range xsd:integer .
-
-
-
-###  http://lodlaundromat.org/ontology/added
-
-llo:added rdf:type owl:DatatypeProperty ;
-          
-          rdfs:label "added"@en-us ;
-          
-          rdfs:comment "The date and time at which the dirty data document was added to the LOD Basket."@en-us ;
-          
-          rdfs:domain llo:DataDocument ;
-          
-          rdfs:range xsd:dateTime .
-
-
-
-###  http://lodlaundromat.org/ontology/archiveFileType
-
-llo:archiveFileType rdf:type owl:DatatypeProperty ;
-                    
-                    rdfs:label "archive file type"@en-us ;
-                    
-                    rdfs:comment "The high-level file type of an archive file.Possible values: `file` and `dir`.An archive of type `dir` can be unpacked into archive entries."@en-us ;
-                    
-                    rdfs:domain llo:Archive ;
-                    
-                    rdfs:range xsd:string .
-
-
-
-###  http://lodlaundromat.org/ontology/archiveFormat
-
-llo:archiveFormat rdf:type owl:DatatypeProperty ;
-                  
-                  rdfs:label "archive format"@en-us ;
-                  
-                  rdfs:comment "TODO"@en-us ;
-                  
-                  rdfs:domain llo:Archive ;
-                  
-                  rdfs:range xsd:string .
-
-
-
-###  http://lodlaundromat.org/ontology/archiveLastModified
-
-llo:archiveLastModified rdf:type owl:DatatypeProperty ;
-                        
-                        rdfs:label "archive last modified"@en-us ;
-                        
-                        rdfs:comment "TODO"@en-us ;
-                        
-                        rdfs:domain llo:Archive ;
-                        
-                        rdfs:range xsd:dateTime .
-
-
-
-###  http://lodlaundromat.org/ontology/archiveSize
-
-llo:archiveSize rdf:type owl:DatatypeProperty ;
-                
-                rdfs:label "archive size"@en-us ;
-                
-                rdfs:comment "TODO"@en-us ;
-                
-                rdfs:domain llo:Archive ;
-                
-                rdfs:range xsd:nonNegativeInteger .
-
-
-
-###  http://lodlaundromat.org/ontology/byteCount
-
-llo:byteCount rdf:type owl:DatatypeProperty ;
-              
-              rdfs:label "byte count"@en-us ;
-              
-              rdfs:comment "The number of bytes that were processed in the stream of the dirty data document."@en-us ;
-              
-              rdfs:domain llo:DataDocument ;
-              
-              rdfs:range xsd:nonNegativeInteger .
-
-
-
-###  http://lodlaundromat.org/ontology/charCount
-
-llo:charCount rdf:type owl:DatatypeProperty ;
-              
-              rdfs:label "character count"@en-us ;
-              
-              rdfs:comment "The number of characters that were processed in the stream of the dirty data document."@en-us ;
-              
-              rdfs:domain llo:DataDocument ;
-              
-              rdfs:range xsd:nonNegativeInteger .
-
-
-
-###  http://lodlaundromat.org/ontology/contentLength
-
-llo:contentLength rdf:type owl:DatatypeProperty ;
-                  
-                  rdfs:label "content length"@en-us ;
-                  
-                  rdfs:comment "The number of bytes denoted in the Content-Length header of the HTTP reply message, received upon downloading a single dirty data document of type URL. Availability of this information depends on whether the disseminating host can be accessed and the HTTP reply contains the factum."@en-us ;
-                  
-                  rdfs:domain llo:URL ;
-                  
-                  rdfs:range xsd:nonNegativeInteger .
-
-
-
-###  http://lodlaundromat.org/ontology/contentType
-
-llo:contentType rdf:type owl:DatatypeProperty ;
-                
-                rdfs:label "content type"@en-us ;
-                
-                rdfs:comment "The value of the Content-Type header of the HTTP reply message, received upon downloading a single data document of type URL. Availability of this information depends on whether the disseminating host can be accessed and the HTTP reply contains the factum."@en-us ;
-                
-                rdfs:domain llo:URL ;
-                
-                rdfs:range xsd:string .
-
-
-
-###  http://lodlaundromat.org/ontology/downloadSize
-
-llo:downloadSize rdf:type owl:DatatypeProperty ;
-                 
-                 rdfs:label "byte size"@en-us ;
-                 
-                 rdfs:comment "The size of the downloaded dirty data document before unpacking. Represented in bytes.Availability: Data documents that are directly downloaded."@en-us ;
-                 
-                 rdfs:domain llo:URL ;
-                 
-                 rdfs:range xsd:nonNegativeInteger .
-
-
-
-###  http://lodlaundromat.org/ontology/duplicates
-
-llo:duplicates rdf:type owl:DatatypeProperty ;
-               
-               rdfs:label "number of duplicate triples"@en-us ;
-               
-               rdfs:comment "The number of triples that are duplicates of other triples in the same dirty data document."@en-us ;
-               
-               rdfs:domain llo:DataDocument ;
-               
-               rdfs:range xsd:nonNegativeInteger .
-
-
-
-###  http://lodlaundromat.org/ontology/endClean
-
-llo:endClean rdf:type owl:DatatypeProperty ;
-             
-             rdfs:label "end cleaning a data document"@en-us ;
-             
-             rdfs:comment "The date and time at which the process of cleaning the data document ended."@en-us ;
-             
-             rdfs:domain llo:DataDocument ;
-             
-             rdfs:range xsd:dateTime .
-
-
-
-###  http://lodlaundromat.org/ontology/endUnpack
-
-llo:endUnpack rdf:type owl:DatatypeProperty ;
-              
-              rdfs:label "end unpacking a data document"@en-us ;
-              
-              rdfs:comment "The date and time at which the process of downloading and unpacking the data document ended."@en-us ;
-              
-              rdfs:domain llo:DataDocument ;
-              
-              rdfs:range xsd:dateTime .
-
-
-
-###  http://lodlaundromat.org/ontology/fileExtension
-
-llo:fileExtension rdf:type owl:DatatypeProperty ;
-                  
-                  rdfs:label "file extension"@en-us ;
-                  
-                  rdfs:comment "The file extension of a the dirty data document.This is only set for data documents that can be downloading and extracted, and that have a file extension."@en-us ;
-                  
-                  rdfs:domain llo:DataDocument ;
-                  
-                  rdfs:range xsd:string .
-
-
-
-###  http://lodlaundromat.org/ontology/lastModified
-
-llo:lastModified rdf:type owl:DatatypeProperty ;
-                 
-                 rdfs:label "last modified"@en-us ;
-                 
-                 rdfs:comment "The date and time denoted by the Last-Modified header of the HTTP reply message, received upon downloading a single data document of type URL. Availability of this information depends on whether the disseminating host can be accessed and the HTTP reply contains the factum."@en-us ;
-                 
-                 rdfs:domain llo:URL ;
-                 
-                 rdfs:range xsd:dateTime .
-
-
-
-###  http://lodlaundromat.org/ontology/lineCount
-
-llo:lineCount rdf:type owl:DatatypeProperty ;
-              
-              rdfs:label "line count"@en-us ;
-              
-              rdfs:comment "The number of lines that were processed in the stream of the data document."@en-us ;
-              
-              rdfs:domain llo:DataDocument ;
-              
-              rdfs:range xsd:nonNegativeInteger .
-
-
-
-###  http://lodlaundromat.org/ontology/md5
-
-llo:md5 rdf:type owl:DatatypeProperty ;
-        
-        rdfs:label "MD5"@en-us ;
-        
-        rdfs:comment "Slightly superfluous property uniquely identifying a data document within the LOD Laundromat context. In contrast, the data document IRI acts as the *globally* unique identifier."@en-us ;
-        
-        rdfs:domain llo:DataDocument ;
-        
-        rdfs:range xsd:string .
-
-
-
-###  http://lodlaundromat.org/ontology/number_of_warnings
-
-llo:number_of_warnings rdf:type owl:DatatypeProperty ;
-                       
-                       rdfs:label "number of warnings"@en-us ;
-                       
-                       rdfs:comment "The number of warnings detected while cleaning the given data document."@en-us ;
-                       
-                       rdfs:domain llo:DataDocument ;
-                       
-                       rdfs:range xsd:nonNegativeInteger .
-
-
-
-###  http://lodlaundromat.org/ontology/path
-
-llo:path rdf:type owl:DatatypeProperty ;
-         
-         rdfs:label "file archive path"@en-us ;
-         
-         rdfs:comment "For data documents that are entries in a file archive, the path of the data document in that file archive."@en-us ;
-         
-         rdfs:domain llo:ArchiveEntry ;
-         
-         rdfs:range xsd:string .
-
-
-
-###  http://lodlaundromat.org/ontology/startClean
-
-llo:startClean rdf:type owl:DatatypeProperty ;
-               
-               rdfs:label "start cleaning a data document"@en-us ;
-               
-               rdfs:comment "The date and time at which the process of cleaning the data document started."@en-us ;
-               
-               rdfs:domain llo:DataDocument ;
-               
-               rdfs:range xsd:dateTime .
-
-
-
-###  http://lodlaundromat.org/ontology/startUnpack
-
-llo:startUnpack rdf:type owl:DatatypeProperty ;
-                
-                rdfs:label "start unpacking a data document"@en-us ;
-                
-                rdfs:comment "The date and time at which the process of downloading and unpacking the data document started."@en-us ;
-                
-                rdfs:domain llo:DataDocument ;
-                
-                rdfs:range xsd:dateTime .
-
-
-
-###  http://lodlaundromat.org/ontology/statementsType
-
-llo:statementsType rdf:type owl:DatatypeProperty ;
-                   
-                   rdfs:label "statements type"@en-us ;
-                   
-                   rdfs:comment "The type of statements contained in a data document. Either `triples` or `quadruples`. The latter indicates that the data document contains at least one quadruple."@en-us ;
-                   
-                   rdfs:domain llo:DataDocument ;
-                   
-                   rdfs:range xsd:string .
-
-
-
-###  http://lodlaundromat.org/ontology/triples
-
-llo:triples rdf:type owl:DatatypeProperty ;
-            
-            rdfs:label "triples"@en-us ;
-            
-            rdfs:comment "The number of triples that could be read from the dirty data document. This is also the number of triples that is stored in the cleaned data document.n     This is after triple deduplication."@en-us ;
-            
-            rdfs:domain llo:DataDocument ;
-            
-            rdfs:range xsd:nonNegativeInteger .
-
-
-
-###  http://lodlaundromat.org/ontology/unpackedSize
-
-llo:unpackedSize rdf:type owl:DatatypeProperty ;
-                 
-                 rdfs:label "unpacked file size"@en-us ;
-                 
-                 rdfs:comment "The size of the unpacked dirty data document. Represented in bytes.Availability: Every data document."@en-us ;
-                 
-                 rdfs:domain llo:DataDocument ;
-                 
-                 rdfs:range xsd:nonNegativeInteger .
-
-
-
-
-
-#################################################################
-#
-#    Classes
-#
-#################################################################
-
-
-###  http://lodlaundromat.org/error/ontology/Action
-
-error:Action rdfs:label "action"@en-us ;
-             
-             rdfs:subClassOf rdfs:Resource ;
-             
-             rdfs:comment "An action performed by a computing device."@en-us .
-
-
-
-###  http://lodlaundromat.org/error/ontology/ArchiveError
-
-error:ArchiveError rdfs:label "archive error"@en-us ;
-                   
-                   rdfs:subClassOf error:Error ;
-                   
-                   rdfs:comment "An error that occurs as part of an archive (un)packing process."@en-us .
-
-
-
-###  http://lodlaundromat.org/error/ontology/CharacterEncodingError
-
-error:CharacterEncodingError rdfs:label "character encoding error"@en-us ;
-                             
-                             rdfs:subClassOf error:EncodingError ;
-                             
-                             rdfs:comment "An error due to the use of an illegitimate character code. The character code is stored under the error:object property."@en-us .
-
-
-
-###  http://lodlaundromat.org/error/ontology/DirectoryExistenceError
-
-error:DirectoryExistenceError rdfs:subClassOf error:ExistenceError .
-
-
-
-###  http://lodlaundromat.org/error/ontology/DirectoryNotEmptyError
-
-error:DirectoryNotEmptyError rdfs:subClassOf error:ExistenceError .
-
-
-
-###  http://lodlaundromat.org/error/ontology/EncodingError
-
-error:EncodingError rdfs:label "encoding error"@en-us ;
-                    
-                    rdfs:subClassOf error:Error ;
-                    
-                    rdfs:comment "An error due to the use of an illigitimate or unrecognized encoding."@en-us .
-
-
-
-###  http://lodlaundromat.org/error/ontology/Error
-
-error:Error rdfs:label "error"@en-us ;
-            
-            rdfs:subClassOf rdfs:Resource ;
-            
-            rdfs:comment "An recognized irregularity in program execution."@en-us .
-
-
-
-###  http://lodlaundromat.org/error/ontology/ExistenceError
-
-error:ExistenceError rdfs:subClassOf error:Error .
-
-
-
-###  http://lodlaundromat.org/error/ontology/FileExistenceError
-
-error:FileExistenceError rdfs:label "file existence error"@en-us ;
-                         
-                         rdfs:subClassOf error:ExistenceError ;
-                         
-                         rdfs:comment "An error that occurs because a file which is assumed to exist does not."@en-us .
-
-
-
-###  http://lodlaundromat.org/error/ontology/HttpError
-
-error:HttpError rdfs:label "HTTP error"@en-us ;
-                
-                rdfs:subClassOf error:Error ;
-                
-                rdfs:comment "An error that is emitted as part of an HTTP reply."@en-us .
-
-
-
-###  http://lodlaundromat.org/error/ontology/HttpUri
-
-error:HttpUri rdfs:label "HTTP URI"@en-us ;
-              
-              rdfs:subClassOf error:Object ;
-              
-              rdfs:comment "A URI that uses the HTTP scheme."@en-us .
-
-
-
-###  http://lodlaundromat.org/error/ontology/IoError
-
-error:IoError rdfs:label "IO error"@en-us ;
-              
-              rdfs:subClassOf error:Error ;
-              
-              rdfs:comment "An error that was thrown due to an input and/or output issue."@en-us .
-
-
-
-###  http://lodlaundromat.org/error/ontology/IsADirectoryError
-
-error:IsADirectoryError rdfs:subClassOf error:ExistenceError .
-
-
-
-###  http://lodlaundromat.org/error/ontology/MalformedUrl
-
-error:MalformedUrl rdfs:label "malformed URL"@en-us ;
-                   
-                   rdfs:subClassOf error:Error ;
-                   
-                   rdfs:comment "An error that is thrown for a value which is expected to be a URL but does not conform to URL syntax."@en-us .
-
-
-
-###  http://lodlaundromat.org/error/ontology/MissingTurtlePrefixDefinition
-
-error:MissingTurtlePrefixDefinition rdfs:label "missing Turtle prefix definition"@en-us ;
-                                    
-                                    rdfs:subClassOf error:TurtleParserError ;
-                                    
-                                    rdfs:comment "An error that occurs if a Turtle prefix is used but not defined."@en-us .
-
-
-
-###  http://lodlaundromat.org/error/ontology/Object
-
-error:Object rdfs:label "object"@en-us ;
-             
-             rdfs:subClassOf rdfs:Resource ;
-             
-             rdfs:comment "An object that is related to an error."@en-us .
-
-
-
-###  http://lodlaundromat.org/error/ontology/ParserError
-
-error:ParserError rdfs:label "parser error"@en-us ;
-                  
-                  rdfs:subClassOf error:Error ;
-                  
-                  rdfs:comment "An error that is emitted by a parser, indicating deviation from a defined grammar."@en-us .
-
-
-
-###  http://lodlaundromat.org/error/ontology/PermissionError
-
-error:PermissionError rdfs:label "permission error"@en-us ;
-                      
-                      rdfs:subClassOf error:Error ;
-                      
-                      rdfs:comment "An error that occurs because a specific action is not allowed to be performed w.r.t. a specific object that is of a given type."@en-us .
-
-
-
-###  http://lodlaundromat.org/error/ontology/RdfParserError
-
-error:RdfParserError rdfs:label "RDF parser error"@en-us ;
-                     
-                     rdfs:subClassOf error:ParserError ;
-                     
-                     rdfs:comment "An error that is emitted by an RDF parser."@en-us .
-
-
-
-###  http://lodlaundromat.org/error/ontology/RdfxmlParserError
-
-error:RdfxmlParserError rdfs:label "RDF/XML parser error"@en-us ;
-                        
-                        rdfs:subClassOf error:RdfParserError ,
-                                        error:XmlParserError ;
-                        
-                        rdfs:comment "An that is emitted by an RDF/XML parser when it encounters data that does not conform to the RDF/XML grammar."@en-us .
-
-
-
-###  http://lodlaundromat.org/error/ontology/ReadError
-
-error:ReadError rdfs:label "read error"@en-us ;
-                
-                rdfs:subClassOf error:IoError ;
-                
-                rdfs:comment "An error that occurs while reading data."@en-us .
-
-
-
-###  http://lodlaundromat.org/error/ontology/RedefinedRdfId
-
-error:RedefinedRdfId rdfs:label "redefined RDF identifier"@en-us ;
-                     
-                     rdfs:subClassOf error:RdfxmlParserError ;
-                     
-                     rdfs:comment "An error that is thrown whenever multiple definitions of the same resource occur in an RDF/XML document. This typically occurs whenever more than one rdf:Id statement occurs for the same resource."@en-us .
-
-
-
-###  http://lodlaundromat.org/error/ontology/SgmlParserError
-
-error:SgmlParserError rdfs:label "SGML parser error"@en-us ;
-                      
-                      rdfs:subClassOf error:ParserError ;
-                      
-                      rdfs:comment "A warning that is emitted by an SGML parser."@en-us .
-
-
-
-###  http://lodlaundromat.org/error/ontology/SocketError
-
-error:SocketError rdfs:label "socket error"@en-us ;
-                  
-                  rdfs:subClassOf error:Error ;
-                  
-                  rdfs:comment "An error thrown because of a socket-related problem."@en-us .
-
-
-
-###  http://lodlaundromat.org/error/ontology/StreamPosition
-
-error:StreamPosition rdfs:label "stream position"@en-us ;
-                     
-                     rdfs:subClassOf error:Error ;
-                     
-                     rdfs:comment "A position in a stream."@en-us .
-
-
-
-###  http://lodlaundromat.org/error/ontology/SyntaxError
-
-error:SyntaxError rdfs:label "syntax position"@en-us ;
-                  
-                  rdfs:subClassOf error:ParserError ;
-                  
-                  rdfs:comment "A parser error that is due to the occurrence of an expression in the parsed data stream that does not conform to the expected grammar."@en-us .
-
-
-
-###  http://lodlaundromat.org/error/ontology/TimeoutError
-
-error:TimeoutError rdfs:label "timeout error"@en-us ;
-                   
-                   rdfs:subClassOf error:Error ;
-                   
-                   rdfs:comment "An error that is thrown due to a timeout."@en-us .
-
-
-
-###  http://lodlaundromat.org/error/ontology/TurtleParserError
-
-error:TurtleParserError rdfs:label "XML parser error"@en-us ;
-                        
-                        rdfs:subClassOf error:RdfParserError ;
-                        
-                        rdfs:comment "A warning that is emitted by an XML parser."@en-us .
-
-
-
-###  http://lodlaundromat.org/error/ontology/WriteError
-
-error:WriteError rdfs:label "write error"@en-us ;
-                 
-                 rdfs:subClassOf error:IoError ;
-                 
-                 rdfs:comment "An error that occurs while writing data."@en-us .
-
-
-
-###  http://lodlaundromat.org/error/ontology/XmlNameError
-
-error:XmlNameError rdfs:label "XML name error"@en-us ;
-                   
-                   rdfs:subClassOf error:XmlParserError ;
-                   
-                   rdfs:comment "The argument to rdf:ID is not an XML name."@en-us .
-
-
-
-###  http://lodlaundromat.org/error/ontology/XmlParserError
-
-error:XmlParserError rdfs:label "XML parser error"@en-us ;
-                     
-                     rdfs:subClassOf error:SgmlParserError ;
-                     
-                     rdfs:comment "A warning that is emitted by an XML parser."@en-us .
-
-
-
-###  http://lodlaundromat.org/error/ontology/4xxHttpError
-
-<http://lodlaundromat.org/error/ontology/4xxHttpError> rdfs:label "4xx HTTP Error"@en-us ;
-                                                       
-                                                       rdfs:subClassOf error:HttpError ;
-                                                       
-                                                       rdfs:comment "An HTTP error in the 400-range."@en-us .
-
-
-
-###  http://lodlaundromat.org/error/ontology/5xxHttpError
-
-<http://lodlaundromat.org/error/ontology/5xxHttpError> rdfs:label "5xx HTTP Error"@en-us ;
-                                                       
-                                                       rdfs:subClassOf error:HttpError ;
-                                                       
-                                                       rdfs:comment "An HTTP error in the 500-range."@en-us .
-
-
-
-###  http://lodlaundromat.org/http/ontology/CONNECT
-
-httpo:CONNECT rdfs:label "CONNECT"@en-us ;
-              
-              rdfs:subClassOf httpo:Method ;
-              
-              rdfs:comment "HTTP method for establishing a tunnel to the server identified by the target resource."@en-us .
-
-
-
-###  http://lodlaundromat.org/http/ontology/CacheableMethod
-
-httpo:CacheableMethod rdfs:label "HTTP cacheable method"@en-us ;
-                      
-                      rdfs:subClassOf httpo:Method ;
-                      
-                      rdfs:comment "HTTP methods whose responses are allowed to be stored for future reuse."@en-us .
-
-
-
-###  http://lodlaundromat.org/http/ontology/ConditionalHeader
-
-httpo:ConditionalHeader rdfs:label "HTTP conditional header"@en-us ;
-                        
-                        rdfs:subClassOf httpo:Header ;
-                        
-                        rdfs:comment "Allows a client to place a precondition on the state of the target resource, so that the action corresponding to the method semantics will not be applied if the precondition evaluates to false."@en-us .
-
-
-
-###  http://lodlaundromat.org/http/ontology/ContentNegotiationHeader
-
-httpo:ContentNegotiationHeader rdfs:label "HTTP content negotiation header"@en-us ;
-                               
-                               rdfs:subClassOf httpo:Header .
-
-
-
-###  http://lodlaundromat.org/http/ontology/DELETE
-
-httpo:DELETE rdfs:label "DELETE"@en-us ;
-             
-             rdfs:subClassOf httpo:IdempotentMethod ,
-                             httpo:Method ;
-             
-             rdfs:comment "HTTP method for removing all current representations of the target resource."@en-us .
-
-
-
-###  http://lodlaundromat.org/http/ontology/GET
-
-httpo:GET rdfs:label "GET"@en-us ;
-          
-          rdfs:subClassOf httpo:CacheableMethod ,
-                          httpo:SafeMethod ;
-          
-          rdfs:comment "HTTP method for transfering a current representation of the target resource."@en-us .
-
-
-
-###  http://lodlaundromat.org/http/ontology/HEAD
-
-httpo:HEAD rdfs:label "HEAD"@en-us ;
-           
-           rdfs:subClassOf httpo:CacheableMethod ,
-                           httpo:SafeMethod ;
-           
-           rdfs:comment "HTTP method that only transfers the status line and header section of the target resource."@en-us .
-
-
-
-###  http://lodlaundromat.org/http/ontology/Header
-
-httpo:Header rdfs:label "HTTP header"@en-us ;
-             
-             rdfs:subClassOf rdfs:Class ;
-             
-             rdfs:comment "An HTTP header."@en-us .
-
-
-
-###  http://lodlaundromat.org/http/ontology/IdempotentMethod
-
-httpo:IdempotentMethod rdfs:label "HTTP idempotent method"@en-us ;
-                       
-                       rdfs:subClassOf httpo:Method ;
-                       
-                       rdfs:comment "A request method whose intended effect on the server of multiple identical requests with that method is the same as the effect for a single such request."@en-us .
-
-
-
-###  http://lodlaundromat.org/http/ontology/Method
-
-httpo:Method rdfs:label "HTTP method"@en-us ;
-             
-             rdfs:subClassOf rdfs:Class ;
-             
-             rdfs:comment "Indicates the purpose for which the client has made a request and what is expected by the client as a successful result."@en-us .
-
-
-
-###  http://lodlaundromat.org/http/ontology/OPTIONS
-
-httpo:OPTIONS rdfs:label "OPTIONS"@en-us ;
-              
-              rdfs:subClassOf httpo:SafeMethod ;
-              
-              rdfs:comment "HTTP method that describes the communication options for the target resource."@en-us .
-
-
-
-###  http://lodlaundromat.org/http/ontology/POST
-
-httpo:POST rdfs:label "POST"@en-us ;
-           
-           rdfs:subClassOf httpo:CacheableMethod ,
-                           httpo:Method ;
-           
-           rdfs:comment "HTTP method that performs resource-specific processing on the request payload."@en-us .
-
-
-
-###  http://lodlaundromat.org/http/ontology/PUT
-
-httpo:PUT rdfs:label "PUT"@en-us ;
-          
-          rdfs:subClassOf httpo:IdempotentMethod ,
-                          httpo:Method ;
-          
-          rdfs:comment "HTTP method that replaces all current representations of the target resource with the payload."@en-us .
-
-
-
-###  http://lodlaundromat.org/http/ontology/RepresentationHeader
-
-httpo:RepresentationHeader rdfs:label "HTTP representation header"@en-us ;
-                           
-                           rdfs:subClassOf httpo:Header ;
-                           
-                           rdfs:comment "Representation header fields provide metadata about the representation. When a message includes a payload body, the representation header fields describe how to interpret the representation data enclosed in the payload body. In a response to a HEAD request, the representation header fields describe the representation data that would have been enclosed in the payload body if the same request had been a GET."@en-us .
-
-
-
-###  http://lodlaundromat.org/http/ontology/RequestHeader
-
-httpo:RequestHeader rdfs:label "HTTP request header"@en-us ;
-                    
-                    rdfs:subClassOf httpo:Header ;
-                    
-                    rdfs:comment "Request header fields provide metadata about the request context."@en-us .
-
-
-
-###  http://lodlaundromat.org/http/ontology/SafeMethod
-
-httpo:SafeMethod rdfs:label "HTTP safe method"@en-us ;
-                 
-                 rdfs:subClassOf httpo:Method ;
-                 
-                 rdfs:comment "An HTTP method whose defined semantics is essentially read-only."@en-us .
-
-
-
-###  http://lodlaundromat.org/http/ontology/Status
-
-httpo:Status rdfs:label "HTTP status"@en-us ;
-             
-             owl:equivalentClass <http://www.w3.org/2011/http#StatusCode> ;
-             
-             rdfs:subClassOf rdfs:Class ;
-             
-             rdfs:comment "A status that is returned by an HTTP server, indicating whether an HTTP request was handled successfully or not."@en-us .
-
-
-
-###  http://lodlaundromat.org/http/ontology/TRACE
-
-httpo:TRACE rdfs:label "TRACE"@en-us ;
-            
-            rdfs:subClassOf httpo:SafeMethod ;
-            
-            rdfs:comment "HTTP method that performs a message loop-back test along the path to the target resource."@en-us .
-
-
-
-###  http://lodlaundromat.org/http/ontology/1xx
-
-<http://lodlaundromat.org/http/ontology/1xx> rdfs:label "Informational"@en-us ;
-                                             
-                                             rdfs:subClassOf httpo:Status ;
-                                             
-                                             rdfs:comment "An HTTP status that is informational."@en-us .
-
-
-
-###  http://lodlaundromat.org/http/ontology/2xx
-
-<http://lodlaundromat.org/http/ontology/2xx> rdfs:label "Successful"@en-us ;
-                                             
-                                             rdfs:subClassOf httpo:Status ;
-                                             
-                                             rdfs:comment "An HTTP status that is successful."@en-us .
-
-
-
-###  http://lodlaundromat.org/http/ontology/3xx
-
-<http://lodlaundromat.org/http/ontology/3xx> rdfs:label "Redirection"@en-us ;
-                                             
-                                             rdfs:subClassOf httpo:Status ;
-                                             
-                                             rdfs:comment "An HTTP status that is a redirection."@en-us .
-
-
-
-###  http://lodlaundromat.org/http/ontology/4xx
-
-<http://lodlaundromat.org/http/ontology/4xx> rdfs:label "Client Error"@en-us ;
-                                             
-                                             rdfs:subClassOf error:Exception ,
-                                                             httpo:Status ;
-                                             
-                                             rdfs:comment "An HTTP status that is unsuccessful due to a client error."@en-us .
-
-
-
-###  http://lodlaundromat.org/http/ontology/5xx
-
-<http://lodlaundromat.org/http/ontology/5xx> rdfs:label "Server Error"@en-us ;
-                                             
-                                             rdfs:subClassOf error:Exception ,
-                                                             httpo:Status ;
-                                             
-                                             rdfs:comment "An HTTP status that is unsuccessful due to a server error."@en-us .
-
-
-
-###  http://lodlaundromat.org/ontology/Archive
-
-llo:Archive rdf:type owl:Class ;
-            
-            rdfs:label "file archive"@en-us ;
-            
-            rdfs:subClassOf llo:DataDocument ;
-            
-            rdfs:comment "The class of resources that denote a data document that can be unpacked in order to reveal one or more data document entries. These entries are of type ArchiveEntry.Since archives can contain archives, there may be resources that are both Archive and ArchiveEntry."@en-us .
-
-
-
-###  http://lodlaundromat.org/ontology/ArchiveEntry
-
-llo:ArchiveEntry rdf:type owl:Class ;
-                 
-                 rdfs:label "file archive entry"@en-us ;
-                 
-                 rdfs:subClassOf llo:DataDocument ;
-                 
-                 rdfs:comment "The class of resource that denote data documents that are not directly downloaded over the Internet, but that are extracted from another data document. The data document from which the archive entry is extracted is always of type Archive, and can either be of type URL or of type ArchiveEntry."@en-us .
-
-
-
-###  http://lodlaundromat.org/ontology/DataDocument
-
-llo:DataDocument rdf:type owl:Class ;
-                 
-                 rdfs:label "data document"@en-us ;
-                 
-                 rdfs:subClassOf rdfs:Class ;
-                 
-                 rdfs:comment "A data document that is handled by the LOD Laundromat.n Instances of this class are named by using MD5 hashed of the source(s) of the data document. The source of a data document is either its URL, or the pair of (1) the source of the archive from which it was derived, and (2) its entry path within that archive."@en-us .
-
-
-
-###  http://lodlaundromat.org/ontology/URL
-
-llo:URL rdf:type owl:Class ;
-        
-        rdfs:label "URL"@en-us ;
-        
-        rdfs:subClassOf llo:DataDocument ;
-        
-        rdfs:comment "The class of resources denoting data documents that are directly downloaded over the Internet.Such URLs are always added as seed points to the LOD Basket, via an HTTP SEND request to the LOD Basket endpoint.These requests can be performed either by (1) a bash script we use to initialize the LOD Laundromat, (2) the procedure the LOD Washing Machine cleaning process uses to extract VoID datadump locations, and (3) human input, delivered through the HTML form at the LOD Laundromat dissemination Website."@en-us .
-
-
-
-###  http://www.w3.org/1999/02/22-rdf-syntax-ns#List
-
-rdf:List rdf:type owl:Class .
-
-
-
-###  http://www.w3.org/2011/http#StatusCode
-
-
-
-
-
-
-#################################################################
-#
-#    Individuals
-#
-#################################################################
-
-
-###  http://lodlaundromat.org/error/ontology/DirectoryExistenceError
-
-error:DirectoryExistenceError error:code "17"^^xsd:nonNegativeInteger ;
-                              
-                              error:variableName "EXIST"^^xsd:string ;
-                              
-                              error:message "File exists"^^xsd:string .
-
-
-
-###  http://lodlaundromat.org/error/ontology/DirectoryNotEmptyError
-
-error:DirectoryNotEmptyError error:code "39"^^xsd:nonNegativeInteger ;
-                             
-                             error:message "Directory not empty"^^xsd:string ;
-                             
-                             error:variableName "ENOTEMPTY"^^xsd:string .
-
-
-
-###  http://lodlaundromat.org/error/ontology/ExistenceError
-
-error:ExistenceError error:code "2"^^xsd:nonNegativeInteger ;
-                     
-                     error:variableName "ENOENT"^^xsd:string ;
-                     
-                     error:message "No such file or directory"^^xsd:string .
-
-
-
-###  http://lodlaundromat.org/error/ontology/IsADirectoryError
-
-error:IsADirectoryError error:code "21"^^xsd:nonNegativeInteger ;
-                        
-                        error:variableName "EISDIR"^^xsd:string ;
-                        
-                        error:message "Is a directory"^^xsd:string .
-
-
-
-###  http://lodlaundromat.org/error/ontology/connectionRefused
-
-error:connectionRefused rdf:type error:SocketError ;
-                        
-                        error:code "111"^^xsd:nonNegativeInteger ;
-                        
-                        error:message "Connection refused"^^xsd:string ;
-                        
-                        error:variableName "ECONNREFUSED"^^xsd:string .
-
-
-
-###  http://lodlaundromat.org/error/ontology/connectionResetByPeer
-
-error:connectionResetByPeer rdf:type error:ExistenceError ,
-                                     error:ReadError ,
-                                     error:SocketError ;
-                            
-                            error:code "104"^^xsd:nonNegativeInteger ;
-                            
-                            error:message "Connection reset by peer"^^xsd:string ;
-                            
-                            error:variableName "ECONNRESET"^^xsd:string .
-
-
-
-###  http://lodlaundromat.org/error/ontology/connectionTimedOut
-
-error:connectionTimedOut rdf:type error:SocketError ;
-                         
-                         error:code "110"^^xsd:nonNegativeInteger ;
-                         
-                         error:message "Connection timed out"^^xsd:string ;
-                         
-                         error:variableName "ETIMEDOUT"^^xsd:string .
-
-
-
-###  http://lodlaundromat.org/error/ontology/encodingError
-
-error:encodingError rdf:type error:WriteError ;
-                    
-                    rdfs:label "encoding error"@en-us ;
-                    
-                    rdfs:comment "Encoding cannot represent character."@en-us .
-
-
-
-###  http://lodlaundromat.org/error/ontology/hostNotFound
-
-error:hostNotFound rdf:type error:SocketError ;
-                   
-                   rdfs:label "Host not found"@en-us .
-
-
-
-###  http://lodlaundromat.org/error/ontology/illegalUtf8Continuation
-
-error:illegalUtf8Continuation rdf:type error:ReadError ;
-                              
-                              rdfs:label "illegal UTF-8 continuation"@en-us ;
-                              
-                              rdfs:comment "Illegal UTF-8 continuation."@en-us .
-
-
-
-###  http://lodlaundromat.org/error/ontology/illegalUtf8Start
-
-error:illegalUtf8Start rdf:type error:ReadError ;
-                       
-                       rdfs:label "illegal UTF-8 start"@en-us ;
-                       
-                       rdfs:comment "Illegal UTF-8 start."@en-us .
-
-
-
-###  http://lodlaundromat.org/error/ontology/invalidCentralDirectorySignature
-
-error:invalidCentralDirectorySignature rdf:type error:ArchiveError ;
-                                       
-                                       error:code "25"^^xsd:nonNegativeInteger ;
-                                       
-                                       error:message "Invalid central directory signature."^^xsd:string .
-
-
-
-###  http://lodlaundromat.org/error/ontology/isADirectory
-
-error:isADirectory rdf:type error:ReadError ;
-                   
-                   rdfs:label "is a directory"@en-us ;
-                   
-                   error:code "21"^^xsd:nonNegativeInteger ;
-                   
-                   error:variableName "EISDIR"^^xsd:string ;
-                   
-                   error:message "Is a directory"^^xsd:string ;
-                   
-                   rdfs:comment "???"@en-us .
-
-
-
-###  http://lodlaundromat.org/error/ontology/missingTypeKeywordInMtreeSpec
-
-error:missingTypeKeywordInMtreeSpec rdf:type error:ArchiveError ;
-                                    
-                                    error:code "2"^^xsd:nonNegativeInteger ;
-                                    
-                                    error:message "Missing type keyword in mtree specification."^^xsd:string .
-
-
-
-###  http://lodlaundromat.org/error/ontology/noData
-
-error:noData rdf:type error:SocketError ;
-             
-             rdfs:label "No data"@en-us ;
-             
-             error:code "61"^^xsd:nonNegativeInteger ;
-             
-             error:variableName "ENODATA"^^xsd:string ;
-             
-             error:message "No data available"^^xsd:string .
-
-
-
-###  http://lodlaundromat.org/error/ontology/noRouteToHost
-
-error:noRouteToHost rdf:type error:SocketError ;
-                    
-                    error:code "113"^^xsd:nonNegativeInteger ;
-                    
-                    error:variableName "EHOSTUNREACH"^^xsd:string ;
-                    
-                    error:message "No route to host"^^xsd:string .
-
-
-
-###  http://lodlaundromat.org/error/ontology/notATypewriter
-
-error:notATypewriter rdf:type error:ReadError ;
-                     
-                     rdfs:label "not a typewriter"@en-us ;
-                     
-                     error:code "25"^^xsd:nonNegativeInteger ;
-                     
-                     error:variableName "ENOTTY"^^xsd:string ;
-                     
-                     error:message "Inappropriate ioctl for device"^^xsd:string ;
-                     
-                     rdfs:comment "Inappropriate input/output control for device."@en-us .
-
-
-
-###  http://lodlaundromat.org/error/ontology/readTimeoutError
-
-error:readTimeoutError rdf:type error:TimeoutError ;
-                       
-                       rdfs:label "read timeout error"@en-us ;
-                       
-                       rdfs:comment "Timeout occurs while reading"@en-us .
-
-
-
-###  http://lodlaundromat.org/error/ontology/redirectAction
-
-error:redirectAction rdf:type error:Action ;
-                     
-                     rdfs:label "redirect action"@en-us ;
-                     
-                     rdfs:comment "A rediraction action."@en-us .
-
-
-
-###  http://lodlaundromat.org/error/ontology/sslError
-
-error:sslError rdf:type error:Error ;
-               
-               rdfs:label "SSL error"@en-us ;
-               
-               rdfs:comment "SSL error"@en-us .
-
-
-
-###  http://lodlaundromat.org/error/ontology/tryAgain
-
-error:tryAgain rdf:type error:SocketError ;
-               
-               rdfs:label "Try again"@en-us .
-
-
-
-###  http://lodlaundromat.org/error/ontology/unrecognizedFormat
-
-error:unrecognizedFormat rdf:type rdfs:Resource ,
-                                  owl:NamedIndividual ;
-                         
-                         rdfs:label "unrecognized format"@en-us ;
-                         
-                         rdfs:comment "A syntactic format that is not recognized as any of the RDF serialization formats."@en-us .
-
-
-
-###  http://lodlaundromat.org/http/ontology/Accept
-
-httpo:Accept rdf:type httpo:ContentNegotiationHeader ;
-             
-             rdfs:label "Accept"@en-us .
-
-
-
-###  http://lodlaundromat.org/http/ontology/Accept-Charset
-
-httpo:Accept-Charset rdf:type httpo:ContentNegotiationHeader ;
-                     
-                     rdfs:label "Accept-Charset"@en-us .
-
-
-
-###  http://lodlaundromat.org/http/ontology/Accept-Encoding
-
-httpo:Accept-Encoding rdf:type httpo:ContentNegotiationHeader ;
-                      
-                      rdfs:label "Accept-Encoding"@en-us .
-
-
-
-###  http://lodlaundromat.org/http/ontology/Accept-Language
-
-httpo:Accept-Language rdf:type httpo:ContentNegotiationHeader ;
-                      
-                      rdfs:label "Accept-Language"@en-us .
-
-
-
-###  http://lodlaundromat.org/http/ontology/Cache-Control
-
-httpo:Cache-Control rdf:type httpo:RequestHeader ;
-                    
-                    rdfs:label "Cache-Control"@en-us .
-
-
-
-###  http://lodlaundromat.org/http/ontology/Content-Encoding
-
-httpo:Content-Encoding rdf:type httpo:RepresentationHeader ;
-                       
-                       rdfs:label "Content-Encoding"@en-us .
-
-
-
-###  http://lodlaundromat.org/http/ontology/Content-Language
-
-httpo:Content-Language rdf:type httpo:RepresentationHeader ;
-                       
-                       rdfs:label "Content-Language"@en-us .
-
-
-
-###  http://lodlaundromat.org/http/ontology/Content-Length
-
-httpo:Content-Length rdf:type httpo:PayloadHeader ;
-                     
-                     rdfs:label "Content-Length"@en-us .
-
-
-
-###  http://lodlaundromat.org/http/ontology/Content-Location
-
-httpo:Content-Location rdf:type httpo:RepresentationHeader ;
-                       
-                       rdfs:label "Content-Location"@en-us .
-
-
-
-###  http://lodlaundromat.org/http/ontology/Content-Range
-
-httpo:Content-Range rdf:type httpo:PayloadHeader ;
-                    
-                    rdfs:label "Content-Range"@en-us .
-
-
-
-###  http://lodlaundromat.org/http/ontology/Content-Type
-
-httpo:Content-Type rdf:type httpo:RepresentationHeader ;
-                   
-                   rdfs:label "Content-Type"@en-us .
-
-
-
-###  http://lodlaundromat.org/http/ontology/Expect
-
-httpo:Expect rdf:type httpo:RequestHeader ;
-             
-             rdfs:label "Expect"@en-us ;
-             
-             rdfs:comment "Indication from a client that a certain set of behaviors (expectations) need to be supported by the server in order to properly handle the request."@en-us .
-
-
-
-###  http://lodlaundromat.org/http/ontology/Host
-
-httpo:Host rdf:type httpo:RequestHeader ;
-           
-           rdfs:label "Host"@en-us .
-
-
-
-###  http://lodlaundromat.org/http/ontology/If-Match
-
-httpo:If-Match rdf:type httpo:ConditionalHeader ;
-               
-               rdfs:label "If-Match"@en-us .
-
-
-
-###  http://lodlaundromat.org/http/ontology/If-Modified-Since
-
-httpo:If-Modified-Since rdf:type httpo:ConditionalHeader ;
-                        
-                        rdfs:label "If-Modified-Since"@en-us .
-
-
-
-###  http://lodlaundromat.org/http/ontology/If-None-Match
-
-httpo:If-None-Match rdf:type httpo:ConditionalHeader ;
-                    
-                    rdfs:label "If-None-Match"@en-us .
-
-
-
-###  http://lodlaundromat.org/http/ontology/If-Range
-
-httpo:If-Range rdf:type httpo:ConditionalHeader ;
-               
-               rdfs:label "If-Range"@en-us .
-
-
-
-###  http://lodlaundromat.org/http/ontology/If-Unmodified-Since
-
-httpo:If-Unmodified-Since rdf:type httpo:ConditionalHeader ;
-                          
-                          rdfs:label "If-Unmodified-Since"@en-us .
-
-
-
-###  http://lodlaundromat.org/http/ontology/Max-Forwards
-
-httpo:Max-Forwards rdf:type httpo:RequestHeader ;
-                   
-                   rdfs:label "Max-Forwards"@en-us ;
-                   
-                   rdfs:comment "Mechanism for limiting the number of times a request is forwarded by proxies.Only supported for the OPTIONS and TRACE methods."@en-us .
-
-
-
-###  http://lodlaundromat.org/http/ontology/PayloadHeader
-
-httpo:PayloadHeader rdf:type httpo:Header .
-
-
-
-###  http://lodlaundromat.org/http/ontology/Pragma
-
-httpo:Pragma rdf:type httpo:RequestHeader ;
-             
-             rdfs:label "Pragma"@en-us .
-
-
-
-###  http://lodlaundromat.org/http/ontology/Range
-
-httpo:Range rdf:type httpo:RequestHeader ;
-            
-            rdfs:label "Range"@en-us .
-
-
-
-###  http://lodlaundromat.org/http/ontology/TE
-
-httpo:TE rdf:type httpo:RequestHeader ;
-         
-         rdfs:label "TE"@en-us .
-
-
-
-###  http://lodlaundromat.org/http/ontology/Trailer
-
-httpo:Trailer rdf:type httpo:PayloadHeader ;
-              
-              rdfs:label "Trailer"@en-us .
-
-
-
-###  http://lodlaundromat.org/http/ontology/Transfer-Encoding
-
-httpo:Transfer-Encoding rdf:type httpo:PayloadHeader ;
-                        
-                        rdfs:label "Transfer-Encoding"@en-us .
-
-
-
-###  http://lodlaundromat.org/http/ontology/100
-
-<http://lodlaundromat.org/http/ontology/100> rdf:type <http://lodlaundromat.org/http/ontology/1xx> ;
-                                             
-                                             rdfs:label "Continue"@en-us ;
-                                             
-                                             httpo:statusCode 100 ;
-                                             
-                                             httpo:reasonPhrase "Continue"^^xsd:string ;
-                                             
-                                             rdfs:comment "Indicates that the initial part of a request has been received and has not yet been rejected by the server. The server intends to send a final response after the request has been fully received and acted upon."@en-us ;
-                                             
-                                             rdfs:isDefinedBy <http://tools.ietf.org/html/rfc7231> .
-
-
-
-###  http://lodlaundromat.org/http/ontology/101
-
-<http://lodlaundromat.org/http/ontology/101> rdf:type <http://lodlaundromat.org/http/ontology/1xx> ;
-                                             
-                                             rdfs:label "Switching Protocols"@en-us ;
-                                             
-                                             httpo:statusCode 101 ;
-                                             
-                                             httpo:reasonPhrase "Switching Protocols"^^xsd:string ;
-                                             
-                                             rdfs:comment "Indicates that the server understands and is willing to comply with the client's request, via the Upgrade header field for a change in the application protocol being used on this connection."@en-us ;
-                                             
-                                             rdfs:isDefinedBy <http://tools.ietf.org/html/rfc7231> .
-
-
-
-###  http://lodlaundromat.org/http/ontology/200
-
-<http://lodlaundromat.org/http/ontology/200> rdf:type <http://lodlaundromat.org/http/ontology/2xx> ;
-                                             
-                                             rdfs:label "OK"@en-us ;
-                                             
-                                             httpo:statusCode 200 ;
-                                             
-                                             httpo:reasonPhrase "OK"^^xsd:string ;
-                                             
-                                             rdfs:comment "Indicates that the request has succeeded."@en-us ;
-                                             
-                                             rdfs:isDefinedBy <http://tools.ietf.org/html/rfc7231> .
-
-
-
-###  http://lodlaundromat.org/http/ontology/201
-
-<http://lodlaundromat.org/http/ontology/201> rdf:type <http://lodlaundromat.org/http/ontology/2xx> ;
-                                             
-                                             rdfs:label "Created"@en-us ;
-                                             
-                                             httpo:statusCode 201 ;
-                                             
-                                             httpo:reasonPhrase "Created"^^xsd:string ;
-                                             
-                                             rdfs:comment "Indicates that the request has been fulfilled and has resulted in one or more new resources being created."@en-us ;
-                                             
-                                             rdfs:isDefinedBy <http://tools.ietf.org/html/rfc7231> .
-
-
-
-###  http://lodlaundromat.org/http/ontology/202
-
-<http://lodlaundromat.org/http/ontology/202> rdf:type <http://lodlaundromat.org/http/ontology/2xx> ;
-                                             
-                                             rdfs:label "Accepted"@en-us ;
-                                             
-                                             httpo:statusCode 202 ;
-                                             
-                                             httpo:reasonPhrase "Accepted"^^xsd:string ;
-                                             
-                                             rdfs:comment "Indicates that the request has been accepted for processing, but the processing has not been completed."@en-us ;
-                                             
-                                             rdfs:isDefinedBy <http://tools.ietf.org/html/rfc7231> .
-
-
-
-###  http://lodlaundromat.org/http/ontology/203
-
-<http://lodlaundromat.org/http/ontology/203> rdf:type <http://lodlaundromat.org/http/ontology/2xx> ;
-                                             
-                                             rdfs:label "Non-Authoritative Information"@en-us ;
-                                             
-                                             httpo:statusCode 203 ;
-                                             
-                                             httpo:reasonPhrase "Non-Authoritative Information"^^xsd:string ;
-                                             
-                                             rdfs:comment "Indicates that the request was successful but the enclosed payload has been modified from that of the origin server's 200 (OK) response by a transforming proxy."@en-us ;
-                                             
-                                             rdfs:isDefinedBy <http://tools.ietf.org/html/rfc7231> .
-
-
-
-###  http://lodlaundromat.org/http/ontology/204
-
-<http://lodlaundromat.org/http/ontology/204> rdf:type <http://lodlaundromat.org/http/ontology/2xx> ;
-                                             
-                                             rdfs:label "No Content"@en-us ;
-                                             
-                                             httpo:statusCode 204 ;
-                                             
-                                             httpo:reasonPhrase "No Content"^^xsd:string ;
-                                             
-                                             rdfs:comment "Indicates that the server has successfully fulfilled the request and that there is no additional content to send in the response payload body."@en-us ;
-                                             
-                                             rdfs:isDefinedBy <http://tools.ietf.org/html/rfc7231> .
-
-
-
-###  http://lodlaundromat.org/http/ontology/205
-
-<http://lodlaundromat.org/http/ontology/205> rdf:type <http://lodlaundromat.org/http/ontology/2xx> ;
-                                             
-                                             rdfs:label "Reset Content"@en-us ;
-                                             
-                                             httpo:statusCode 205 ;
-                                             
-                                             httpo:reasonPhrase "Reset Content"^^xsd:string ;
-                                             
-                                             rdfs:comment "Indicates that the server has fulfilled the request and desires that the user agent reset the \"document view\", which caused the request to be sent, to its original state as received from the origin server."@en-us ;
-                                             
-                                             rdfs:isDefinedBy <http://tools.ietf.org/html/rfc7231> .
-
-
-
-###  http://lodlaundromat.org/http/ontology/300
-
-<http://lodlaundromat.org/http/ontology/300> rdf:type <http://lodlaundromat.org/http/ontology/3xx> ;
-                                             
-                                             rdfs:label "Multiple Choices"@en-us ;
-                                             
-                                             httpo:statusCode 300 ;
-                                             
-                                             httpo:reasonPhrase "Multiple Choices"^^xsd:string ;
-                                             
-                                             rdfs:comment "Indicates that the target resource has more than one representation, each with its own more specific identifier, and information about the alternatives is being provided so that the user (or user agent) can select a preferred representation by redirecting its request to one or more of those identifiers."@en-us ;
-                                             
-                                             rdfs:isDefinedBy <http://tools.ietf.org/html/rfc7231> .
-
-
-
-###  http://lodlaundromat.org/http/ontology/301
-
-<http://lodlaundromat.org/http/ontology/301> rdf:type <http://lodlaundromat.org/http/ontology/3xx> ;
-                                             
-                                             rdfs:label "Moved Permanently"@en-us ;
-                                             
-                                             httpo:statusCode 301 ;
-                                             
-                                             httpo:reasonPhrase "Moved Permanently"^^xsd:string ;
-                                             
-                                             rdfs:comment "Indicates that the target resource has been assigned a new permanent URI and any future references to this resource ought to use one of the enclosed URIs."@en-us ;
-                                             
-                                             rdfs:isDefinedBy <http://tools.ietf.org/html/rfc7231> .
-
-
-
-###  http://lodlaundromat.org/http/ontology/302
-
-<http://lodlaundromat.org/http/ontology/302> rdf:type <http://lodlaundromat.org/http/ontology/3xx> ;
-                                             
-                                             rdfs:label "Found"@en-us ;
-                                             
-                                             httpo:statusCode 302 ;
-                                             
-                                             httpo:reasonPhrase "Found"^^xsd:string ;
-                                             
-                                             rdfs:comment "Indicates that the target resource resides temporarily under a different URI."@en-us ;
-                                             
-                                             rdfs:isDefinedBy <http://tools.ietf.org/html/rfc7231> .
-
-
-
-###  http://lodlaundromat.org/http/ontology/303
-
-<http://lodlaundromat.org/http/ontology/303> rdf:type <http://lodlaundromat.org/http/ontology/3xx> ;
-                                             
-                                             rdfs:label "See Other"@en-us ;
-                                             
-                                             httpo:statusCode 303 ;
-                                             
-                                             httpo:reasonPhrase "See Other"^^xsd:string ;
-                                             
-                                             rdfs:comment "Indicates that the server is redirecting the user agent to a different resource, as indicated by a URI in the Location header field, which is intended to provide an indirect response to the original request."@en-us ;
-                                             
-                                             rdfs:isDefinedBy <http://tools.ietf.org/html/rfc7231> .
-
-
-
-###  http://lodlaundromat.org/http/ontology/305
-
-<http://lodlaundromat.org/http/ontology/305> rdf:type <http://lodlaundromat.org/http/ontology/3xx> ;
-                                             
-                                             rdfs:label "Use Proxy"@en-us ;
-                                             
-                                             httpo:statusCode 305 ;
-                                             
-                                             httpo:reasonPhrase "Use Proxy"^^xsd:string ;
-                                             
-                                             rdfs:comment "The requested resource MUST be accessed through the proxy given by the Location field."@en-us ;
-                                             
-                                             rdfs:isDefinedBy <httpo://tools.ietf.org/html/rfc2616> .
-
-
-
-###  http://lodlaundromat.org/http/ontology/306
-
-<http://lodlaundromat.org/http/ontology/306> rdf:type <http://lodlaundromat.org/http/ontology/3xx> ;
-                                             
-                                             rdfs:label "Unused"@en-us ;
-                                             
-                                             httpo:statusCode 306 ;
-                                             
-                                             httpo:reasonPhrase "Unused"^^xsd:string ;
-                                             
-                                             rdfs:comment "Subsequent requests should use the specified proxy."@en-us ;
-                                             
-                                             rdfs:isDefinedBy <https://tools.ietf.org/html/draft-cohen-http-305-306-responses-00> .
-
-
-
-###  http://lodlaundromat.org/http/ontology/307
-
-<http://lodlaundromat.org/http/ontology/307> rdf:type <http://lodlaundromat.org/http/ontology/3xx> ;
-                                             
-                                             rdfs:label "Temporary Redirect"@en-us ;
-                                             
-                                             httpo:statusCode 307 ;
-                                             
-                                             httpo:reasonPhrase "Temporary Redirect"^^xsd:string ;
-                                             
-                                             rdfs:comment "Indicates that the target resource resides temporarily under a different URI and the user agent MUST NOT change the request method if it performs an automatic redirection to that URI."@en-us ;
-                                             
-                                             rdfs:isDefinedBy <http://tools.ietf.org/html/rfc7231> .
-
-
-
-###  http://lodlaundromat.org/http/ontology/308
-
-<http://lodlaundromat.org/http/ontology/308> rdf:type <http://lodlaundromat.org/http/ontology/3xx> ;
-                                             
-                                             rdfs:label "Permanent Redirect"@en-us ;
-                                             
-                                             httpo:statusCode 308 ;
-                                             
-                                             httpo:reasonPhrase "Permanent Redirect"^^xsd:string ;
-                                             
-                                             rdfs:comment "The request, and all future requests should be repeated using another URI."@en-us ;
-                                             
-                                             rdfs:isDefinedBy <httpo://tools.ietf.org/html/rfc7238> .
-
-
-
-###  http://lodlaundromat.org/http/ontology/400
-
-<http://lodlaundromat.org/http/ontology/400> rdf:type <http://lodlaundromat.org/http/ontology/4xx> ;
-                                             
-                                             rdfs:label "Bad Request"@en-us ;
-                                             
-                                             httpo:statusCode 400 ;
-                                             
-                                             httpo:reasonPhrase "Bad Request"^^xsd:string ;
-                                             
-                                             rdfs:comment "Indicates that the server cannot or will not process the request due to something that is perceived to be a client error."@en-us ;
-                                             
-                                             rdfs:isDefinedBy <http://tools.ietf.org/html/rfc7231> .
-
-
-
-###  http://lodlaundromat.org/http/ontology/402
-
-<http://lodlaundromat.org/http/ontology/402> rdf:type <http://lodlaundromat.org/http/ontology/4xx> ;
-                                             
-                                             rdfs:label "Payment Required"@en-us ;
-                                             
-                                             httpo:statusCode 402 ;
-                                             
-                                             httpo:reasonPhrase "Payment Required"^^xsd:string ;
-                                             
-                                             rdfs:comment "Reserved for future use."@en-us ;
-                                             
-                                             rdfs:isDefinedBy <http://tools.ietf.org/html/rfc7231> .
-
-
-
-###  http://lodlaundromat.org/http/ontology/403
-
-<http://lodlaundromat.org/http/ontology/403> rdf:type <http://lodlaundromat.org/http/ontology/4xx> ;
-                                             
-                                             rdfs:label "Forbidden"@en-us ;
-                                             
-                                             httpo:statusCode 403 ;
-                                             
-                                             httpo:reasonPhrase "Forbidden"^^xsd:string ;
-                                             
-                                             rdfs:comment "Indicates that the server understood the request but refuses to authorize it."@en-us ;
-                                             
-                                             rdfs:isDefinedBy <http://tools.ietf.org/html/rfc7231> .
-
-
-
-###  http://lodlaundromat.org/http/ontology/404
-
-<http://lodlaundromat.org/http/ontology/404> rdf:type <http://lodlaundromat.org/http/ontology/4xx> ;
-                                             
-                                             rdfs:label "Not Found"@en-us ;
-                                             
-                                             httpo:statusCode 404 ;
-                                             
-                                             httpo:reasonPhrase "Not Found"^^xsd:string ;
-                                             
-                                             rdfs:comment "Indicates that the origin server did not find a current representation for the target resource or is not willing to disclose that one exists."@en-us ;
-                                             
-                                             rdfs:isDefinedBy <http://tools.ietf.org/html/rfc7231> .
-
-
-
-###  http://lodlaundromat.org/http/ontology/405
-
-<http://lodlaundromat.org/http/ontology/405> rdf:type <http://lodlaundromat.org/http/ontology/4xx> ;
-                                             
-                                             rdfs:label "Method Not Allowed"@en-us ;
-                                             
-                                             httpo:statusCode 405 ;
-                                             
-                                             httpo:reasonPhrase "Method Not Allowed"^^xsd:string ;
-                                             
-                                             rdfs:comment "Indicates that the method received in the request-line is known by the origin server but not supported by the target resource."@en-us ;
-                                             
-                                             rdfs:isDefinedBy <http://tools.ietf.org/html/rfc7231> .
-
-
-
-###  http://lodlaundromat.org/http/ontology/406
-
-<http://lodlaundromat.org/http/ontology/406> rdf:type <http://lodlaundromat.org/http/ontology/4xx> ;
-                                             
-                                             rdfs:label "Not Acceptable"@en-us ;
-                                             
-                                             httpo:statusCode 406 ;
-                                             
-                                             httpo:reasonPhrase "Not Acceptable"^^xsd:string ;
-                                             
-                                             rdfs:comment "Indicates that the target resource does not have a current representation that would be acceptable to the user agent, according to the proactive negotiation header fields received in the request, and the server is unwilling to supply a default representation."@en-us ;
-                                             
-                                             rdfs:isDefinedBy <http://tools.ietf.org/html/rfc7231> .
-
-
-
-###  http://lodlaundromat.org/http/ontology/408
-
-<http://lodlaundromat.org/http/ontology/408> rdf:type <http://lodlaundromat.org/http/ontology/4xx> ;
-                                             
-                                             rdfs:label "Request Timeout"@en-us ;
-                                             
-                                             httpo:statusCode 408 ;
-                                             
-                                             httpo:reasonPhrase "Request Timeout"^^xsd:string ;
-                                             
-                                             rdfs:comment "Indicates that the server did not receive a complete request message within the time that it was prepared to wait."@en-us ;
-                                             
-                                             rdfs:isDefinedBy <http://tools.ietf.org/html/rfc7231> .
-
-
-
-###  http://lodlaundromat.org/http/ontology/409
-
-<http://lodlaundromat.org/http/ontology/409> rdf:type <http://lodlaundromat.org/http/ontology/4xx> ;
-                                             
-                                             rdfs:label "Conflict"@en-us ;
-                                             
-                                             httpo:statusCode 409 ;
-                                             
-                                             httpo:reasonPhrase "Conflict"^^xsd:string ;
-                                             
-                                             rdfs:comment "Indicates that the request could not be completed due to a conflict with the current state of the target resource."@en-us ;
-                                             
-                                             rdfs:isDefinedBy <http://tools.ietf.org/html/rfc7231> .
-
-
-
-###  http://lodlaundromat.org/http/ontology/410
-
-<http://lodlaundromat.org/http/ontology/410> rdf:type <http://lodlaundromat.org/http/ontology/4xx> ;
-                                             
-                                             rdfs:label "Gone"@en-us ;
-                                             
-                                             httpo:statusCode 410 ;
-                                             
-                                             httpo:reasonPhrase "Gone"^^xsd:string ;
-                                             
-                                             rdfs:comment "Indicates that access to the target resource is no longer available at the origin server and that this condition is likely to be permanent."@en-us ;
-                                             
-                                             rdfs:isDefinedBy <http://tools.ietf.org/html/rfc7231> .
-
-
-
-###  http://lodlaundromat.org/http/ontology/411
-
-<http://lodlaundromat.org/http/ontology/411> rdf:type <http://lodlaundromat.org/http/ontology/4xx> ;
-                                             
-                                             rdfs:label "Length Required"@en-us ;
-                                             
-                                             httpo:statusCode 411 ;
-                                             
-                                             httpo:reasonPhrase "Length Required"^^xsd:string ;
-                                             
-                                             rdfs:comment "Indicates that the server refuses to accept the request without a defined Content-Length."@en-us ;
-                                             
-                                             rdfs:isDefinedBy <http://tools.ietf.org/html/rfc7231> .
-
-
-
-###  http://lodlaundromat.org/http/ontology/413
-
-<http://lodlaundromat.org/http/ontology/413> rdf:type <http://lodlaundromat.org/http/ontology/4xx> ;
-                                             
-                                             rdfs:label "Payload Too Large"@en-us ;
-                                             
-                                             httpo:statusCode 413 ;
-                                             
-                                             httpo:reasonPhrase "Payload Too Large"^^xsd:string ;
-                                             
-                                             rdfs:comment "Indicates that the server is refusing to process a request because the request payload is larger than the server is willing or able to process."@en-us ;
-                                             
-                                             rdfs:isDefinedBy <http://tools.ietf.org/html/rfc7231> .
-
-
-
-###  http://lodlaundromat.org/http/ontology/414
-
-<http://lodlaundromat.org/http/ontology/414> rdf:type <http://lodlaundromat.org/http/ontology/4xx> ;
-                                             
-                                             rdfs:label "URI Too Long"@en-us ;
-                                             
-                                             httpo:statusCode 414 ;
-                                             
-                                             httpo:reasonPhrase "URI Too Long"^^xsd:string ;
-                                             
-                                             rdfs:comment "Indicates that the server is refusing to service the request because the request-target is longer than the server is willing to interpret."@en-us ;
-                                             
-                                             rdfs:isDefinedBy <http://tools.ietf.org/html/rfc7231> .
-
-
-
-###  http://lodlaundromat.org/http/ontology/415
-
-<http://lodlaundromat.org/http/ontology/415> rdf:type <http://lodlaundromat.org/http/ontology/4xx> ;
-                                             
-                                             rdfs:label "Unsupported Media Type"@en-us ;
-                                             
-                                             httpo:statusCode 415 ;
-                                             
-                                             httpo:reasonPhrase "Unsupported Media Type"^^xsd:string ;
-                                             
-                                             rdfs:comment "Indicates that the origin server is refusing to service the request because the payload is in a format not supported by this method on the target resource."@en-us ;
-                                             
-                                             rdfs:isDefinedBy <http://tools.ietf.org/html/rfc7231> .
-
-
-
-###  http://lodlaundromat.org/http/ontology/417
-
-<http://lodlaundromat.org/http/ontology/417> rdf:type <http://lodlaundromat.org/http/ontology/4xx> ;
-                                             
-                                             rdfs:label "Expectation Failed"@en-us ;
-                                             
-                                             httpo:statusCode 417 ;
-                                             
-                                             httpo:reasonPhrase "Expectation Failed"^^xsd:string ;
-                                             
-                                             rdfs:comment "Indicates that the expectation given in the request's Expect header field could not be met by at least one of the inbound servers."@en-us ;
-                                             
-                                             rdfs:isDefinedBy <http://tools.ietf.org/html/rfc7231> .
-
-
-
-###  http://lodlaundromat.org/http/ontology/426
-
-<http://lodlaundromat.org/http/ontology/426> rdf:type <http://lodlaundromat.org/http/ontology/4xx> ;
-                                             
-                                             rdfs:label "Upgrade Required"@en-us ;
-                                             
-                                             httpo:statusCode 426 ;
-                                             
-                                             httpo:reasonPhrase "Upgrade Required"^^xsd:string ;
-                                             
-                                             rdfs:comment "Indicates that the server refuses to perform the request using the current protocol but might be willing to do so after the client upgrades to a different protocol."@en-us ;
-                                             
-                                             rdfs:isDefinedBy <http://tools.ietf.org/html/rfc7231> .
-
-
-
-###  http://lodlaundromat.org/http/ontology/501
-
-<http://lodlaundromat.org/http/ontology/501> rdf:type <http://lodlaundromat.org/http/ontology/5xx> ;
-                                             
-                                             rdfs:label "Not Implemented"@en-us ;
-                                             
-                                             httpo:statusCode 501 ;
-                                             
-                                             httpo:reasonPhrase "Not Implemented"^^xsd:string ;
-                                             
-                                             rdfs:comment "Indicates that the server does not support the functionality required to fulfill the request."@en-us ;
-                                             
-                                             rdfs:isDefinedBy <http://tools.ietf.org/html/rfc7231> .
-
-
-
-###  http://lodlaundromat.org/http/ontology/502
-
-<http://lodlaundromat.org/http/ontology/502> rdf:type <http://lodlaundromat.org/http/ontology/5xx> ;
-                                             
-                                             rdfs:label "Bad Gateway"@en-us ;
-                                             
-                                             httpo:statusCode 502 ;
-                                             
-                                             httpo:reasonPhrase "Bad Gateway"^^xsd:string ;
-                                             
-                                             rdfs:comment "Indicates that the server, while acting as a gateway or proxy, received an invalid response from an inbound server it accessed while attempting to fulfill the request."@en-us ;
-                                             
-                                             rdfs:isDefinedBy <http://tools.ietf.org/html/rfc7231> .
-
-
-
-###  http://lodlaundromat.org/http/ontology/503
-
-<http://lodlaundromat.org/http/ontology/503> rdf:type <http://lodlaundromat.org/http/ontology/5xx> ;
-                                             
-                                             rdfs:label "Service Unavailable"@en-us ;
-                                             
-                                             httpo:statusCode 503 ;
-                                             
-                                             httpo:reasonPhrase "Service Unavailable"^^xsd:string ;
-                                             
-                                             rdfs:comment "Indicates that the server is currently unable to handle the request due to a temporary overload or scheduled maintenance, which will likely be alleviated after some delay."@en-us ;
-                                             
-                                             rdfs:isDefinedBy <http://tools.ietf.org/html/rfc7231> .
-
-
-
-###  http://lodlaundromat.org/http/ontology/504
-
-<http://lodlaundromat.org/http/ontology/504> rdf:type <http://lodlaundromat.org/http/ontology/5xx> ;
-                                             
-                                             rdfs:label "Gateway Timeout"@en-us ;
-                                             
-                                             httpo:statusCode 504 ;
-                                             
-                                             httpo:reasonPhrase "Gateway Timeout"^^xsd:string ;
-                                             
-                                             rdfs:comment "Indicates that the server, while acting as a gateway or proxy, did not receive a timely response from an upstream server it needed to access in order to complete the request."@en-us ;
-                                             
-                                             rdfs:isDefinedBy <http://tools.ietf.org/html/rfc7231> .
-
-
-
-###  http://lodlaundromat.org/http/ontology/505
-
-<http://lodlaundromat.org/http/ontology/505> rdf:type <http://lodlaundromat.org/http/ontology/5xx> ;
-                                             
-                                             rdfs:label "HTTP Version Not Supported"@en-us ;
-                                             
-                                             httpo:statusCode 505 ;
-                                             
-                                             httpo:reasonPhrase "HTTP Version Not Supported"^^xsd:string ;
-                                             
-                                             rdfs:comment "Indicates that the server does not support, or refuses to support, the major version of HTTP that was used in the request message."@en-us ;
-                                             
-                                             rdfs:isDefinedBy <http://tools.ietf.org/html/rfc7231> .
-
-
-
-###  http://lodlaundromat.org/ontology/
-
-<http://lodlaundromat.org/ontology/> rdf:type voaf:Vocabulary ,
-                                              owl:NamedIndividual .
-
-
-
-[ rdf:type foaf:Person ;
-  foaf:homepage <http://www.wouterbeek.com>
-] .
-[ rdf:type foaf:Person ;
-  foaf:homepage <http://laurensrietveld.nl>
-] .
-
-
-#################################################################
-#
-#    Annotations
-#
-#################################################################
-
-
-error:DirectoryNotEmptyError rdfs:label "directory not empty"@en-us ;
-                             
-                             rdfs:comment "An error that occurs because a directory is assumed to be empty, but is not."@en-us .
-
-
-
-error:IsADirectoryError rdfs:label "source sink error"@en-us ;
-                        
-                        rdfs:comment "???"@en-us .
-
-
-
-httpo:statusCode rdfs:label "HTTP status code"@en-us ;
-                 
-                 rdfs:comment "The numeric indicator of an HTTP status."@en-us .
-
-
-
-error:DirectoryExistenceError rdfs:label "directory existence error"@en-us ;
-                              
-                              rdfs:comment "An error that occurs because a directory which is assumed to exist does not."@en-us .
-
-
-
-error:ExistenceError rdfs:label "existence error"@en-us ;
-                     
-                     rdfs:comment "An error that occurs because a resource which is assumed to exist does not."@en-us .
-
-
-
-httpo:PayloadHeader rdfs:label "HTTP Payload Header"@en-us ;
-                    
-                    rdfs:comment "Header fields that specifically describe the payload, rather than the associated representation."@en-us .
-
-
-
-
-###  Generated by the OWL API (version 3.5.1) http://owlapi.sourceforge.net
-
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:
+  rdf:type voaf:Vocabulary ;
+  rdf:type owl:Ontology ;
+  <http://creativecommons.org/ns#license> <http://creativecommons.org/licenses/by/3.0/> ;
+  dc:creator person:laurens_rietveld ;
+  dc:creator person:rinke_hoekstra ;
+  dc:creator person:wouter_beek ;
+  dcterms:created "2014-09-24"^^xsd:date ;
+  dcterms:description "Vocabulary for describing the crawling meta-data of the LOD Laundromat" ;
+  dcterms:modified "2015-11-18"^^xsd:date ;
+  dcterms:publisher "VU University Amsterdam" ;
+  dcterms:title "LOD Laundromat Vocabulary" ;
+  vann:preferredNamespacePrefix "llo" ;
+  vann:preferredNamespaceUri "http://lodlaundromat.org/ontology/" ;
+  rdfs:isDefinedBy : ;
+  owl:imports <http://lodlaundromat.org/error/ontology/> ;
+  owl:imports <http://lodlaundromat.org/http/ontology/> ;
+  owl:imports <http://lodlaundromat.org/resource/person> ;
+  owl:imports <http://purl.org/dc/elements/1.1> ;
+  owl:imports <http://purl.org/dc/terms> ;
+  owl:imports <http://purl.org/vocab/vann> ;
+  owl:imports <http://purl.org/vocommons/voaf> ;
+  owl:imports <http://www.w3.org/ns/prov> ;
+  owl:imports <http://xmlns.com/foaf/0.1> ;
+  owl:versionInfo "1.0.2" ;
+  foaf:homepage <http://lodlaundromat.org> ;
+.
+:Archive
+  rdf:type owl:Class ;
+  rdfs:comment "The class of resources that denote a data document that can be unpacked in order to reveal one or more data document entries. These entries are of type ArchiveEntry.Since archives can contain archives, there may be resources that are both Archive and ArchiveEntry."@en-us ;
+  rdfs:isDefinedBy : ;
+  rdfs:label "file archive"@en-us ;
+  rdfs:subClassOf :DataDocument ;
+  rdfs:subClassOf <http://www.w3.org/ns/prov#Collection> ;
+.
+:ArchiveEntry
+  rdf:type owl:Class ;
+  rdfs:comment "The class of resource that denote data documents that are not directly downloaded over the Internet, but that are extracted from another data document. The data document from which the archive entry is extracted is always of type Archive, and can either be of type URL or of type ArchiveEntry."@en-us ;
+  rdfs:isDefinedBy : ;
+  rdfs:label "file archive entry"@en-us ;
+  rdfs:subClassOf :DataDocument ;
+.
+:DataDocument
+  rdf:type owl:Class ;
+  rdfs:comment "A data document that is handled by the LOD Laundromat.n Instances of this class are named by using MD5 hashed of the source(s) of the data document. The source of a data document is either its URL, or the pair of (1) the source of the archive from which it was derived, and (2) its entry path within that archive."@en-us ;
+  rdfs:isDefinedBy : ;
+  rdfs:label "data document"@en-us ;
+  rdfs:subClassOf <http://www.w3.org/ns/prov#Entity> ;
+.
+:URL
+  rdf:type owl:Class ;
+  rdfs:comment "The class of resources denoting data documents that are directly downloaded over the Internet.Such URLs are always added as seed points to the LOD Basket, via an HTTP SEND request to the LOD Basket endpoint.These requests can be performed either by (1) a bash script we use to initialize the LOD Laundromat, (2) the procedure the LOD Washing Machine cleaning process uses to extract VoID datadump locations, and (3) human input, delivered through the HTML form at the LOD Laundromat dissemination Website."@en-us ;
+  rdfs:isDefinedBy : ;
+  rdfs:label "URL"@en-us ;
+  rdfs:subClassOf :DataDocument ;
+.
+:added
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "The date and time at which the dirty data document was added to the LOD Basket."@en-us ;
+  rdfs:domain :DataDocument ;
+  rdfs:isDefinedBy : ;
+  rdfs:label "added"@en-us ;
+  rdfs:range xsd:dateTime ;
+.
+:archiveFileType
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "The high-level file type of an archive file.Possible values: `file` and `dir`.An archive of type `dir` can be unpacked into archive entries."@en-us ;
+  rdfs:domain :Archive ;
+  rdfs:isDefinedBy : ;
+  rdfs:label "archive file type"@en-us ;
+  rdfs:range xsd:string ;
+.
+:archiveFilters
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "A list of filters that were applied in unpacking the archive."@en-us ;
+  rdfs:domain :Archive ;
+  rdfs:isDefinedBy : ;
+  rdfs:label "archive filters"@en-us ;
+  rdfs:range rdf:List ;
+.
+:archiveFormat
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "TODO"@en-us ;
+  rdfs:domain :Archive ;
+  rdfs:isDefinedBy : ;
+  rdfs:label "archive format"@en-us ;
+  rdfs:range xsd:string ;
+.
+:archiveLastModified
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "TODO"@en-us ;
+  rdfs:domain :Archive ;
+  rdfs:isDefinedBy : ;
+  rdfs:label "archive last modified"@en-us ;
+  rdfs:range xsd:dateTime ;
+.
+:archiveSize
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "TODO"@en-us ;
+  rdfs:domain :Archive ;
+  rdfs:isDefinedBy : ;
+  rdfs:label "archive size"@en-us ;
+  rdfs:range xsd:nonNegativeInteger ;
+.
+:byteCount
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "The number of bytes that were processed in the stream of the dirty data document."@en-us ;
+  rdfs:domain :DataDocument ;
+  rdfs:isDefinedBy : ;
+  rdfs:label "byte count"@en-us ;
+  rdfs:range xsd:nonNegativeInteger ;
+.
+:charCount
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "The number of characters that were processed in the stream of the dirty data document."@en-us ;
+  rdfs:domain :DataDocument ;
+  rdfs:isDefinedBy : ;
+  rdfs:label "character count"@en-us ;
+  rdfs:range xsd:nonNegativeInteger ;
+.
+:containsEntry
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "A link between a parent archive and one of its direct archive entries."@en-us ;
+  rdfs:domain :Archive ;
+  rdfs:isDefinedBy : ;
+  rdfs:label "contains entry"@en-us ;
+  rdfs:range :ArchiveEntry ;
+.
+:contentLength
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "The number of bytes denoted in the Content-Length header of the HTTP reply message, received upon downloading a single dirty data document of type URL. Availability of this information depends on whether the disseminating host can be accessed and the HTTP reply contains the factum."@en-us ;
+  rdfs:domain :URL ;
+  rdfs:isDefinedBy : ;
+  rdfs:label "content length"@en-us ;
+  rdfs:range xsd:nonNegativeInteger ;
+.
+:contentType
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "The value of the Content-Type header of the HTTP reply message, received upon downloading a single data document of type URL. Availability of this information depends on whether the disseminating host can be accessed and the HTTP reply contains the factum."@en-us ;
+  rdfs:domain :URL ;
+  rdfs:isDefinedBy : ;
+  rdfs:label "content type"@en-us ;
+  rdfs:range xsd:string ;
+.
+:downloadSize
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "The size of the downloaded dirty data document before unpacking. Represented in bytes.Availability: Data documents that are directly downloaded."@en-us ;
+  rdfs:domain :URL ;
+  rdfs:isDefinedBy : ;
+  rdfs:label "byte size"@en-us ;
+  rdfs:range xsd:nonNegativeInteger ;
+.
+:duplicates
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "The number of triples that are duplicates of other triples in the same dirty data document."@en-us ;
+  rdfs:domain :DataDocument ;
+  rdfs:isDefinedBy : ;
+  rdfs:label "number of duplicate triples"@en-us ;
+  rdfs:range xsd:nonNegativeInteger ;
+.
+:endClean
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "The date and time at which the process of cleaning the data document ended."@en-us ;
+  rdfs:domain :DataDocument ;
+  rdfs:isDefinedBy : ;
+  rdfs:label "end cleaning a data document"@en-us ;
+  rdfs:range xsd:dateTime ;
+  rdfs:subPropertyOf <http://www.w3.org/ns/prov#generatedAtTime> ;
+.
+:endUnpack
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "The date and time at which the process of downloading and unpacking the data document ended."@en-us ;
+  rdfs:domain :DataDocument ;
+  rdfs:isDefinedBy : ;
+  rdfs:label "end unpacking a data document"@en-us ;
+  rdfs:range xsd:dateTime ;
+.
+:exception
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "A blockig exception that occured somewhere during the unpacking and/or cleaning process. Possible values: (1) fail, failed to unpack/clean due to an unanticipated reason. (2) true, successfully unpacked and cleaned data document. (3) exception, failed to unpack/clean due to an anticipated reason."@en-us ;
+  rdfs:domain :DataDocument ;
+  rdfs:isDefinedBy : ;
+  rdfs:label "status"@en-us ;
+  rdfs:range <http://lodlaundromat.org/error/ontology/Error> ;
+.
+:fileExtension
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "The file extension of a the dirty data document.This is only set for data documents that can be downloading and extracted, and that have a file extension."@en-us ;
+  rdfs:domain :DataDocument ;
+  rdfs:isDefinedBy : ;
+  rdfs:label "file extension"@en-us ;
+  rdfs:range xsd:string ;
+.
+:httpStatus
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "The HTTP status of the reply that was received when requesting the resource located at the URL."@en-us ;
+  rdfs:domain :URL ;
+  rdfs:isDefinedBy : ;
+  rdfs:label "HTTP status"@en-us ;
+  rdfs:range <http://lodlaundromat.org/http/ontology/Status> ;
+.
+:lastModified
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "The date and time denoted by the Last-Modified header of the HTTP reply message, received upon downloading a single data document of type URL. Availability of this information depends on whether the disseminating host can be accessed and the HTTP reply contains the factum."@en-us ;
+  rdfs:domain :URL ;
+  rdfs:isDefinedBy : ;
+  rdfs:label "last modified"@en-us ;
+  rdfs:range xsd:dateTime ;
+.
+:lineCount
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "The number of lines that were processed in the stream of the data document."@en-us ;
+  rdfs:domain :DataDocument ;
+  rdfs:isDefinedBy : ;
+  rdfs:label "line count"@en-us ;
+  rdfs:range xsd:nonNegativeInteger ;
+.
+:md5
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "Slightly superfluous property uniquely identifying a data document within the LOD Laundromat context. In contrast, the data document IRI acts as the *globally* unique identifier."@en-us ;
+  rdfs:domain :DataDocument ;
+  rdfs:isDefinedBy : ;
+  rdfs:label "MD5"@en-us ;
+  rdfs:range xsd:string ;
+.
+:number_of_warnings
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "The number of warnings detected while cleaning the given data document."@en-us ;
+  rdfs:domain :DataDocument ;
+  rdfs:isDefinedBy : ;
+  rdfs:label "number of warnings"@en-us ;
+  rdfs:range xsd:nonNegativeInteger ;
+.
+:path
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "For data documents that are entries in a file archive, the path of the data document in that file archive."@en-us ;
+  rdfs:domain :ArchiveEntry ;
+  rdfs:isDefinedBy : ;
+  rdfs:label "file archive path"@en-us ;
+  rdfs:range xsd:string ;
+.
+:serializationFormat
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "The RDF serialization format that the dirty data document was parsed in.This format is determined based on a parse of an initial portion of the file contents, the file extension (if any) and the value of the HTTP Content-Type header (if any).The possible values are: JSON-LD, N-Quads, N-Triples, RDF/XML, RDFa, Turtle, TriG."@en-us ;
+  rdfs:domain :DataDocument ;
+  rdfs:isDefinedBy : ;
+  rdfs:label "serialization format"@en-us ;
+  rdfs:range rdfs:Resource ;
+.
+:startClean
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "The date and time at which the process of cleaning the data document started."@en-us ;
+  rdfs:domain :DataDocument ;
+  rdfs:isDefinedBy : ;
+  rdfs:label "start cleaning a data document"@en-us ;
+  rdfs:range xsd:dateTime ;
+.
+:startUnpack
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "The date and time at which the process of downloading and unpacking the data document started."@en-us ;
+  rdfs:domain :DataDocument ;
+  rdfs:isDefinedBy : ;
+  rdfs:label "start unpacking a data document"@en-us ;
+  rdfs:range xsd:dateTime ;
+.
+:statementsType
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "The type of statements contained in a data document. Either `triples` or `quadruples`. The latter indicates that the data document contains at least one quadruple."@en-us ;
+  rdfs:domain :DataDocument ;
+  rdfs:isDefinedBy : ;
+  rdfs:label "statements type"@en-us ;
+  rdfs:range xsd:string ;
+.
+:triples
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "The number of triples that could be read from the dirty data document. This is also the number of triples that is stored in the cleaned data document.n     This is after triple deduplication."@en-us ;
+  rdfs:domain :DataDocument ;
+  rdfs:isDefinedBy : ;
+  rdfs:label "triples"@en-us ;
+  rdfs:range xsd:nonNegativeInteger ;
+.
+:unpackedSize
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "The size of the unpacked dirty data document. Represented in bytes.Availability: Every data document."@en-us ;
+  rdfs:domain :DataDocument ;
+  rdfs:isDefinedBy : ;
+  rdfs:label "unpacked file size"@en-us ;
+  rdfs:range xsd:nonNegativeInteger ;
+.
+:url
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "The URL from which the original version of the data document was downloaded."@en-us ;
+  rdfs:domain :URL ;
+  rdfs:isDefinedBy : ;
+  rdfs:label "URL"@en-us ;
+  rdfs:range rdfs:Resource ;
+  rdfs:subPropertyOf <http://www.w3.org/ns/prov#wasDerivedFrom> ;
+.
+:warning
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "A non-blocking warning message that is either emitted while downloading, unpacking, or cleaning a dirty data document.Possible values: (1) TODO (1) Syntax error while parsing RDF file. (2) No RDF in file."@en-us ;
+  rdfs:domain :DataDocument ;
+  rdfs:isDefinedBy : ;
+  rdfs:label "message"@en-us ;
+  rdfs:range <http://lodlaundromat.org/error/ontology/Error> ;
+.
+rdf:List
+  rdf:type owl:Class ;
+  rdfs:isDefinedBy : ;
+.
+[
+  rdf:type foaf:Person ;
+  rdfs:isDefinedBy : ;
+  foaf:homepage <http://laurensrietveld.nl> ;
+].
+[
+  rdf:type foaf:Person ;
+  rdfs:isDefinedBy : ;
+  foaf:homepage <http://www.wouterbeek.com> ;
+].
