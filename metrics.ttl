@@ -1,10 +1,8 @@
 # baseURI: http://lodlaundromat.org/metrics/ontology/
 # imports: http://ldf.fi/void-ext
-# imports: http://lodlaundromat.org/error/ontology/
 # imports: http://lodlaundromat.org/ontology/
 # imports: http://lodlaundromat.org/resource/person
 # imports: http://rdfs.org/ns/void
-# imports: http://www.w3.org/ns/prov#
 
 @prefix : <http://lodlaundromat.org/metrics/ontology/> .
 @prefix cc: <http://creativecommons.org/ns#> .
@@ -78,11 +76,9 @@ llm:
   vann:preferredNamespacePrefix "llm" ;
   vann:preferredNamespaceUri "http://lodlaundromat.org/metrics/ontology/" ;
   owl:imports <http://ldf.fi/void-ext> ;
-  owl:imports <http://lodlaundromat.org/error/ontology/> ;
   owl:imports llo: ;
   owl:imports <http://lodlaundromat.org/resource/person> ;
   owl:imports <http://rdfs.org/ns/void> ;
-  owl:imports prov: ;
   owl:versionInfo "1.0.2" ;
   foaf:homepage <http://lodlaundromat.org> ;
 .
