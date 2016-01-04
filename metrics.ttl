@@ -75,6 +75,12 @@ llm:
   dcterms:title "Collection (and extension) of several dataset metrics" ;
   vann:preferredNamespacePrefix "llm" ;
   vann:preferredNamespaceUri "http://lodlaundromat.org/metrics/ontology/" ;
+  voaf:classNumber 2 ;
+  voaf:generalizes <http://ldf.fi/void-ext> ;
+  voaf:propertyNumber 24 ;
+  voaf:specializes <http://rdfs.org/ns/void> ;
+  voaf:specializes <http://www.w3.org/ns/prov> ;
+  voaf:usageInDataset <http://lodlaundromat.org> ;
   owl:imports <http://ldf.fi/void-ext> ;
   owl:imports llo: ;
   owl:imports <http://lodlaundromat.org/resource/person> ;

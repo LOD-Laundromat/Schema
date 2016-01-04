@@ -1,5 +1,6 @@
 # baseURI: http://lodlaundromat.org/error/ontology/
 # imports: http://lodlaundromat.org/resource/person
+# imports: http://purl.org/vocommons/voaf
 
 @prefix : <http://lodlaundromat.org/error/ontology/> .
 @prefix cc: <http://creativecommons.org/ns#> .
@@ -37,20 +38,25 @@ error:
   dcterms:title "Vocabulary for describing crawling errors" ;
   vann:preferredNamespacePrefix "error" ;
   vann:preferredNamespaceUri "http://lodlaundromat.org/error/ontology/" ;
+  voaf:classNumber 33 ;
+  voaf:propertyNumber 10 ;
   rdfs:isDefinedBy error: ;
   owl:imports <http://lodlaundromat.org/resource/person> ;
+  owl:imports <http://purl.org/vocommons/voaf> ;
   owl:versionInfo "1.0.1" ;
   foaf:homepage <http://lodlaundromat.org> ;
 .
 <http://lodlaundromat.org/error/ontology/4xxHttpError>
   rdf:type owl:Class ;
   rdfs:comment "An HTTP error in the 400-range."@en-us ;
+  rdfs:isDefinedBy error: ;
   rdfs:label "4xx HTTP Error"@en-us ;
   rdfs:subClassOf error:HttpError ;
 .
 <http://lodlaundromat.org/error/ontology/5xxHttpError>
   rdf:type owl:Class ;
   rdfs:comment "An HTTP error in the 500-range."@en-us ;
+  rdfs:isDefinedBy error: ;
   rdfs:label "5xx HTTP Error"@en-us ;
   rdfs:subClassOf error:HttpError ;
 .
@@ -63,12 +69,14 @@ error:Action
 error:ArchiveError
   rdf:type owl:Class ;
   rdfs:comment "An error that occurs as part of an archive (un)packing process."@en-us ;
+  rdfs:isDefinedBy error: ;
   rdfs:label "archive error"@en-us ;
   rdfs:subClassOf error:Error ;
 .
 error:CharacterEncodingError
   rdf:type owl:Class ;
   rdfs:comment "An error due to the use of an illegitimate character code. The character code is stored under the error:object property."@en-us ;
+  rdfs:isDefinedBy error: ;
   rdfs:label "character encoding error"@en-us ;
   rdfs:subClassOf error:EncodingError ;
 .
@@ -78,6 +86,7 @@ error:DirectoryExistenceError
   error:message "File exists"^^xsd:string ;
   error:variableName "EXIST"^^xsd:string ;
   rdfs:comment "An error that occurs because a directory which is assumed to exist does not."@en-us ;
+  rdfs:isDefinedBy error: ;
   rdfs:label "directory existence error"@en-us ;
   rdfs:subClassOf error:ExistenceError ;
 .
@@ -87,12 +96,14 @@ error:DirectoryNotEmptyError
   error:message "Directory not empty"^^xsd:string ;
   error:variableName "ENOTEMPTY"^^xsd:string ;
   rdfs:comment "An error that occurs because a directory is assumed to be empty, but is not."@en-us ;
+  rdfs:isDefinedBy error: ;
   rdfs:label "directory not empty"@en-us ;
   rdfs:subClassOf error:ExistenceError ;
 .
 error:EncodingError
   rdf:type owl:Class ;
   rdfs:comment "An error due to the use of an illigitimate or unrecognized encoding."@en-us ;
+  rdfs:isDefinedBy error: ;
   rdfs:label "encoding error"@en-us ;
   rdfs:subClassOf error:Error ;
 .
@@ -108,30 +119,35 @@ error:ExistenceError
   error:message "No such file or directory"^^xsd:string ;
   error:variableName "ENOENT"^^xsd:string ;
   rdfs:comment "An error that occurs because a resource which is assumed to exist does not."@en-us ;
+  rdfs:isDefinedBy error: ;
   rdfs:label "existence error"@en-us ;
   rdfs:subClassOf error:Error ;
 .
 error:FileExistenceError
   rdf:type owl:Class ;
   rdfs:comment "An error that occurs because a file which is assumed to exist does not."@en-us ;
+  rdfs:isDefinedBy error: ;
   rdfs:label "file existence error"@en-us ;
   rdfs:subClassOf error:ExistenceError ;
 .
 error:HttpError
   rdf:type owl:Class ;
   rdfs:comment "An error that is emitted as part of an HTTP reply."@en-us ;
+  rdfs:isDefinedBy error: ;
   rdfs:label "HTTP error"@en-us ;
   rdfs:subClassOf error:Error ;
 .
 error:HttpUri
   rdf:type owl:Class ;
   rdfs:comment "A URI that uses the HTTP scheme."@en-us ;
+  rdfs:isDefinedBy error: ;
   rdfs:label "HTTP URI"@en-us ;
   rdfs:subClassOf error:Object ;
 .
 error:IoError
   rdf:type owl:Class ;
   rdfs:comment "An error that was thrown due to an input and/or output issue."@en-us ;
+  rdfs:isDefinedBy error: ;
   rdfs:label "IO error"@en-us ;
   rdfs:subClassOf error:Error ;
 .
@@ -141,18 +157,21 @@ error:IsADirectoryError
   error:message "Is a directory"^^xsd:string ;
   error:variableName "EISDIR"^^xsd:string ;
   rdfs:comment "???"@en-us ;
+  rdfs:isDefinedBy error: ;
   rdfs:label "source sink error"@en-us ;
   rdfs:subClassOf error:ExistenceError ;
 .
 error:MalformedUrl
   rdf:type owl:Class ;
   rdfs:comment "An error that is thrown for a value which is expected to be a URL but does not conform to URL syntax."@en-us ;
+  rdfs:isDefinedBy error: ;
   rdfs:label "malformed URL"@en-us ;
   rdfs:subClassOf error:Error ;
 .
 error:MissingTurtlePrefixDefinition
   rdf:type owl:Class ;
   rdfs:comment "An error that occurs if a Turtle prefix is used but not defined."@en-us ;
+  rdfs:isDefinedBy error: ;
   rdfs:label "missing Turtle prefix definition"@en-us ;
   rdfs:subClassOf error:TurtleParserError ;
 .
@@ -165,24 +184,28 @@ error:Object
 error:ParserError
   rdf:type owl:Class ;
   rdfs:comment "An error that is emitted by a parser, indicating deviation from a defined grammar."@en-us ;
+  rdfs:isDefinedBy error: ;
   rdfs:label "parser error"@en-us ;
   rdfs:subClassOf error:Error ;
 .
 error:PermissionError
   rdf:type owl:Class ;
   rdfs:comment "An error that occurs because a specific action is not allowed to be performed w.r.t. a specific object that is of a given type."@en-us ;
+  rdfs:isDefinedBy error: ;
   rdfs:label "permission error"@en-us ;
   rdfs:subClassOf error:Error ;
 .
 error:RdfParserError
   rdf:type owl:Class ;
   rdfs:comment "An error that is emitted by an RDF parser."@en-us ;
+  rdfs:isDefinedBy error: ;
   rdfs:label "RDF parser error"@en-us ;
   rdfs:subClassOf error:ParserError ;
 .
 error:RdfxmlParserError
   rdf:type owl:Class ;
   rdfs:comment "An that is emitted by an RDF/XML parser when it encounters data that does not conform to the RDF/XML grammar."@en-us ;
+  rdfs:isDefinedBy error: ;
   rdfs:label "RDF/XML parser error"@en-us ;
   rdfs:subClassOf error:RdfParserError ;
   rdfs:subClassOf error:XmlParserError ;
@@ -190,66 +213,77 @@ error:RdfxmlParserError
 error:ReadError
   rdf:type owl:Class ;
   rdfs:comment "An error that occurs while reading data."@en-us ;
+  rdfs:isDefinedBy error: ;
   rdfs:label "read error"@en-us ;
   rdfs:subClassOf error:IoError ;
 .
 error:RedefinedRdfId
   rdf:type owl:Class ;
   rdfs:comment "An error that is thrown whenever multiple definitions of the same resource occur in an RDF/XML document. This typically occurs whenever more than one rdf:Id statement occurs for the same resource."@en-us ;
+  rdfs:isDefinedBy error: ;
   rdfs:label "redefined RDF identifier"@en-us ;
   rdfs:subClassOf error:RdfxmlParserError ;
 .
 error:SgmlParserError
   rdf:type owl:Class ;
   rdfs:comment "A warning that is emitted by an SGML parser."@en-us ;
+  rdfs:isDefinedBy error: ;
   rdfs:label "SGML parser error"@en-us ;
   rdfs:subClassOf error:ParserError ;
 .
 error:SocketError
   rdf:type owl:Class ;
   rdfs:comment "An error thrown because of a socket-related problem."@en-us ;
+  rdfs:isDefinedBy error: ;
   rdfs:label "socket error"@en-us ;
   rdfs:subClassOf error:Error ;
 .
 error:StreamPosition
   rdf:type owl:Class ;
   rdfs:comment "A position in a stream."@en-us ;
+  rdfs:isDefinedBy error: ;
   rdfs:label "stream position"@en-us ;
   rdfs:subClassOf error:Error ;
 .
 error:SyntaxError
   rdf:type owl:Class ;
   rdfs:comment "A parser error that is due to the occurrence of an expression in the parsed data stream that does not conform to the expected grammar."@en-us ;
+  rdfs:isDefinedBy error: ;
   rdfs:label "syntax position"@en-us ;
   rdfs:subClassOf error:ParserError ;
 .
 error:TimeoutError
   rdf:type owl:Class ;
   rdfs:comment "An error that is thrown due to a timeout."@en-us ;
+  rdfs:isDefinedBy error: ;
   rdfs:label "timeout error"@en-us ;
   rdfs:subClassOf error:Error ;
 .
 error:TurtleParserError
   rdf:type owl:Class ;
   rdfs:comment "A warning that is emitted by an XML parser."@en-us ;
+  rdfs:isDefinedBy error: ;
   rdfs:label "XML parser error"@en-us ;
   rdfs:subClassOf error:RdfParserError ;
 .
 error:WriteError
   rdf:type owl:Class ;
   rdfs:comment "An error that occurs while writing data."@en-us ;
+  rdfs:isDefinedBy error: ;
   rdfs:label "write error"@en-us ;
   rdfs:subClassOf error:IoError ;
 .
 error:XmlNameError
   rdf:type owl:Class ;
   rdfs:comment "The argument to rdf:ID is not an XML name."@en-us ;
+  rdfs:isDefinedBy error: ;
   rdfs:label "XML name error"@en-us ;
   rdfs:subClassOf error:XmlParserError ;
 .
 error:XmlParserError
   rdf:type owl:Class ;
   rdfs:comment "A warning that is emitted by an XML parser."@en-us ;
+  rdfs:isDefinedBy error: ;
   rdfs:label "XML parser error"@en-us ;
   rdfs:subClassOf error:SgmlParserError ;
 .

@@ -35,6 +35,11 @@
   dcterms:title "LOD Laundromat Vocabulary" ;
   vann:preferredNamespacePrefix "llo" ;
   vann:preferredNamespaceUri "http://lodlaundromat.org/ontology/" ;
+  voaf:classNumber 4 ;
+  voaf:propertyNumber 31 ;
+  voaf:reliesOn <http://lodlaundromat.org/error/ontology/> ;
+  voaf:reliesOn <http://lodlaundromat.org/http/ontology/> ;
+  voaf:reliesOn <http://www.w3.org/ns/prov#> ;
   rdfs:isDefinedBy : ;
   owl:imports <http://lodlaundromat.org/error/ontology/> ;
   owl:imports <http://lodlaundromat.org/http/ontology/> ;

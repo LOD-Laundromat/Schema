@@ -1,5 +1,6 @@
 # baseURI: http://lodlaundromat.org/http/ontology/
 # imports: http://lodlaundromat.org/resource/person
+# imports: http://purl.org/vocommons/voaf
 
 @prefix cc: <http://creativecommons.org/ns#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
@@ -28,8 +29,8 @@ httpo:
   rdf:type owl:Ontology ;
   cc:license <http://creativecommons.org/licenses/by/3.0/> ;
   dc:creator person:laurens_rietveld ;
-  dc:creator person:wouter_beek ;
   dc:creator person:rinke_hoekstra ;
+  dc:creator person:wouter_beek ;
   dcterms:created "2014-09-24"^^xsd:date ;
   dcterms:description "Vocabulary for describing http error codes" ;
   dcterms:modified "2015-11-18"^^xsd:date ;
@@ -37,8 +38,12 @@ httpo:
   dcterms:title "Vocabulary for describing http error codes" ;
   vann:preferredNamespacePrefix "httpo" ;
   vann:preferredNamespaceUri "http://lodlaundromat.org/http/ontology/" ;
+  voaf:classNumber 27 ;
+  voaf:propertyNumber 2 ;
+  voaf:usageInDataset <http://lodlaundromat.org> ;
   rdfs:isDefinedBy httpo: ;
   owl:imports <http://lodlaundromat.org/resource/person> ;
+  owl:imports <http://purl.org/vocommons/voaf> ;
   owl:versionInfo "1.0.1" ;
   foaf:homepage <http://lodlaundromat.org> ;
 .
@@ -659,7 +664,7 @@ httpo:Transfer-Encoding
   rdfs:label "Transfer-Encoding"@en-us ;
 .
 httpo:reasonPhrase
-  rdf:type rdf:Property ;
+  rdf:type owl:DatatypeProperty ;
   rdfs:comment "A natural language message describing an HTTP status."@en-us ;
   rdfs:domain httpo:Status ;
   rdfs:isDefinedBy httpo: ;
@@ -667,7 +672,7 @@ httpo:reasonPhrase
   rdfs:range xsd:string ;
 .
 httpo:statusCode
-  rdf:type rdf:Property ;
+  rdf:type owl:DatatypeProperty ;
   rdfs:comment "The numeric indicator of an HTTP status."@en-us ;
   rdfs:domain httpo:Status ;
   rdfs:isDefinedBy httpo: ;
